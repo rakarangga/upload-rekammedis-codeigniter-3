@@ -7,8 +7,10 @@ class Settuser_m extends MY_Model {
 	protected $_timeedit='modified';
 	protected $_timestamp = TRUE;
 
-	var $_order_column = array(null,'namalengkap', 'email','namauser', null, null);
+	//Var untuk datatable Ajax
+	var $_order_column = array(null,null,'namalengkap', 'namauser','email', null, null, null);
 	var $_select_column = array('namalengkap', 'email', 'namauser');
+	
 	
 	public $rules = array (
 			
@@ -209,19 +211,24 @@ class Settuser_m extends MY_Model {
 
 	function getAjax(){
 	
-        // $this->db->join('t_acs_nm as b', $this->_table_nama.'.iduserlevel = b.id', 'left');
+        $this->db->join('t_acs_nm as b', $this->_table_nama.'.iduserlevel = b.id', 'left');
 		$this->db->select('*');
 		$this->db->from($this->_table_nama);
-		
+		$_or_like = array(
+			'namalengkap' => $_POST["search"]["value"], 
+			'email' => $_POST["search"]["value"], 
+			'namauser'=> $_POST["search"]["value"],
+			'an_name'=> $_POST["search"]["value"],
+		);
+		$columnIndex = $_POST['order'][0]['column']; // Column index
+		// $columnName = $_POST['columns'][$columnIndex]['data']; // Column name
 		if(isset($_POST["search"]["value"]))
 		{
-			$this->db->like('namalengkap', $_POST["search"]["value"]);
-			$this->db->or_like('namauser', $_POST["search"]["value"]);
-			$this->db->or_like('email', $_POST["search"]["value"]);
+			$this->db->or_like($_or_like,false);
 		}
 		if(isset($_POST["order"]))
 		{
-			$this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+			$this->db->order_by($this->order_column[$columnIndex], $_POST['order']['0']['dir']);
 			
 		}else{
 			$this->db->order_by($this->_order_by,$this->_sort);
