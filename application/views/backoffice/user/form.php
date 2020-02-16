@@ -1,5 +1,5 @@
 <?php 
-if(authorize($_SESSION["access"]["akun_saya"]["pengaturan_akun"]["ac_view"])){
+if(authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_view"])){
 ?>
 <?php echo $sukses;?>
 

@@ -90,13 +90,14 @@ $this->load->view('backoffice/components/page_head');
               </span>
         </div> -->
       </form>
+<?php $CI = & get_instance(); ?>
       <ul class="sidebar-menu">
         <li class="header">MENU UTAMA</li>
-        <li><a href="<?php echo site_url('backoffice/dashboard')?>"><i class="fa fa-dashboard"></i> DASHBOARD</a></li>
+        <li class="<?=$CI->uri->segment(2) == "dashboard" ? "active" : "";?>">
+          <a href="<?php echo site_url('backoffice/dashboard')?>"><i class="fa fa-dashboard"></i> DASHBOARD</a>
+        </li>
          <?php 
-         $CI = & get_instance();
-        
-         
+
          foreach ($_SESSION["access"] as $key => $access) { 
 //              $active_treeview = $CI->uri->segment(2) == $access ? TRUE : FALSE;
 //              $tes = implode("", implode("",$access));
@@ -108,9 +109,12 @@ $this->load->view('backoffice/components/page_head');
                 
                 
 //            } 
-            
+            $active_top = $CI->uri->segment(1).'/'.$CI->uri->segment(2) == $access[$CI->uri->segment(2)]["page_name"] ? TRUE : FALSE;
+            $active_menu_top = $active_top == TRUE ? '<li class="treeview active">' : '<li class="treeview">';
+             echo $active_menu_top
              ?>
-             <li class="treeview"><a  href="#"><?php echo strtoupper($access["top_menu_name"]); ?>
+             
+               <a  href="javascript:void(0);"><?php echo strtoupper($access["top_menu_name"]); ?>
              <span class="pull-right-container">
              			 <i class="fa fa-angle-left pull-right"></i></a>
             			</span>
@@ -119,8 +123,8 @@ $this->load->view('backoffice/components/page_head');
                                 foreach ($access as $k => $val) {
                                   //  dump($val);
                                     if ($k != "top_menu_name") {
-                                        $active = $CI->uri->segment(1).'/'.$CI->uri->segment(2) == $val["page_name"] ? TRUE : FALSE;
-                                        $active_menu = $active ? '<li class="active">' : '<li>';
+                                       $active = $CI->uri->segment(1).'/'.$CI->uri->segment(2) == $val['page_name']? TRUE : FALSE;
+                                        $active_menu = $active == TRUE ? '<li class="active">' : '<li>';
                                         echo $active_menu.'<a href="' . (site_url($val["page_name"])) . '"><i class="fa fa-circle-o"></i>' . strtoupper($val["menu_name"]) . '</a></li>';
                                         ?>
                                         <?php
@@ -131,6 +135,7 @@ $this->load->view('backoffice/components/page_head');
                             </li>
                             <?php
                         }
+                        // dump($CI->uri->segment(1).'/'.$CI->uri->segment(2));
                         ?>
       </ul>
       </section>

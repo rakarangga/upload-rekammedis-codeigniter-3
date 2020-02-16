@@ -260,7 +260,7 @@ class Settuser_m extends MY_Model {
 	}
 
 ////////////////////////////////////////////
-// FUNCTION FOR DATATABLE AJAX
+// END FUNCTION FOR DATATABLE AJAX
 ////////////////////////////////////////////
 
 	public function edit_status($id)

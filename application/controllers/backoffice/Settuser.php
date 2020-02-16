@@ -44,11 +44,11 @@
             $sub_array[] = $row->email;
             $sub_array[] = $row->u_an_id;
           if($row->stts == 'Y'): 
-            $is_edit_status =  authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_edit"]) ? btn_tidak_aktif('backoffice/settuser/stts/'.encrypting($row->iduser)) : '';
-            $sub_array[] = '<div class="btn-group  btn-group-sm"><a href="javascript:void(0);"><button type="button" class="btn btn-primary active" disabled> &nbsp; Aktif &nbsp;</button></a>'.$is_edit_status.'</div>';
+            $is_edit_status_T =  authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_edit"]) ? btn_tidak_aktif('backoffice/settuser/stts/'.encrypting($row->iduser)) : '';
+            $sub_array[] = '<div class="btn-group  btn-group-sm"><a href="javascript:void(0);"><button type="button" class="btn btn-primary active" disabled> &nbsp; Aktif &nbsp;</button></a>'.$is_edit_status_T.'</div>';
           else:
-            $is_edit_status =  authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_edit"]) ? btn_aktif('backoffice/settuser/stts/'.encrypting($row->iduser)) : '';                    
-            $sub_array[] = '<div class="btn-group">'.$is_edit_status.'<a href="javascript:void(0);"><button type="button" class="btn btn-info active" disabled> &nbsp; Nonaktif &nbsp;</button></a></div>';
+            $is_edit_status_Y =  authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_edit"]) ? btn_aktif('backoffice/settuser/stts/'.encrypting($row->iduser)) : '';                    
+            $sub_array[] = '<div class="btn-group">'.$is_edit_status_Y.'<a href="javascript:void(0);"><button type="button" class="btn btn-info active" disabled> &nbsp; Nonaktif &nbsp;</button></a></div>';
           endif;
             $sub_array[] = '<div class="btn-group-vertical">'.$is_edit.$is_delete.'</div>';
           

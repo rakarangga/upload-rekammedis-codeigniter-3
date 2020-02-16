@@ -217,6 +217,7 @@ function set_rights($menus, $menuRights, $topmenu)
                     
                     $data[$menus[$i]->mod_modulegroupid][$menuRights[$j]->ac_module_id] = $row;
                     $data[$menus[$i]->mod_modulegroupid]["top_menu_name"] = $menus[$i]->mod_modulegroupname;
+                    // $data[$menus[$i]->mod_modulegroupid]["top_page_name"] = $menus[$i]->mod_modulepagename;
                 }
             }
         }

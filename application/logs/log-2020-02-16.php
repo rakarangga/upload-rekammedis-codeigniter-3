@@ -285,3 +285,4 @@ OR  `logis_users`.`namauser` LIKE '%%' ESCAPE '!'
 OR  `b`.`an_name` LIKE '%%' ESCAPE '!'
 ORDER BY `modified` DESC
  LIMIT 10
+ERROR - 2020-02-16 19:08:07 --> Severity: error --> Exception: Call to a member function segment() on null D:\webserver@raka\htdocs\rekam_medis\application\views\backoffice\_layout_main.php 95
