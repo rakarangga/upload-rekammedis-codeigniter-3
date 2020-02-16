@@ -42,6 +42,7 @@
 						<table id="example2" class="table table-bordered ">
 							<thead>
 							  <tr class="headings">
+						
                                           <?php 
                                               if(authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_delete"])){
                                             ?>
@@ -61,6 +62,7 @@
                                          </tr>
                                   </thead>
                                 <tbody>
+								<?php /* ?>
                                 <?php $no=1; ?>
                                             <?php if($users):foreach ($users as $user) : ?>
                                               <tr class="even pointer">
@@ -124,7 +126,7 @@
                                              </td>
                                               </tr>
                                            <?php  endforeach; endif; ?>
-
+										<?php */ ?>
 
                                      </tbody>
 
@@ -140,7 +142,7 @@
 
 <script>
 $(document).ready(function () {
-
+	
 	var dataTable = $('#example2').DataTable({
         "processing": true,
         "serverSide": true,
@@ -149,6 +151,9 @@ $(document).ready(function () {
             url: "<?php echo base_url('backoffice/settuser/fetch_ajax'); ?>",
             type: "POST",
         },
+		"language": {
+            processing: '<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>'
+     	 },
         "columnDefs": [{
             "targets": [0, 3, 4],
             "orderable": false,

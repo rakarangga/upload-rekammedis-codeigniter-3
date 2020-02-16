@@ -8,8 +8,8 @@ class Settuser_m extends MY_Model {
 	protected $_timestamp = TRUE;
 
 	//Var untuk datatable Ajax
-	var $_order_column = array(null,null,'namalengkap', 'namauser','email', null, null, null);
-	var $_select_column = array('namalengkap', 'email', 'namauser');
+	protected $_order_column = array(null,null,'namalengkap', 'namauser','email', null, null, null);
+	protected $_select_column = array('*');
 	
 	
 	public $rules = array (
@@ -209,22 +209,24 @@ class Settuser_m extends MY_Model {
 	}
 	
 
-	function getAjax(){
-	
-        $this->db->join('t_acs_nm as b', $this->_table_nama.'.iduserlevel = b.id', 'left');
-		$this->db->select('*');
-		$this->db->from($this->_table_nama);
-		$_or_like = array(
-			'namalengkap' => $_POST["search"]["value"], 
-			'email' => $_POST["search"]["value"], 
-			'namauser'=> $_POST["search"]["value"],
-			'an_name'=> $_POST["search"]["value"],
+
+////////////////////////////////////////////
+// FUNCTION FOR DATATABLE AJAX
+////////////////////////////////////////////	
+	public function getDataTable_Query() {
+		$this->db->select($this->_select_column);
+		$this->_or_like = array(
+			$this->_table_nama.'.namalengkap' => $_POST["search"]["value"], 
+			$this->_table_nama.'.email' => $_POST["search"]["value"], 
+			$this->_table_nama.'.namauser'=> $_POST["search"]["value"],
+			'b.an_name'=> $_POST["search"]["value"],
 		);
-		$columnIndex = $_POST['order'][0]['column']; // Column index
-		// $columnName = $_POST['columns'][$columnIndex]['data']; // Column name
+		$this->db->join('t_acs_nm as b', $this->_table_nama.'.iduserlevel = b.id', 'left');
+        $columnIndex = $_POST['order'][0]['column']; // Column index
+	
 		if(isset($_POST["search"]["value"]))
 		{
-			$this->db->or_like($_or_like,false);
+			$this->db->or_like($this->_or_like,false);
 		}
 		if(isset($_POST["order"]))
 		{
@@ -234,28 +236,32 @@ class Settuser_m extends MY_Model {
 			$this->db->order_by($this->_order_by,$this->_sort);
 		}
 	}
-
-	function getDataTable(){
-		$this->getAjax();
+	
+	public function getDataTable() {
+        $this->getDataTable_Query();
 		if($_POST["length"] != -1)
 		{
 			$this->db->limit($_POST['length'],$_POST['start']);
 		}
-		$query = $this->db->get();
+		$query = $this->db->get($this->_table_nama);
 		return $query->result();
 	}
 
-	function getFiltered(){
-		$this->getAjax();
-		$query = $this->db->get();
+    public function getFiltered(){
+		$this->getDataTable_Query();
+		$query = $this->db->get($this->_table_nama);
 		return $query->num_rows();
 	}
 
-	function getAllData(){
+	public function getAllData(){
 		$this->db->select('*');
 		$this->db->get($this->_table_nama);
 		return $this->db->count_all_results();
 	}
+
+////////////////////////////////////////////
+// FUNCTION FOR DATATABLE AJAX
+////////////////////////////////////////////
 
 	public function edit_status($id)
 	{

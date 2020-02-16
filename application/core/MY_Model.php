@@ -17,6 +17,10 @@ class MY_Model extends CI_Model
 
     protected $_timestamp = TRUE;
 
+    // protected $_order_column = array();
+	// protected $_select_column = array();
+    // protected $_or_like = array();
+
     function __construct()
     {
         parent::__construct();
@@ -104,4 +108,5 @@ else {
     {
         $this->db->truncate($this->_table_nama);
     }
+
 }

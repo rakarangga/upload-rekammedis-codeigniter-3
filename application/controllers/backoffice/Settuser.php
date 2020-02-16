@@ -25,17 +25,34 @@
      { 
         $fetchdata = $this->Settuser_m->getDataTable();
         $data = array();
+        $no=1;
         foreach($fetchdata as $row){
-          $sub_array = array();
-          $sub_array[] = $row->namauser;
-          $sub_array[] = $row->namauser;
-          $sub_array[] = $row->namauser;
-          $sub_array[] = $row->namauser;
-          $sub_array[] = $row->namauser;
-          $sub_array[] = $row->namauser;
-          $sub_array[] = $row->namauser;
-          $sub_array[] = $row->namauser.'1';
-          $data[] = $sub_array;
+            $sub_array = array();
+            $is_edit =  authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_edit"]) ? btn_koreksi('backoffice/settuser/form/'.encrypting($row->iduser)) : '';  
+            $is_delete =  authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_edit"]) ? btn_hapus('settuser/hapus/'.encrypting($row->iduser)) : '';  
+
+          if(authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_delete"])){
+            $sub_array[] = form_checkbox('check_id[]', encrypting($row->iduser), FALSE, 'class="icheckbox_flat-green chk"').'<filedset>';
+          }
+            $sub_array[] = $no++;
+          if(authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_edit"])){
+            $sub_array[] = anchor('backoffice/settuser/form/'.encrypting($row->iduser), $row->namalengkap); 
+          }else{
+            $sub_array[] = $row->namalengkap;
+          }
+            $sub_array[] = $row->namauser;
+            $sub_array[] = $row->email;
+            $sub_array[] = $row->u_an_id;
+          if($row->stts == 'Y'): 
+            $is_edit_status =  authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_edit"]) ? btn_tidak_aktif('backoffice/settuser/stts/'.encrypting($row->iduser)) : '';
+            $sub_array[] = '<div class="btn-group  btn-group-sm"><a href="javascript:void(0);"><button type="button" class="btn btn-primary active" disabled> &nbsp; Aktif &nbsp;</button></a>'.$is_edit_status.'</div>';
+          else:
+            $is_edit_status =  authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_edit"]) ? btn_aktif('backoffice/settuser/stts/'.encrypting($row->iduser)) : '';                    
+            $sub_array[] = '<div class="btn-group">'.$is_edit_status.'<a href="javascript:void(0);"><button type="button" class="btn btn-info active" disabled> &nbsp; Nonaktif &nbsp;</button></a></div>';
+          endif;
+            $sub_array[] = '<div class="btn-group-vertical">'.$is_edit.$is_delete.'</div>';
+          
+            $data[] = $sub_array;
         }
         $output = array(
           "draw"            => intval($_POST["draw"]),
