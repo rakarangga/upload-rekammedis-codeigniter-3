@@ -68,8 +68,11 @@
 <!-- Password Validator -->
 <!-- <script src="<?php //echo base_url()?>assets/plugins/validator/underscore-min.js"></script> -->
 <!-- <script src="<?php //echo base_url()?>assets/plugins/validator/jquery.password-validator.js"></script> -->
-<script src="<?php echo base_url()?>assets/plugins/validator/jquery.password-validation.js"></script>
-
+<!-- <script src="<?php // echo base_url()?>assets/plugins/validator/jquery.password-validation.js"></script> -->
+<script src="<?php echo base_url()?>assets/plugins/validator/validate.js"></script>
+<script src="<?php echo base_url()?>assets/plugins/validator/validate.polyfills.js"></script>
+<!-- TOAST -->
+<script src="<?php echo base_url()?>assets/plugins/toast/jquery.toast.js"></script>
 
 <!--<script src="<?php //echo base_url()?>assets/dist/js/pages/dashboard.js"></script>
 <script src="<?php //echo base_url()?>assets/dist/js/demo.js"></script>-->
@@ -77,8 +80,9 @@
 <script src="<?php echo base_url()?>assets/dist/js/demo.js"></script>
 
           <script type="text/javascript">
-		  
+	
 		 $(document).ready(function(){  
+			
 		  var i=0;  
 		  $('#addMoreItem').click(function(){  
 			   i++;  
@@ -289,6 +293,43 @@
 
 <!-- select2 -->
 <script>
+
+				validate.init({
+					// Classes and Selectors
+					selector: '[data-validate]', // The selector for forms to validate
+					fieldClass: 'error', // The class to apply to fields with errors
+					errorClass: 'error-message', // The class to apply to error messages
+
+					// Messages
+					messageValueMissing: 'Field ini wajib diisi.', // Displayed when a required field is left empty
+					messageValueMissingCheckbox: 'Field ini wajib dipilih.', // Displayed when a required checkbox isn't checked
+					messageValueMissingRadio: 'Mohon pilih opsi yang tersedia.', // Displayed when a required radio button isn't selected
+					messageValueMissingSelect: 'Mohon pilih opsi yang tersedia.', // Displayed when an option from a required select menu isn't selected
+					messageValueMissingSelectMulti: 'Please select at least one value.', // Displayed when an option from a require multi-select menu isn't selected
+					messageTypeMismatchEmail: 'Silahkan gunakan format email.', // Displayed when a `type="email"` field isn't a valid email
+					messageTypeMismatchURL: 'Mohon untuk mengisi format URL.', // Displayed when a `type="url"` field isn't a valid URL
+					messageTooShort: 'Please lengthen this text to {minLength} characters or more. You are currently using {length} characters.', // Displayed with the `minLength` attribute is used and the input value is too short
+					messageTooLong: 'Please shorten this text to no more than {maxLength} characters. You are currently using {length} characters.', // Displayed with the `maxLength` attribute is used and the input value is too long
+					messagePatternMismatch: 'Mohon untuk menyesuakan format.', // Displayed with the `pattern` attribute is used and the pattern doesn't match (if a `title` attribute is used, that's displayed instead)
+					messageBadInput: 'Mohon untuk mengisi Angka.', // Displayed when the field is numeric (ex. `type="number"`) but the value is not a number
+					messageStepMismatch: 'Mohon pilih opsi yang Benar.', // Displayed when the `step` attribute is used and the value doesn't adhere to it
+					messageRangeOverflow: 'Mohon pilih opsi yang tersedia that is no more than {max}.', // Displayed with the `max` attribute is used and the input value is too hight
+					messageRangeUnderflow: 'Mohon pilih opsi yang tersedia that is no less than {min}.', // Displayed with the `mind` attribute is used and the input value is too low
+					messageGeneric: 'Data yang dimasukkan tidak valid.', // A catchall error, displayed when the field fails validation and none of the other conditions apply
+
+					// Form Submission
+					disableSubmit: false, // If true, don't submit the form to the server (for Ajax for submission)
+					onSubmit: function (form, fields) {
+						
+					}, // Function to run if the form successfully validates
+
+					// Callbacks
+					beforeShowError: function (field, error) {}, // Function to run before an error is display
+					afterShowError: function (field, error) {}, // Function to run after an error is display
+					beforeRemoveError: function (field) {}, // Function to run before an error is removed
+					afterRemoveError: function (field) {}, // Function to run after an error is removed
+				});
+
 				$(".showhide_pw").click(function() {
 					$(this).find( "i.toggle-password" ).toggleClass("fa-eye fa-eye-slash");
 					var input = $($(this).attr("toggle"));

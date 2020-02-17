@@ -35,7 +35,10 @@
     <!--datatables plus plugins -->
     <link href="<?php echo base_url()?>assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet">
     <link href="<?php echo base_url()?>assets/plugins/datepicker/datepicker3.css" rel="stylesheet">
- 	<link href="<?php echo base_url()?>assets/plugins/daterangepicker/daterangepicker.css" rel="stylesheet">
+   <link href="<?php echo base_url()?>assets/plugins/daterangepicker/daterangepicker.css" rel="stylesheet">
+   
+    <!-- toast-->
+    <link href="<?php echo base_url()?>assets/plugins/toast/jquery.toast.css" rel="stylesheet">
  	
  	  <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="<?php echo base_url()?>assets/plugins/iCheck/all.css">
@@ -66,7 +69,7 @@
 
     <script src="<?php echo base_url()?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="<?php echo base_url()?>assets/plugins/jQueryUI/jquery-ui.min.js"></script>
-     <link rel="stylesheet" href="<?php echo base_url()?>assets/plugins/validator/jquery-password-validator.css"></link>
+     <!-- <link rel="stylesheet" href="<?php //echo base_url()?>assets/plugins/validator/jquery-password-validator.css"></link> -->
     
 </head>
 <style>

@@ -18,99 +18,151 @@ class Settuser_m extends MY_Model {
 					'field' => 'namalengkap',
 					'label' => 'Nama Lengkap',
 					'rules' => 'trim|required|xss_clean',
-					'errors' => array (
-							'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-              </button>
-              <strong>%s</strong> Harus Di isi.
-              </div>' 
-					) 
+					'errors' => array(
+						'required' => '<script>
+										$(document).ready(function() {
+											$.toast({
+												heading: "Error",
+												text: "<strong>%s</strong> Harus diisi.",
+												showHideTransition: "fade",
+												icon: "error",
+												hideAfter: 5000,
+											})
+										});
+										</script>'
+						)
 			),
 			'namauser' => array (
 					'field' => 'namauser',
 					'label' => 'Username',
 					'rules' => 'trim|required|xss_clean',
-					'errors' => array (
-							'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-              </button>
-              <strong>%s</strong> Harus Di isi.
-              </div>' 
-					) 
+					'errors' => array(
+						'required' => '<script>
+										$(document).ready(function() {
+											$.toast({
+												heading: "Error",
+												text: "<strong>%s</strong> Harus diisi.",
+												showHideTransition: "fade",
+												icon: "error",
+												hideAfter: 5000,
+											})
+										});
+										</script>'
+						)
 			),
-	    'nomorhp' => array (
-	        'field' => 'nomorhp',
-	        'label' => 'Nomor Handphone',
-	        'rules' => 'trim|required|xss_clean',
-	        'errors' => array (
-	            'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-              </button>
-              <strong>%s</strong> Harus Di isi.
-              </div>'
-	        )
-	    ),
-	    
+			'nomorhp' => array (
+				'field' => 'nomorhp',
+				'label' => 'Nomor Handphone',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => array(
+					'required' => '<script>
+									$(document).ready(function() {
+										$.toast({
+											heading: "Error",
+											text: "<strong>%s</strong> Harus diisi.",
+											showHideTransition: "fade",
+											icon: "error",
+											hideAfter: 5000,
+										})
+									});
+									</script>'
+					)
+			),
+			'iduserlevel' => array (
+				'field' => 'iduserlevel',
+				'label' => 'Hak Akses',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => array(
+					'required' => '<script>
+									$(document).ready(function() {
+										$.toast({
+											heading: "Error",
+											text: "<strong>%s</strong> Harus Dipilih.",
+											showHideTransition: "fade",
+											icon: "error",
+											hideAfter: 5000,
+										})
+									});
+									</script>'
+					)
+			),
 			'userpass' => array (
 					'field' => 'userpass',
 					'label' => 'Password',
 					'rules' => 'trim|matches[u_pass_confirm]',
-					'errors' => array (
-							'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-              </button>
-              <strong>%s</strong> Harus Di isi.
-              </div>',
-							'matches' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-                  </button>
-                  <strong>%s</strong> Tidak Sesuai.
-                  </div>' 
-					)
+					'errors' => array(
+						'required' => '<script>
+										$(document).ready(function() {
+											$.toast({
+												heading: "Error",
+												text: "<strong>%s</strong> Harus diisi.",
+												showHideTransition: "fade",
+												icon: "error",
+												hideAfter: 5000,
+											})
+										});
+										</script>',
+						'matches' =>'<script>
+										$(document).ready(function() {
+											$.toast({
+												heading: "Error",
+												text: "<strong>%s</strong> Tidak Sama.",
+												showHideTransition: "fade",
+												icon: "error",
+												hideAfter: 5000,
+											})
+										});
+										</script>'
+						)
 					 
 			),
 			'u_pass_confirm' => array (
 					'field' => 'u_pass_confirm',
 					'label' => 'Konfirmasi Password',
 					'rules' => 'trim|matches[userpass]',
-					'errors' => array (
-							'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-              </button>
-              <strong>%s</strong> Harus Di isi.
-              </div>',
-							'matches' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-                </button>
-                <strong>%s</strong> Tidak Sama.
-                </div>' 
-					)
-					 
-			),
-			'namabisnis' => array (
-					'field' => 'namabisnis',
-					'label' => 'Nama Bisnis',
-					'rules' => 'trim|required|xss_clean',
-					'errors' => array (
-							'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-              </button>
-              <strong>%s</strong> Harus Di isi.
-              </div>' 
-					)
+					'errors' => array(
+						'required' => '<script>
+										$(document).ready(function() {
+											$.toast({
+												heading: "Error",
+												text: "<strong>%s</strong> Harus diisi.",
+												showHideTransition: "fade",
+												icon: "error",
+												hideAfter: 5000,
+											})
+										});
+										</script>',
+						'matches' =>'<script>
+										$(document).ready(function() {
+											$.toast({
+												heading: "Error",
+												text: "<strong>%s</strong> Tidak Sama.",
+												showHideTransition: "fade",
+												icon: "error",
+												hideAfter: 5000,
+											})
+										});
+										</script>'
+						)
 					 
 			),
 			'logo' => array (
 					'field' => 'logo',
 					'label' => 'Foto Upload',
 					'rules' => 'trim',
-					'errors' => array (
-							'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-              </button>
-              <strong>%s</strong> Harus Di isi.
-              </div>' 
-					)
+					'errors' => array(
+						'required' => '<script>
+										$(document).ready(function() {
+											$.toast({
+												heading: "Error",
+												text: "<strong>%s</strong> Harus diisi.",
+												showHideTransition: "fade",
+												icon: "error",
+												hideAfter: 5000,
+											})
+										});
+										</script>'
+						)
 					 
 			) 
 	);
@@ -125,7 +177,7 @@ class Settuser_m extends MY_Model {
 	            'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
               </button>
-              <strong>%s</strong> Harus Di isi.
+              <strong>%s</strong> Harus diisi.
               </div>'
 	        )
 	    ),
@@ -137,7 +189,7 @@ class Settuser_m extends MY_Model {
 	            'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
               </button>
-              <strong>%s</strong> Harus Di isi.
+              <strong>%s</strong> Harus diisi.
               </div>'
 	        )
 	    ),
@@ -149,7 +201,7 @@ class Settuser_m extends MY_Model {
 	            'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
               </button>
-              <strong>%s</strong> Harus Di isi.
+              <strong>%s</strong> Harus diisi.
               </div>'
 	        )
 	    ),
@@ -162,7 +214,7 @@ class Settuser_m extends MY_Model {
 	            'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
               </button>
-              <strong>%s</strong> Harus Di isi.
+              <strong>%s</strong> Harus diisi.
               </div>'
 	        )
 	
@@ -173,7 +225,7 @@ class Settuser_m extends MY_Model {
 	        'rules' => 'trim|required|xss_clean',
 	        'errors' => array(
 	            'required' => '<script>swal({
-                                    title: "%s Harus Di isi.",
+                                    title: "%s Harus diisi.",
                                     type: "error",
                                   });</script>'
 	        ),
@@ -186,7 +238,7 @@ class Settuser_m extends MY_Model {
 	            'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
               </button>
-              <strong>%s</strong> Harus Di isi.
+              <strong>%s</strong> Harus diisi.
               </div>'
 	        )
 	
@@ -293,7 +345,7 @@ class Settuser_m extends MY_Model {
 		);
 		if (count($hakaksess)) {
 			foreach ($hakaksess as $hakakses) :
-			$arr[$hakakses->id] = $hakakses->an_name;
+			$arr[$hakakses->id.':'.$hakakses->an_id] = $hakakses->an_name;
 			endforeach;
 		}
 		return $arr;

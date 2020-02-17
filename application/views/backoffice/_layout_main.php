@@ -111,7 +111,7 @@ $this->load->view('backoffice/components/page_head');
              echo $active_menu_top
              ?>
              
-               <a  href="javascript:void(0);"><?php echo strtoupper($access["top_menu_name"]); ?>
+               <a  href="javascript:void(0);"><?php echo $access["top_menu_name"]; ?>
              <span class="pull-right-container">
              			 <i class="fa fa-angle-left pull-right"></i></a>
             			</span>
@@ -134,6 +134,9 @@ $this->load->view('backoffice/components/page_head');
                         }
                         // dump($CI->uri->segment(1).'/'.$CI->uri->segment(2));
                         ?>
+          <li class="<?=$CI->uri->segment(2) == "dashboard" ? "active" : "";?>">
+            <a href="<?php echo site_url('backoffice/logout')?>"><i class="glyphicon glyphicon-off"></i> Logout</a>
+          </li>
       </ul>
       </section>
       

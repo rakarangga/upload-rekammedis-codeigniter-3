@@ -32,7 +32,7 @@
             $is_delete =  authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_edit"]) ? btn_hapus('settuser/hapus/'.encrypting($row->iduser)) : '';  
 
           if(authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_delete"])){
-            $sub_array[] = form_checkbox('check_id[]', encrypting($row->iduser), FALSE, 'class="icheckbox_flat-green chk"').'<filedset>';
+            $sub_array[] = form_checkbox('check_id[]', $row->iduser, FALSE, 'class="icheckbox_flat-green chk"').'<filedset>';
           }
             $sub_array[] = $no++;
           if(authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_edit"])){
@@ -78,24 +78,33 @@
       $this->data['hakakses_dropdown'] = $this->Settuser_m->get_drowpdown_hakakses();
       
        $rules = $this->Settuser_m->rules;
-       $id || $rules['u_pass']['rules'] .= '|required';
+       $id || $rules['userpass']['rules'] .= '|required';
        $this->form_validation->set_rules($rules);
 
        if ($this->form_validation->run() == TRUE) {
          $data = $this->Settuser_m->array_from_post(array(
-               'u_an_id',
-               'u_name_l',
-               'u_name',
+              //  'iduserlevel',
+               'namalengkap',
+               'namauser',
                'email',
-               'no_hp',
+               'nomorhp',
+               'logo',
                'stts',
-               'u_pass'
+               'userpass'
            ));
-       
-           if (empty($data['u_pass'])) {
-               $data['u_pass'] = $this->data['user']->u_pass;
+          //  $data['iduserlevel'] =$this->input->post('ac_an_id');
+          $ex = explode(':',$this->input->post('iduserlevel'));
+          if( ! empty($ex)){
+            $data['iduserlevel'] = $ex[0];
+            $data['u_an_id'] = $ex[1];
+          }
+         
+
+           if (empty($data['userpass'])) {
+               $data['userpass'] = $this->data['user']->userpass;
+              
            } else {
-               $data['u_pass'] = $this->Settuser_m->hash($data['u_pass']);
+               $data['userpass'] = $this->Settuser_m->hash($data['userpass']);
 
            }
            $this->Settuser_m->simpan($data, $id);
@@ -167,19 +176,21 @@
      public function hapus($id)
      {
       $id = decrypting($id);
-     	$this->Settuser_m->hapus($id);
+     	  $this->Settuser_m->hapus($id);
      	redirect('backoffice/settuser/');
      }
 
      public function multi_delete()
      {
         if($this->input->post('chk_val')){
-              $id = $this->input->post('chk_val');
-              $id = decrypting($id);
+          $id = $this->input->post('chk_val');
+            
               for($count = 0; $count < count($id); $count++){
                   $this->Settuser_m->hapus($id[$count]);
               }
+            
           }
+        
      }
      public function stts($id)
      {

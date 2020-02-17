@@ -29,7 +29,7 @@ function btn_hapus($uri)
     return "<a href=\"javascript:void(0);\" class=\"btn btn-danger\" onclick=\"hapus('" . $uri . "');\" >Hapus</a>";
 }
 
-function btn_multi_hapus($uri)
+function btn_multi_hapus()
 {
     return "<a href=\"javascript:void(0);\" id=\"btn_hapus_multi\" class=\"btn btn-danger margin-bottom btn_hapus_multi\"  ><i class=\"fa\"></i> HAPUS YANG DI TANDAI</a>";
 }

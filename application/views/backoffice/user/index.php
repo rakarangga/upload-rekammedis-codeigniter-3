@@ -27,7 +27,7 @@
 				  ?>
           <?php 
 					if(authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_delete"])){
-						echo btn_multi_hapus('user/hapus/'.encrypting($user->iduser));
+						echo btn_multi_hapus();
 						echo "<fieldset>";				
 					}
 				  ?>
@@ -188,16 +188,18 @@ if(authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_delete"])){
 									method: "POST",
 									url: "<?php echo base_url('backoffice/settuser/multi_delete'); ?>",
 									data: {chk_val: chk_val},
-									success: function(){
+									success: function(msg){
 										// $("#animation").hide();
 										// jika tidak ada data
 										$(".removeRow").fadeOut(300);
-										setTimeout(function(){
-										// window.location.replace('backoffice/user');
-											window.location.reload()
-										}, 500);
+										dataTable.ajax.reload();
+										// alert(msg);
+										// setTimeout(function(){
+										// // window.location.replace('backoffice/user');
+										// 	window.location.reload()
+										// }, 500);
 										// chk.length = 0;
-										// $('#example').data.reload();
+										//  $('#example2').dataTable.reload();
 									}
 								});
 						});
