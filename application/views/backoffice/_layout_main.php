@@ -34,18 +34,15 @@ $this->load->view('backoffice/components/page_head');
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-             <img src="<?php echo $user->logo == NULL ? base_url().'assets/dist/img/user.png' : base_url().$user->logo; ?>" class="user-image" alt="User Image">
+             <img src="<?php echo $user_me->logo == NULL ? base_url().'assets/dist/img/user.png' : base_url().$user_me->logo; ?>" class="user-image" alt="User Image">
               <span class="hidden-xs"><?php echo $nama_lengkap; ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-               <img src="<?php echo $user->logo == NULL ? base_url().'assets/dist/img/user.png' : base_url().$user->logo; ?>"  class="img-circle" alt="User Image">
-        
-
+               <img src="<?php echo $user_me->logo == NULL ? base_url().'assets/dist/img/user.png' : base_url().$user_me->logo; ?>"  class="img-circle" alt="User Image">
                 <p>
-               	<?php echo $nama_lengkap; ?>
-                 
+               	  <?php echo $nama_lengkap; ?>
                 </p>
               </li>
         
@@ -74,7 +71,7 @@ $this->load->view('backoffice/components/page_head');
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-            <img src="<?php echo $user->logo == NULL ? base_url().'assets/dist/img/user.png' : base_url().$user->logo; ?>" class="img-circle" alt="User Image">
+            <img src="<?php echo $user_me->logo == NULL ? base_url().'assets/dist/img/user.png' : base_url().$user_me->logo; ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $nama_lengkap; ?></p>

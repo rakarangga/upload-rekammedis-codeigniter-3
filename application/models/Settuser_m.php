@@ -293,7 +293,7 @@ class Settuser_m extends MY_Model {
 		);
 		if (count($hakaksess)) {
 			foreach ($hakaksess as $hakakses) :
-			$arr[$hakakses->an_id] = $hakakses->an_name;
+			$arr[$hakakses->id] = $hakakses->an_name;
 			endforeach;
 		}
 		return $arr;

@@ -4,7 +4,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> <?php echo $version;?>
     </div>
-    <strong>Copyright &copy; <?php echo date(Y);?> <?php echo $copyright;?>.</strong> 
+    <strong>Copyright &copy; <?php echo date('Y');?> <?php echo $copyright;?>.</strong> 
   </footer>
 
 <!-- Autocomplete -->
@@ -64,6 +64,13 @@
 <script src="<?php echo base_url()?>assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="<?php echo base_url()?>assets/plugins/fastclick/fastclick.js"></script>
 <script src="<?php echo base_url()?>assets/dist/js/app.min.js"></script>
+
+<!-- Password Validator -->
+<!-- <script src="<?php //echo base_url()?>assets/plugins/validator/underscore-min.js"></script> -->
+<!-- <script src="<?php //echo base_url()?>assets/plugins/validator/jquery.password-validator.js"></script> -->
+<script src="<?php echo base_url()?>assets/plugins/validator/jquery.password-validation.js"></script>
+
+
 <!--<script src="<?php //echo base_url()?>assets/dist/js/pages/dashboard.js"></script>
 <script src="<?php //echo base_url()?>assets/dist/js/demo.js"></script>-->
 <!-- Demo JS-->
@@ -282,6 +289,15 @@
 
 <!-- select2 -->
 <script>
+				$(".showhide_pw").click(function() {
+					$(this).find( "i.toggle-password" ).toggleClass("fa-eye fa-eye-slash");
+					var input = $($(this).attr("toggle"));
+					if (input.attr("type") == "password") {
+					input.attr("type", "text");
+					} else {
+					input.attr("type", "password");
+					}
+				});
            $(document).ready(function () {
 			
 				// //iCheck for checkbox and radio inputs
@@ -300,7 +316,7 @@
 				//   radioClass: 'iradio_flat-green'
 				// });
 				//delete by check
-				
+			
                $('#example').DataTable({
                  "paging": true,
                  "lengthChange": false,

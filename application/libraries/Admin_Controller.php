@@ -54,22 +54,22 @@ class Admin_Controller extends MY_Controller
         $this->data['promo'] = $this->Promo_m->get_nested();
         
         if (count($this->data['iduser'])) {
-            $this->data['user'] = $this->Settuser_m->get_by(array(
+            $this->data['user_m'] = $this->Settuser_m->get_by(array(
             'logis_users.iduser' => $this->data['iduser'] ,
-            'logis_users.idmemstat' => $this->data['idmemstat']
+            // 'logis_users.idmemstat' => $this->data['idmemstat']
             ), true); 
-            if (!count($this->data['user'])) {
-                $this->data['notif']='<script>swal({
-                                title: "Pengajuan O.S.E.D.E anda telah diverifikasi !",
-                                text: "Silahkan Login Kembali",
-                                type: "info",
-                                closeOnConfirm: false
-                              },function(isConfirm) {
-                                 window.location.replace("'.site_url('backoffice/user/logout').'");
-                              });
-                             </script>';
+            // if (!count($this->data['user'])) {
+            //     $this->data['notif']='<script>swal({
+            //                     title: "Notifikasi",
+            //                     text: "Mohon Untuk Login Kembali",
+            //                     type: "info",
+            //                     closeOnConfirm: false
+            //                   },function(isConfirm) {
+            //                      window.location.replace("'.site_url('backoffice/user/logout').'");
+            //                   });
+            //                  </script>';
               
-            }
+            // }
         }
    
        

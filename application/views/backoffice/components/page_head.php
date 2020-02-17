@@ -46,7 +46,9 @@
      Include Sweet-alert-->
       <script src="<?php echo base_url()?>assets/sweet-allert/sweetalert-dev.js"></script>
       <link rel="stylesheet" href="<?php echo base_url()?>assets/sweet-allert/sweetalert.css">
-
+    
+     
+     
       <!-- include auto complete-->
      
       <!--.......................-->
@@ -63,7 +65,9 @@
         <![endif]-->
 
     <script src="<?php echo base_url()?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
-	  <script src="<?php echo base_url()?>assets/plugins/jQueryUI/jquery-ui.min.js"></script>
+    <script src="<?php echo base_url()?>assets/plugins/jQueryUI/jquery-ui.min.js"></script>
+     <link rel="stylesheet" href="<?php echo base_url()?>assets/plugins/validator/jquery-password-validator.css"></link>
+    
 </head>
 <style>
 .removeRow{
