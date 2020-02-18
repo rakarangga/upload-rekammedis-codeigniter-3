@@ -6,9 +6,9 @@ class Admin_Controller extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->data['meta_title'] = 'MRAM';
-        $this->data['nav_title'] = 'Medical Records Archive Management';
-        $this->data['copyright'] = 'All Rights Reserved. Medical Records Archive Management';
+        $this->data['meta_title'] = 'ARCHIVE MANAGER';
+        $this->data['nav_title'] = 'Archive Manager';
+        $this->data['copyright'] = 'All Rights Reserved. Archive Manager Medical Record';
         $this->data['version'] = 'Beta 0.1';
         $this->load->helper('form');
         $this->load->helper('security');

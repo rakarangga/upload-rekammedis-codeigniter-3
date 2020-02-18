@@ -3,7 +3,7 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
-	<section class="content-header">
+	<!-- <section class="content-header">
 		<h1>
 			Hai <?php echo $nama_lengkap; ?> <small>Intrex OMS membantu Anda mengelola pesanan dan
 				mengajukan penjemputan.</small>
@@ -12,14 +12,14 @@
 			<li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
 			<li class="active">Home</li>
 		</ol>
-	</section>
+	</section> -->
 
 	<!-- Main content -->
 	<section class="content">
 		<!-- Small boxes (Stat box) -->
-		<div class="row">
+		<?php /*	<div class="row">
 
-			<div class="col-lg-6 col-xs-6">
+			<div class="col-lg-3 col-xs-3">
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
@@ -35,7 +35,7 @@
 			</div>
 			
 			<!-- ./col -->
-			<div class="col-lg-6 col-xs-6">
+			<div class="col-lg-3 col-xs-3">
 				<!-- small box -->
 				<div class="small-box bg-red">
 					<div class="inner">
@@ -50,8 +50,68 @@
 				</div>
 			</div>
 			
+		<?php */?>
+		  <!-- Info boxes -->
+		  <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-archive"></i></span>
+
+            <div class="info-box-content" >
+             <span class="info-box-text" style="font-size:20px">TOTAL BERKAS</span>
+              <span class="info-box-number" style="font-size:20px">90</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa  fa-file-text-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text" style="font-size:20px">NEW BERKAS</span>
+              <span class="info-box-number" style="font-size:20px">10</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-rotate-left "></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text" style="font-size:20px">YESTERDAY</span>
+              <span class="info-box-number" style="font-size:20px">15</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-file-archive-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text" style="font-size:20px">DRAFT</span>
+              <span class="info-box-number" style="font-size:20px">5</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
 		
-		</div>
 	
 		<!-- /.row -->
 		<!-- Main row -->
@@ -86,35 +146,38 @@
 
 				<!-- </div> -->
 				<!-- /.box (chart box) -->
-<section class="col-lg-12 connectedSortable">
-  <div class="alert <?php if($user->idajuosede == "1"){
-                  echo  'alert-info';
-              }elseif($user->idajuosede == "3"){
-                  echo 'alert-warning';
-              }elseif($user->idajuosede == "2"){
-                  echo 'alert-success';
-              }else{
-                  echo 'alert-info';
-              }?> alert-dismissible">
-               
-                <h4><i class="icon fa fa-info"></i> Selamat Datang</h4>
-               
-              <?php 
-              if($user->idajuosede == "1"){
-                  echo  '<p>Terima kasih, Anda telah <b>Mendaftar</b> sebagai member O.S.E.D.E, Mohon untuk menunggu proses verifikasi data member O.S.E.D.E anda.</p>';
-              }elseif($user->idajuosede == "3"){
-                  echo  '<p>Mohon Maaf Pengajuan data member O.S.E.D.E anda <b>Belum Diterima</b> dikarenakan data tidak valid, Mohon untuk merevisi data member O.S.E.D.E anda, lalu <b>Mendaftar</b> kembali  </br>'.anchor ( 'backoffice/profile/form/'.$user->iduser, '<b>Daftar Ulang</b>', 'class="btn btn-danger"' ).'</p>';
-                  echo $user->komenajuan == NULL ? "" :  '<b>Message From CSO :</b>  <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">'.$user->komenajuan.'. </p>';
-              }elseif($user->idajuosede == "2"){
-                  echo '<p>Anda telah terdaftar sebagai member O.S.E.D.E,  Nikmati potongan harga lebih murah untuk pengiriman international.</p>';
-              }else{
-                  echo '<p>Anda Belum terdaftar sebagai member O.S.E.D.E,  dapatkan potongan harga lebih murah untuk pengiriman international. </br>'.anchor ( 'backoffice/profile/form/'.$user->iduser, '<b>Daftar</b>', 'class="btn btn-danger"' ).'</p>';
-              }
-              ?>
-            
-						
-              </div>
-          </section>
+				<?php /*
+		<section class="col-lg-12 connectedSortable">
+
+				<div class="alert <?php if($user->idajuosede == "1"){
+								echo  'alert-info';
+							}elseif($user->idajuosede == "3"){
+								echo 'alert-warning';
+							}elseif($user->idajuosede == "2"){
+								echo 'alert-success';
+							}else{
+								echo 'alert-info';
+							}?> alert-dismissible">
+							
+								<h4><i class="icon fa fa-info"></i> Selamat Datang</h4>
+							
+							<?php 
+							if($user->idajuosede == "1"){
+								echo  '<p>Terima kasih, Anda telah <b>Mendaftar</b> sebagai member O.S.E.D.E, Mohon untuk menunggu proses verifikasi data member O.S.E.D.E anda.</p>';
+							}elseif($user->idajuosede == "3"){
+								echo  '<p>Mohon Maaf Pengajuan data member O.S.E.D.E anda <b>Belum Diterima</b> dikarenakan data tidak valid, Mohon untuk merevisi data member O.S.E.D.E anda, lalu <b>Mendaftar</b> kembali  </br>'.anchor ( 'backoffice/profile/form/'.$user->iduser, '<b>Daftar Ulang</b>', 'class="btn btn-danger"' ).'</p>';
+								echo $user->komenajuan == NULL ? "" :  '<b>Message From CSO :</b>  <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">'.$user->komenajuan.'. </p>';
+							}elseif($user->idajuosede == "2"){
+								echo '<p>Anda telah terdaftar sebagai member O.S.E.D.E,  Nikmati potongan harga lebih murah untuk pengiriman international.</p>';
+							}else{
+								echo '<p>Anda Belum terdaftar sebagai member O.S.E.D.E,  dapatkan potongan harga lebih murah untuk pengiriman international. </br>'.anchor ( 'backoffice/profile/form/'.$user->iduser, '<b>Daftar</b>', 'class="btn btn-danger"' ).'</p>';
+							}
+							?>
+							
+										
+							</div>
+		  </section>
+		  	<?php */ ?>
 			<!-- /.Left col -->
 			<!-- right col (We are only adding the ID to make the widgets sortable)-->
 			<section class="col-lg-7 connectedSortable">

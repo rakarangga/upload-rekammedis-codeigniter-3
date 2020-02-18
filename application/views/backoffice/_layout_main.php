@@ -136,7 +136,7 @@ $this->load->view('backoffice/components/page_head');
                         // dump($CI->uri->segment(1).'/'.$CI->uri->segment(2));
                         ?>
           <li class="<?=$CI->uri->segment(2) == "dashboard" ? "active" : "";?>">
-            <a href="<?php echo site_url('backoffice/logout')?>"><i class="glyphicon glyphicon-off"></i> Logout</a>
+            <a href="<?php echo site_url('backoffice/user/logout')?>"><i class="glyphicon glyphicon-off"></i> LOGOUT</a>
           </li>
       </ul>
       </section>
