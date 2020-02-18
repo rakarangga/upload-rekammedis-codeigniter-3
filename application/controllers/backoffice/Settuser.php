@@ -21,6 +21,8 @@
         }
      }
 
+
+
      public function fetch_ajax()
      { 
         $fetchdata = $this->Settuser_m->getDataTable();

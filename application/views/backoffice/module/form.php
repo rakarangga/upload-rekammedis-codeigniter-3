@@ -45,10 +45,23 @@ if(authorize($_SESSION["access"]["pengaturan_umum"]["settmodule"]["ac_view"])){
 									class="required">*</span></label>
 								<div class="col-sm-10">
 									<?php //echo form_input ( 'mod_modulegroupname', set_value ( 'mod_modulegroupname',$module->mod_modulegroupname), 'class="form-control"  required' ); ?>
-									<?php echo form_textarea('mod_modulegroupname',set_value ( 'mod_modulegroupname',$module->mod_modulegroupname,false), 'class="form-control" placeholder="Nama Menu Utama (dapat menggunakan icon dengan tag html)."  style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"'); ?>
+									<?php echo form_input('mod_modulegroupname',set_value ( 'mod_modulegroupname',$module->mod_modulegroupname), 'class="form-control" placeholder="Nama Menu Utama (dapat menggunakan icon dengan tag html)."  '); ?>
 								</div>
 							</div>
-							
+							<div class="form-group">
+								<label for="ico" class="col-sm-2 control-label">Icon Module<span class="required">*</span>
+								</label>
+								<div class="col-sm-10">
+								<div class="input-group">
+									<?php echo form_input ( 'ico', set_value ( 'ico', $module->ico == "" ? "<i class=\"fa  fa-dropbox\"></i>" : $module->ico, false), 'class="form-control" required' ); ?>
+									
+									<span  class="input-group-addon "><?=$module->ico == NULL ? "ICON KOSONG" : set_value ( 'ico', $module->ico , false) ?></span>
+									</div>
+									<?php echo anchor ( 'backoffice/settmodule/ico', '<label for="ico" class="control-label">Klik untuk memilih icon</span></label>', 'target="_blank"' ); ?>
+								</div>
+								
+							</div>
+
 							<div class="form-group">
 								<label for="mod_modulegrouporder" class="col-sm-2 control-label">Urutan<span
 									class="required">*</span></label>

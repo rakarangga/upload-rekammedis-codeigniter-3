@@ -21,7 +21,7 @@ class Module_m extends MY_Model {
 	    'mod_modulegroupname' => array (
 	        'field' => 'mod_modulegroupname',
 	        'label' => 'Menu Utama',
-	        'rules' => 'trim|required',
+	        'rules' => 'trim|required|xss_clean',
 	        'errors' => array (
 	            'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
@@ -48,6 +48,19 @@ class Module_m extends MY_Model {
 	        'field' => 'mod_modulename',
 	        'label' => 'Submenu',
 	        'rules' => 'trim|required',
+	        'errors' => array (
+	            'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+              </button>
+              <strong>%s</strong> Harus Di isi.
+              </div>'
+	        )
+	    
+		),  
+		'ico' => array (
+	        'field' => 'ico',
+	        'label' => 'Submenu',
+	        'rules' => 'trim',
 	        'errors' => array (
 	            'required' => '  <div class="alert alert-warning alert-dismissible fade in" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
@@ -86,6 +99,7 @@ class Module_m extends MY_Model {
 	);
 	public function get_new() {
 		$module = new stdClass ();
+		// $module->ico = '';
 		$module->mod_modulegroupid = '';
 		$module->mod_modulegroupname = '';
 		$module->mod_moduleid= '';
@@ -105,9 +119,9 @@ class Module_m extends MY_Model {
 	}
 	
 	public function allModules($id = NULL, $single = FALSE) {
-	    $this->db->select('mod_modulegroupid, mod_modulegroupname,mod_modulepagename,mod_moduleid,mod_modulename');
-	    $this->db->order_by('mod_modulegrouporder','dsc');
-	    $this->db->order_by('mod_moduleorder','dsc');
+	    $this->db->select('mod_modulegroupid, mod_modulegroupname,mod_modulepagename,mod_moduleid,mod_modulename,ico');
+	    $this->db->order_by('mod_modulegrouporder','ASC');
+	    $this->db->order_by('mod_moduleorder','ASC');
 	    
 	  //  $this->db->where('1', 'mod_modulegroupid');
 	

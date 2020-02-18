@@ -111,7 +111,7 @@ $this->load->view('backoffice/components/page_head');
              echo $active_menu_top
              ?>
              
-               <a  href="javascript:void(0);"><?php echo $access["top_menu_name"]; ?>
+               <a  href="javascript:void(0);"><?php echo $access["top_icon"]; ?><?php echo STRTOUPPER($access["top_menu_name"]); ?>
              <span class="pull-right-container">
              			 <i class="fa fa-angle-left pull-right"></i></a>
             			</span>
@@ -119,17 +119,18 @@ $this->load->view('backoffice/components/page_head');
                                 echo '<ul class="treeview-menu">';
                                 foreach ($access as $k => $val) {
                                   //  dump($val);
-                                    if ($k != "top_menu_name") {
+                                    if ($k != "top_menu_name" && $k != "top_icon") {
                                        $active = $CI->uri->segment(1).'/'.$CI->uri->segment(2) == $val['page_name']? TRUE : FALSE;
                                         $active_menu = $active == TRUE ? '<li class="active">' : '<li>';
-                                        echo $active_menu.'<a href="' . (site_url($val["page_name"])) . '"><i class="fa fa-circle-o"></i>' . strtoupper($val["menu_name"]) . '</a></li>';
+                                        echo $active_menu.'<a href="' . (site_url($val["page_name"])) . '"><i class="fa fa-circle-o"></i>' . strtoupper($val["menu_name"]) . '</a>'.PHP_EOL;
+                                        echo "</li>";
                                         ?>
                                         <?php
                                     }
                                 }
                                 echo '</ul>';
                                 ?>
-                            </li>
+
                             <?php
                         }
                         // dump($CI->uri->segment(1).'/'.$CI->uri->segment(2));

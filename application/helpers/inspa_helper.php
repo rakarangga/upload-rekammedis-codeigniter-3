@@ -200,10 +200,10 @@ function set_rights($menus, $menuRights, $topmenu)
 {
     $data = array();
     
-    for ($i = 0, $c = count($menus); $i < $c; $i ++) {
+    for ($i = 0, $c = count($menus); $i < $c; $i++) {
         
         $row = array();
-        for ($j = 0, $c2 = count($menuRights); $j < $c2; $j ++) {
+        for ($j = 0, $c2 = count($menuRights); $j < $c2; $j++) {
             if ($menuRights[$j]->ac_module_id == $menus[$i]->mod_moduleid) {
                 if (authorize($menuRights[$j]->ac_create) || authorize($menuRights[$j]->ac_edit) || authorize($menuRights[$j]->ac_delete) || authorize($menuRights[$j]->ac_view)) {
                     
@@ -217,12 +217,12 @@ function set_rights($menus, $menuRights, $topmenu)
                     
                     $data[$menus[$i]->mod_modulegroupid][$menuRights[$j]->ac_module_id] = $row;
                     $data[$menus[$i]->mod_modulegroupid]["top_menu_name"] = $menus[$i]->mod_modulegroupname;
-                    // $data[$menus[$i]->mod_modulegroupid]["top_page_name"] = $menus[$i]->mod_modulepagename;
+                    $data[$menus[$i]->mod_modulegroupid]["top_icon"] = $menus[$i]->ico;
                 }
             }
         }
     }
-    
+    // dump($data);
     return $data;
 }
 

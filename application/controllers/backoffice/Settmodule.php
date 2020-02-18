@@ -16,6 +16,18 @@
          $this->data['subview'] = 'backoffice/module/index';
          $this->load->view('backoffice/_layout_main',$this->data);
      }
+     public function ico()
+     {
+       
+       
+         if(authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_view"])){
+           // $this->data['users']=$this->Settuser_m->get();
+           $this->data['subview'] = 'backoffice/module/ico';
+           $this->load->view('backoffice/_layout_main',$this->data);
+         }else{
+           $this->show_404();
+         }
+     }
 
      public function form($id = NULL )
      {
@@ -34,6 +46,7 @@
 
        if ($this->form_validation->run() == TRUE) {
          $data = $this->Module_m->array_from_post(array(
+               'ico',
                'mod_modulegroupid',
                'mod_modulegroupname',
                'mod_moduleid',
@@ -42,8 +55,14 @@
                'mod_moduleorder',
                'mod_modulepagename'
            ));
-          $data[mod_modulegroupid] = $this->whitespace($data[mod_modulegroupid]);
-          $data[mod_moduleid] = $this->whitespace($data[mod_moduleid]);
+          $data['mod_modulegroupid'] = $this->whitespace($data['mod_modulegroupid']);
+          $data['mod_moduleid'] = $this->whitespace($data['mod_moduleid']);
+          if (empty($data['ico'])) {
+            $data['ico'] = '<i class="fa fa-wrench"></i>';
+          } else {
+              $data['ico'] = $data['ico'];
+
+          }
            $this->Module_m->simpan($data, $id);
            //var_dump($data);
           // redirect('backoffice/settmodule/');
