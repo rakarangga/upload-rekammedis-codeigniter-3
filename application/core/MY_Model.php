@@ -10,12 +10,15 @@ class MY_Model extends CI_Model
     protected $_primary_filter = 'intval';
     protected $_timePost = 'tgl_posting';
     protected $_timeedit= 'tgl_update';
+    protected $_userInput = 'id_user';
+    protected $_userSession = 'iduser';
     protected $_order_by = 'tgl_posting';
     protected $_sort = 'DESC';
 
     public $rules = array();
 
     protected $_timestamp = TRUE;
+    protected $_userTag = FALSE;
 
     // protected $_order_column = array();
 	// protected $_select_column = array();
@@ -70,6 +73,16 @@ class MY_Model extends CI_Model
             $id || $data[$this->_timePost] = $now;
             $this->_timeedit == True ? $data[$this->_timeedit] = $now : "";
         }
+
+        // userInput
+        if ($this->_userTag == TRUE) {
+            if ($this->session->userdata($this->_userSession) != null) {
+                $userID = $this->session->userdata($this->_userSession);
+                $id || $data[$this->_timePost] = $userID;
+                $this->_userInput == True ? $data[$this->_userInput] = $userID : "";
+            }
+        }
+        
         // insert
         if ($id === NULL) {
             ! isset($data[$this->_primary_key]) || $data[$this->_primary_key] = NULL;

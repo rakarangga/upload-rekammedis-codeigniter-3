@@ -28,18 +28,22 @@ class Admin_Controller extends MY_Controller
         $this->load->model('Module_m');
         $this->load->model('Accescontrol_m');
         $this->load->model('Promo_m');
-        $this->load->model('BukuAlamat_m');
-        $this->load->model('Crdomestic_m');
-        $this->load->model('Propinsi_m');
-        $this->load->model('Crinter_m');
-        $this->load->model('Itemdetail_m');
         $this->load->model('Promointr_m');
-        $this->load->model('Draftinter_m');
-        $this->load->model('Rulepickup_m');
-        $this->load->model('Metodepay_m');
-        $this->load->model('Jemputdom_m');
-        $this->load->model('Payment_m');
-        $this->load->model('International_m');
+        
+        // $this->load->model('Rulepickup_m');
+        // $this->load->model('BukuAlamat_m');
+        // $this->load->model('Crdomestic_m');
+        // $this->load->model('Propinsi_m');
+        // $this->load->model('Crinter_m');
+        // $this->load->model('Itemdetail_m');
+        // $this->load->model('Draftinter_m');
+        // $this->load->model('Metodepay_m');
+        // $this->load->model('Jemputdom_m');
+        // $this->load->model('Payment_m');
+        // $this->load->model('International_m');
+        $this->load->model('Directory_m');
+        $this->load->model('Berkas_m');
+        $this->load->model('Pasien_m');
         
         $this->data['iduser'] = $this->session->userdata('iduser');
         $this->data['loggedin'] = $this->session->userdata('loggedin');

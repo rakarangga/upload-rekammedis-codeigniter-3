@@ -3,11 +3,25 @@ $this->load->view('backoffice/components/page_head');
 
 ?>
 <style>
-/* .skin-yellow-light .main-header .navbar {
-    background-color: #1caae2;
-} */
+.skin-blue-light .main-sidebar, .skin-blue-light .left-side {
+    background-color: #F7F7F9;
+   
+}
+.skin-blue-light .sidebar a {
+  color:#677789;
+}    
+.skin-blue-light .treeview-menu>li.active>a, .skin-blue-light .treeview-menu>li>a:hover {
+    color: #000;
+    
+}
+menu>li:hover>a, .skin-blue-light .sidebar-menu>li.active>a {
+    color: #fff;
+    background: #a0b6c3;
+    border-left-color: #e04a38;
+}
+
 </style>
-<body class="hold-transition skin-blue">
+<body class="hold-transition skin-blue-light">
 <div class="wrapper">
 
   <header class="main-header">
@@ -27,7 +41,7 @@ $this->load->view('backoffice/components/page_head');
         <span class="sr-only">Toggle navigation</span>
       </a>
 
-      <div class="navbar-custom-menu">
+      <div class="navbar-custom-menu" >
         <ul class="nav navbar-nav">
          
          
@@ -135,7 +149,7 @@ $this->load->view('backoffice/components/page_head');
                         }
                         // dump($CI->uri->segment(1).'/'.$CI->uri->segment(2));
                         ?>
-          <li class="<?=$CI->uri->segment(2) == "dashboard" ? "active" : "";?>">
+          <li >
             <a href="<?php echo site_url('backoffice/user/logout')?>"><i class="glyphicon glyphicon-off"></i> LOGOUT</a>
           </li>
       </ul>

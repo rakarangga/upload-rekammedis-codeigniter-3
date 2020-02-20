@@ -12,7 +12,7 @@
 <script src="<?php echo base_url()?>assets/dist/js/autocomplete/jquery.autocomplete.js"></script>
 
 	<script type="text/javascript">
-	 $(function () {
+<?php /*	 $(function () {
 		// 'use strict';
          var return_first = function () {
          var tmp = null;
@@ -37,9 +37,10 @@
         appendTo: '#autoComplete',
    });
    });
+    <?php */ ?>
       $.widget.bridge('uibutton', $.ui.button);
       //INI PENTING UNTUK DINAMIS SELECT2
-    
+   
     </script>
 
 <script src="<?php echo base_url()?>assets/bootstrap/js/bootstrap.min.js"></script>

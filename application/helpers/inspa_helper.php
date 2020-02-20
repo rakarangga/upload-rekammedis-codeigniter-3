@@ -94,8 +94,17 @@ function tgl_no_jam($tgl)
     $tanggal = substr($tgl, 8, 2);
     $bulan = getBulan(substr($tgl, 5, 2));
     $tahun = substr($tgl, 0, 4);
-    $jam = substr($tgl, 11, 5);
-    return $tanggal . ' - ' . $bulan . ' - ' . $tahun . ' ' . $jam ;
+    // $jam = substr($tgl, 11, 5);
+    return $tanggal . ' - ' . $bulan . ' - ' . $tahun;
+}
+
+function tgl_bulan($tgl)
+{
+    $tanggal = substr($tgl, 8, 2);
+    $bulan = getBulan(substr($tgl, 5, 2));
+    // $tahun = substr($tgl, 0, 4);
+    // $jam = substr($tgl, 11, 5);
+    return $tanggal . ' - ' . $bulan;
 }
 
 function thousandsCurrencyFormat($num) {

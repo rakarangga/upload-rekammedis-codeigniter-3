@@ -71,6 +71,11 @@
     <script src="<?php echo base_url()?>assets/plugins/jQueryUI/jquery-ui.min.js"></script>
      <!-- <link rel="stylesheet" href="<?php //echo base_url()?>assets/plugins/validator/jquery-password-validator.css"></link> -->
     
+     <!-- highchart 8.0.0 !-->
+    <script type="text/javascript" src="<?php echo base_url()?>assets/plugins/highchart/highcharts.js"></script>
+    <script type="text/javascript" src="<?php echo base_url()?>assets/plugins/highchart/no-data-to-display.js"></script>
+    <script type="text/javascript" src="<?php echo base_url()?>assets/plugins/highchart/exporting.js"></script>
+    
 </head>
 <style>
 .removeRow{
