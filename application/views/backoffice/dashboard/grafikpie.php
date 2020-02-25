@@ -6,7 +6,7 @@
 										data: <?=$data?>,
 										resize: true,
 										// colors:['#EEA6AC','#0073B7','#0473B7']
-										colors:[<?=$color?>]
+										colors:<?=$color?>
 									});
 								});
 								</script>

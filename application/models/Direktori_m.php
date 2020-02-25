@@ -1,5 +1,5 @@
 <?php
-class Directory_m extends MY_Model {
+class Direktori_m extends MY_Model {
 	protected $_table_nama = 't_directory';
 	protected $_primary_key = 'id';
 	protected $_order_by = 't_directory.modified';
@@ -9,7 +9,7 @@ class Directory_m extends MY_Model {
 	protected $_userTag= TRUE;
 
 	//Var untuk datatable Ajax
-	protected $_order_column = array(null,null,'namalengkap', 'namauser','email', null, null, null);
+	protected $_order_column = array(null,null,'namadirectory', 'tgldirectory',null, null, null, null);
 	protected $_select_column = array('*');
 	
 	
@@ -192,12 +192,10 @@ class Directory_m extends MY_Model {
 	public function getDataTable_Query() {
 		$this->db->select($this->_select_column);
 		$this->_or_like = array(
-			$this->_table_nama.'.namalengkap' => $_POST["search"]["value"], 
-			$this->_table_nama.'.email' => $_POST["search"]["value"], 
-			$this->_table_nama.'.namauser'=> $_POST["search"]["value"],
-			'b.an_name'=> $_POST["search"]["value"],
+			$this->_table_nama.'.namadirectory' => $_POST["search"]["value"], 
+			$this->_table_nama.'.tgldirectory' => $_POST["search"]["value"], 
 		);
-		$this->db->join('t_acs_nm as b', $this->_table_nama.'.iduserlevel = b.id', 'left');
+		// $this->db->join('t_acs_nm as b', $this->_table_nama.'.iduserlevel = b.id', 'left');
         $columnIndex = $_POST['order'][0]['column']; // Column index
 	
 		if(isset($_POST["search"]["value"]))
@@ -288,6 +286,26 @@ class Directory_m extends MY_Model {
 		return $arr;
 	}
 	
+
+	public function get_dropdown_tanggal()
+	{
+		
+		// $this->load->model('Hakakses_m');
+		$this->db->select('tgldirectory');
+		// $this->db->group_by("year"); 
+		$querys = $this->db->get($this->_table_nama)->result();
+		// dump($querys);
+		// Jika catagorie Tidak 0 Tampilkan Judul
+		$arr = array(
+				0 => 'Select Tanggal'
+		);
+		if (count($querys)) {
+			foreach ($querys as $query) :
+				$arr[encrypting($query->tgldirectory)] = $query->tgldirectory;
+			endforeach;
+		}
+		return $arr;
+	}
 	public function hapus($id)
 	{
 	    // hapus halaman

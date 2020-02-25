@@ -41,7 +41,7 @@ class Admin_Controller extends MY_Controller
         // $this->load->model('Jemputdom_m');
         // $this->load->model('Payment_m');
         // $this->load->model('International_m');
-        $this->load->model('Directory_m');
+        $this->load->model('Direktori_m');
         $this->load->model('Berkas_m');
         $this->load->model('Pasien_m');
         

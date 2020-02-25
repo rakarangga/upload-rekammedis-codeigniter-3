@@ -9,7 +9,7 @@ class MY_Model extends CI_Model
 
     protected $_primary_filter = 'intval';
     protected $_timePost = 'tgl_posting';
-    protected $_timeedit= 'tgl_update';
+    protected $_timeedit = 'tgl_update';
     protected $_userInput = 'id_user';
     protected $_userSession = 'iduser';
     protected $_order_by = 'tgl_posting';
@@ -21,7 +21,7 @@ class MY_Model extends CI_Model
     protected $_userTag = FALSE;
 
     // protected $_order_column = array();
-	// protected $_select_column = array();
+    // protected $_select_column = array();
     // protected $_or_like = array();
 
     function __construct()
@@ -38,8 +38,8 @@ class MY_Model extends CI_Model
         }
         return $data;
     }
-    
-  
+
+
 
     public function get($id = NULL, $single = FALSE)
     {
@@ -53,8 +53,8 @@ class MY_Model extends CI_Model
         } else {
             $method = 'result';
         }
-        if (! count($this->db->_order_by)) {
-            $this->db->order_by($this->_order_by,$this->_sort);
+        if (!count($this->db->_order_by)) {
+            $this->db->order_by($this->_order_by, $this->_sort);
         }
         return $this->db->get($this->_table_nama)->$method();
     }
@@ -78,19 +78,19 @@ class MY_Model extends CI_Model
         if ($this->_userTag == TRUE) {
             if ($this->session->userdata($this->_userSession) != null) {
                 $userID = $this->session->userdata($this->_userSession);
-                $id || $data[$this->_timePost] = $userID;
+                $id || $data[$this->_userInput] = $userID;
                 $this->_userInput == True ? $data[$this->_userInput] = $userID : "";
             }
         }
-        
+
         // insert
         if ($id === NULL) {
-            ! isset($data[$this->_primary_key]) || $data[$this->_primary_key] = NULL;
+            !isset($data[$this->_primary_key]) || $data[$this->_primary_key] = NULL;
             $this->db->set($data);
             $this->db->insert($this->_table_nama);
             $id = $this->db->insert_id();
         }  // update
-else {
+        else {
             $filter = $this->_primary_filter;
             $id = $filter($id);
             $this->db->set($data);
@@ -99,17 +99,18 @@ else {
         }
         return $id;
     }
-    
-    public function simpanMultiple($data){
-      //  $this->db->set($data);
-        $this->db->insert_batch($this->_table_nama,$data);
+
+    public function simpanMultiple($data)
+    {
+        //  $this->db->set($data);
+        $this->db->insert_batch($this->_table_nama, $data);
     }
 
     public function hapus($id)
     {
         $filter = $this->_primary_filter;
         $id = $filter($id);
-        if (! $id) {
+        if (!$id) {
             return FALSE;
         }
         $this->db->where($this->_primary_key, $id);
@@ -121,5 +122,4 @@ else {
     {
         $this->db->truncate($this->_table_nama);
     }
-
 }

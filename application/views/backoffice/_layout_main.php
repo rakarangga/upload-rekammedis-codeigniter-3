@@ -29,9 +29,9 @@ menu>li:hover>a, .skin-blue-light .sidebar-menu>li.active>a {
     <!-- Logo -->
     <a href="<?php echo site_url('backoffice/dashboard')?>" class="logo ">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>M</b>ARM</span>
+      <span class="logo-mini"><b>Arc</b>M</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Manajemen</b> Area</span>
+      <span class="logo-lg"><b>Archive</b> Manager</span>
     </a>
     
     <!-- Header Navbar: style can be found in header.less -->

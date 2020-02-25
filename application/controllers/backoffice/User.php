@@ -108,7 +108,7 @@
                  $this->session->set_flashdata('error','email / Password tidak valid !');
                  $url = "backoffice/user";
                  $this->data['valid_login']='<script>swal({
-                                title: "email / password tidak valid !",
+                                title: "username / password tidak valid !",
                                 type: "error",
                                 closeOnConfirm: false
                               },function(isConfirm) {

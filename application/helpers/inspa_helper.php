@@ -23,10 +23,22 @@ function btn_pilih($uri,$string = "Pakai Alamat ini")
         'class' => 'btn btn-danger'
     ));
 }
+function btn_koreksi_icon($uri)
+{
+    return anchor($uri, '<i class="fa fa-edit"></i>', array(
+        'class' => 'btn btn-primary btn-sm',
+        'data-toggle'=> 'tooltip',
+        'data-original-title' => 'Perbarui'
+    ));
+}
 
 function btn_hapus($uri)
 {
     return "<a href=\"javascript:void(0);\" class=\"btn btn-danger\" onclick=\"hapus('" . $uri . "');\" >Hapus</a>";
+}
+function btn_hapus_icon($uri)
+{
+    return "<button type=\"button\" onclick=\"hapus('" . $uri . "');\" class=\"btn btn-danger btn-sm\" data-toggle=\"tooltip\" data-original-title=\"Hapus\"><i class=\"fa fa-trash-o\"></i></button>";
 }
 
 function btn_multi_hapus()
@@ -88,7 +100,16 @@ function tgl_indo($tgl)
     $jam = substr($tgl, 11, 5);
     return $tanggal . ' - ' . $bulan . ' - ' . $tahun . ' ' . $jam . ' WIB';
 }
-
+function get_bulan($tgl)
+{
+    $bulan = getBulan(substr($tgl, 5, 2));
+    return $bulan ;
+}
+function get_tahun($tgl)
+{
+    $tahun = substr($tgl, 0, 4);
+    return $tahun ;
+}
 function tgl_no_jam($tgl)
 {
     $tanggal = substr($tgl, 8, 2);
@@ -168,6 +189,20 @@ function getBulan($bln)
             break;
     }
 }
+
+function rand_color() {
+    return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+}
+
+function random_color(){
+    mt_srand((double)microtime()*1000000);
+    $c = '';
+    while(strlen($c)<6){
+        $c .= sprintf("%02X", mt_rand(0, 255));
+    }
+    return $c;
+}
+
 // Fungsi Konversi Time Ago dengan parameter waktu posting (date)
 function konversiTimeAgo($waktuPosting)
 {

@@ -42,15 +42,19 @@
  	
  	  <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="<?php echo base_url()?>assets/plugins/iCheck/all.css">
+
  	<!-- bootstrap wysihtml5 - text editor -->
     <!-- Include Jquery min js
     <script src="<?php //echo base_url()?>assets/js/jquery.min.js"></script>
 
      Include Sweet-alert-->
+     <?php /*  
+         <script src="<?php echo base_url()?>assets/sweet-allert/sweetalert2.all.min.js"></script>
+      <link rel="stylesheet" href="<?php echo base_url()?>assets/sweet-allert/sweetalert2.min.css">
+     <?php */ ?>
+   
       <script src="<?php echo base_url()?>assets/sweet-allert/sweetalert-dev.js"></script>
       <link rel="stylesheet" href="<?php echo base_url()?>assets/sweet-allert/sweetalert.css">
-    
-     
      
       <!-- include auto complete-->
      
