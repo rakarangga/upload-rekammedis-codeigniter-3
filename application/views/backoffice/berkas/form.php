@@ -1,5 +1,5 @@
 <?php
-if (authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_view"])) {
+if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_view"])) {
 ?>
 	<style>
 		.jq-password-validator__popover {
@@ -8,6 +8,7 @@ if (authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_view"])) {
 			box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
 			color: #CC0000;
 		}
+
 		/**
 		* Errors
 		*/
@@ -43,7 +44,7 @@ if (authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_view"])) {
 				<?php echo form_open_multipart('', 'id="demo-form" data-parsley-validate class="form-horizontal" data-validate'); ?>
 				<div class="box-header with-border">
 					<?php echo form_submit('submit', 'Simpan', 'class="btn btn-success btn-save"'); ?>
-					<?php echo anchor('backoffice/settuser', 'Kembali', 'class="btn btn-warning"'); ?>
+					<?php echo anchor('backoffice/berkas', 'Kembali', 'class="btn btn-warning"'); ?>
 				</div>
 				<div class="col-xs-6">
 					<div class="box box-info">
@@ -52,7 +53,7 @@ if (authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_view"])) {
 
 								<div class="form-group">
 									<label for="iduserlevel">Hak Akses<span class="required">*</span></label>
-									<?php echo form_dropdown('iduserlevel', $hakakses_dropdown, $this->input->post('iduserlevel') ? $this->input->post('iduserlevel') : $user->iduserlevel.':'.$user->u_an_id, 'class="form-control select2" style="width: 100%;" required'); ?>
+									<?php echo form_dropdown('iduserlevel', $hakakses_dropdown, $this->input->post('iduserlevel') ? $this->input->post('iduserlevel') : $user->iduserlevel . ':' . $user->u_an_id, 'class="form-control select2" style="width: 100%;" required'); ?>
 
 								</div>
 
@@ -77,9 +78,10 @@ if (authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_view"])) {
 									</label>
 
 									<?php echo form_input(
-												'email', 
-												set_value('email', $user->email), 
-												'class="form-control tab-input" title="Mohon untuk menggunakan format email yang benar (ex. a@a.com)." pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$"  required '); ?>
+										'email',
+										set_value('email', $user->email),
+										'class="form-control tab-input" title="Mohon untuk menggunakan format email yang benar (ex. a@a.com)." pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$"  required '
+									); ?>
 								</div>
 
 
@@ -112,7 +114,7 @@ if (authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_view"])) {
 												'class' => 'form-control',
 												'style' => 'width:250px;',
 												'onChange' => "previewImg(event)",
-												
+
 											);
 											echo form_upload($data_upload);
 											?>
@@ -134,7 +136,7 @@ if (authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_view"])) {
 							<!-- /.box-body -->
 							<div class="box-footer">
 								<?php echo form_submit('submit', 'Simpan', 'class="btn btn-success btn-save"'); ?>
-								<?php echo anchor('backoffice/settuser', 'Kembali', 'class="btn btn-warning"'); ?>
+								<?php echo anchor('backoffice/berkas', 'Kembali', 'class="btn btn-warning"'); ?>
 							</div>
 						</div>
 
@@ -191,77 +193,75 @@ if (authorize($_SESSION["access"]["pengaturan_umum"]["settuser"]["ac_view"])) {
 		</section>
 	</div>
 	<script>
+		function previewImg(event) {
+			$("#form-img").html('<img id="img" class="img" style="margin-top:10px;width:250px;">');
+			var reader = new FileReader();
+			var imageField = document.getElementById("img");
 
-		
-				function previewImg(event) {
-					$("#form-img").html('<img id="img" class="img" style="margin-top:10px;width:250px;">');
-					var reader = new FileReader();
-					var imageField = document.getElementById("img");
+			reader.onload = function() {
+				if (reader.readyState == 2) {
 
-					reader.onload = function() {
-						if (reader.readyState == 2) {
-
-							imageField.src = reader.result;
-						}
-					}
-					reader.readAsDataURL(event.target.files[0]);
-				};
+					imageField.src = reader.result;
+				}
+			}
+			reader.readAsDataURL(event.target.files[0]);
+		};
 
 
-//password strength untuk ganti password
+		//password strength untuk ganti password
 		//   $(function () {
-$(document).ready(function() {
-	
-		// 	var options = {
-		// 		// confirmField:'#u_pass_confirm',
-		// 		// Minimum Length of password
-		// 		minLength: 12,
-		// 		// Minimum number of Upper Case Letters characters in password
-		// 		minUpperCase: 0,
-		// 		// Minimum number of Lower Case Letters characters in password
-		// 		minLowerCase: 2,
-		// 		// Minimum number of digits characters in password
-		// 		minDigits: 2,
-		// 		// Minimum number of special characters in password
-		// 		minSpecial: 2,
-		// 		// Maximum number of repeated alphanumeric characters in password dhgurAAAfjewd <- 3 A's
-		// 		maxRepeats: 12,
-		// 		// Maximum number of alphanumeric characters from one set back to back
-		// 		maxConsecutive: 12,
-		// 		// Disallow Upper Case Lettera
-		// 		noUpper: false,
-		// 		// Disallow Lower Case Letters
-		// 		noLower: false,
-		// 		// Disallow Digits
-		// 		noDigit: false,
-		// 		// Disallow Special Characters
-		// 		noSpecial: false,
-		// 		// Disallow user to have x number of repeated alphanumeric characters ex.. ..A..a..A.. <- fails if maxRepeats <= 3 CASE INSENSITIVE
-		// 		failRepeats: true,
-		// 		// Disallow user to have x number of consecutive alphanumeric characters from any set ex.. abc <- fails if maxConsecutive <= 3 
-		// 		failConsecutive: true,
-		// 		// selector of confirm field
-		// 		confirmField: undefined
-		// 	}
-		// 	$("#userpass").passwordValidation(options, function(element, valid, match, failedCases) {
-		// 		$('#errors1').html('<div class="jq-password-validator__popover">' + failedCases.join("\n") + '</div>');
-		// 		if (valid) {
-		// 			$(element).css('border', '1px solid green');
-		// 			$('#errors1').html('<div></div>');
-		// 			// document.getElementById('errors1').classList.remove('jq-password-validator__popover');
-		// 			// $('#errors1').closest('div').removeClass('jq-password-validator__popover');
-		// 		}
+		$(document).ready(function() {
 
-		// 		if (!valid) {
-		// 			$(element).css('border', '1px solid red');
+			// 	var options = {
+			// 		// confirmField:'#u_pass_confirm',
+			// 		// Minimum Length of password
+			// 		minLength: 12,
+			// 		// Minimum number of Upper Case Letters characters in password
+			// 		minUpperCase: 0,
+			// 		// Minimum number of Lower Case Letters characters in password
+			// 		minLowerCase: 2,
+			// 		// Minimum number of digits characters in password
+			// 		minDigits: 2,
+			// 		// Minimum number of special characters in password
+			// 		minSpecial: 2,
+			// 		// Maximum number of repeated alphanumeric characters in password dhgurAAAfjewd <- 3 A's
+			// 		maxRepeats: 12,
+			// 		// Maximum number of alphanumeric characters from one set back to back
+			// 		maxConsecutive: 12,
+			// 		// Disallow Upper Case Lettera
+			// 		noUpper: false,
+			// 		// Disallow Lower Case Letters
+			// 		noLower: false,
+			// 		// Disallow Digits
+			// 		noDigit: false,
+			// 		// Disallow Special Characters
+			// 		noSpecial: false,
+			// 		// Disallow user to have x number of repeated alphanumeric characters ex.. ..A..a..A.. <- fails if maxRepeats <= 3 CASE INSENSITIVE
+			// 		failRepeats: true,
+			// 		// Disallow user to have x number of consecutive alphanumeric characters from any set ex.. abc <- fails if maxConsecutive <= 3 
+			// 		failConsecutive: true,
+			// 		// selector of confirm field
+			// 		confirmField: undefined
+			// 	}
+			// 	$("#userpass").passwordValidation(options, function(element, valid, match, failedCases) {
+			// 		$('#errors1').html('<div class="jq-password-validator__popover">' + failedCases.join("\n") + '</div>');
+			// 		if (valid) {
+			// 			$(element).css('border', '1px solid green');
+			// 			$('#errors1').html('<div></div>');
+			// 			// document.getElementById('errors1').classList.remove('jq-password-validator__popover');
+			// 			// $('#errors1').closest('div').removeClass('jq-password-validator__popover');
+			// 		}
 
-		// 		}
-				// if(valid && match) {
-				// 	$('#u_pass_confirm').css('border','1px solid green');
-				// }
-				// if(!valid || !match) {
-				// 	$('#u_pass_confirm').css('border','1px solid red');
-				// }
+			// 		if (!valid) {
+			// 			$(element).css('border', '1px solid red');
+
+			// 		}
+			// if(valid && match) {
+			// 	$('#u_pass_confirm').css('border','1px solid green');
+			// }
+			// if(!valid || !match) {
+			// 	$('#u_pass_confirm').css('border','1px solid red');
+			// }
 
 			// });
 

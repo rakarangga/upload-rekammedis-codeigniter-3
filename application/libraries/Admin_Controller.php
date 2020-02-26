@@ -16,20 +16,23 @@ class Admin_Controller extends MY_Controller
         $this->load->library('form_validation');
         $this->load->library('session');
         $this->load->library('barcode'); 
+        $this->load->library('Datatables'); 
+
         //encrypt Vigenere / Crypto.php
         $params = array('key' => config_item('encryption_key'));
         $this->load->library('crypto', $params);
         
-      
-       // $this->load->library('facebook');
+        //path for config module
+        // $this->load->library('facebook');
         $this->load->model('User_m');
-        $this->load->model('Voucherintr_m');
         $this->load->model('Settuser_m');
         $this->load->model('Module_m');
         $this->load->model('Accescontrol_m');
         $this->load->model('Promo_m');
         $this->load->model('Promointr_m');
         
+        //path for module
+        // $this->load->model('Voucherintr_m');
         // $this->load->model('Rulepickup_m');
         // $this->load->model('BukuAlamat_m');
         // $this->load->model('Crdomestic_m');
@@ -45,7 +48,9 @@ class Admin_Controller extends MY_Controller
         $this->load->model('Berkas_m');
         $this->load->model('Pasien_m');
         
+        //define variable to the array $this->data
         $this->data['iduser'] = $this->session->userdata('iduser');
+        $this->data['u_an_id'] = $this->session->userdata('u_an_id');
         $this->data['loggedin'] = $this->session->userdata('loggedin');
         $this->data['nama_lengkap'] = $this->session->userdata('namalengkap');
         $this->data['email'] = $this->session->userdata('email');

@@ -34,7 +34,7 @@ class DatatablesBuilder
         $this->CI =& get_instance();
 
         $this->_db = $this->CI->load->database($this->connection, TRUE);
-        $this->CI->load->helper('url');
+        // $this->CI->load->helper('url');
         $this->CI->load->library('table');
 
         $this->_db->start_cache();
@@ -191,24 +191,46 @@ class DatatablesBuilder
 
 		$output = "
         <script type=\"text/javascript\" defer=\"defer\">
-            function createDatatable() {
-				erTable_{$id} = $(\"#{$id}\").DataTable({
-                    processing: true,
-                    serverSide: true,
-                    {$dt_options}
-                    ajax: {
-                        url: \"". site_url(uri_string()) ."\",
-						type: \"POST\",
-                        data: function (d, dt) {
-							d.dt_name = \"{$id}\"
+            $(document).ready(function() {
+                function createDatatable() {
+                    erTable_{$id} = $(\"#{$id}\").DataTable({
+                        processing: true,
+                        serverSide: true,
+                        language: {
+                        /* processing: '<i class=\"fa fa-refresh fa-spin fa-3x fa-fw\"></i>',*/
+                            search: '_INPUT_',
+                            searchPlaceholder: 'Pencarian...'
+						}, 
+                        // pagingType: \"full_numbers\",
+                        sDom: '<\"top\"lfprtip><\"bottom\"><\"clear\">',
+                        {$dt_options}
+                        ajax: {
+                            url: \"". site_url(uri_string()) ."\",
+                            type: \"POST\",
+                            data: function (d, dt) {
+                                d.dt_name = \"{$id}\";
 
-							{$ax_options}
-						}
-					}
-                });
-            };
-
-            createDatatable();
+                                {$ax_options}
+                            }
+                        }
+                    });
+                    $('.dataTables_filter input').unbind().keyup(function(e) {
+                        var value = $(this).val();
+                        if (value.length>3) {
+                            erTable_{$id}.search(value).draw();
+                        } else {     
+                            //optional, reset the search if the phrase 
+                            //is less then 3 characters long
+                            erTable_{$id}.search('').draw();
+                        }        
+                    });
+                    $(document).on('click', '.refresh', function() {
+						erTable_{$id} .ajax.reload();
+					});
+                };
+                createDatatable();
+                
+            });
         </script>";
 
         echo $output;

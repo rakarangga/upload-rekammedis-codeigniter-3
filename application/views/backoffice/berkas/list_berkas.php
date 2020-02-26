@@ -48,9 +48,29 @@
 				float: left !important;
 			}
 
+			@media screen and (min-width: 768px) {
+				.modal-dialog {
+					width: 700px;
+					/* New width for default modal */
+				}
+
+				.modal-sm {
+					width: 350px;
+					/* New width for small modal */
+				}
+			}
+
+			@media screen and (min-width: 1300px) {
+				.modal-lg {
+					width: 1316px;
+					/* New width for large modal */
+				}
+			}
+
+
 			/**
- * Errors
- */
+		* Errors
+		*/
 			.error {
 				border-color: red;
 			}
@@ -66,7 +86,7 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Manajemen Berkas
+					Berkas Tanggal : <strong><?= tgl_no_jam($direktori->tgldirectory) ?></strong>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="<?php echo base_url('backoffice/dashboard'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
@@ -83,12 +103,14 @@
 						<?php
 						if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_create"])) {
 
-							echo '<button class="btn btn-primary btn-block margin-bottom" data-toggle="modal" data-target="#tgldirectory_modal"><i class="fa fa-plus"></i> Buat Berkas Baru</button>';
+							// echo  anchor(base_url('backoffice/berkas/form/'.encrypting($iddirectory)),'<i class="fa fa-cloud-upload"></i> Upload Berkas</button>','class="btn btn-info btn-block margin-bottom"');
+							echo '<button class="btn btn-info btn-block margin-bottom" data-toggle="modal" data-target="#uploadberkas_modal"><i class="fa fa-cloud-upload"></i> Upload Berkas</button>';
+							echo '<button class="btn btn-warning btn-block margin-bottom" data-toggle="modal" data-target="#scanberkas_modal"><i class="glyphicon glyphicon-print"></i> Scan Berkas</button>';
 						}
 						?>
 						<div class="box box-solid">
 							<div class="box-header with-border">
-								<h3 class="box-title">Manajemen Berkas </h3>
+								<h3 class="box-title">Manajemen Berkas</h3>
 
 								<div class="box-tools">
 									<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -97,8 +119,8 @@
 							</div>
 							<div class="box-body no-padding">
 								<ul class="nav nav-pills nav-stacked">
-									<li class="active"><a href="#"><i class="fa fa-inbox"></i> Semua
-									<?=count($cpasien) > 0 ?'<span class="label label-primary pull-right">'.count($cpasien) .'</span>':'';?></a></li>
+									<li class="active"><a href="javascript:void(0);"><i class="fa fa-inbox"></i> Semua
+											<?= count($cpasien) > 0 ? '<span class="label label-primary pull-right">' . count($cpasien) . '</span>' : ''; ?></a></li>
 									<li><a href="#"><i class="fa fa-file-text-o"></i> Draf</a></li>
 									<li><a href="#"><i class="fa fa-trash-o"></i> Sampah</a></li>
 								</ul>
@@ -106,7 +128,7 @@
 							<!-- /.box-body -->
 						</div>
 						<!-- /. box -->
-
+						<?= anchor(base_url('backoffice/berkas'), '<i class="fa fa-rotate-left"></i> Kembali</button>', 'class="btn btn-danger btn-block margin-bottom"'); ?>
 						<!-- /.box -->
 					</div>
 
@@ -160,7 +182,7 @@
 											?>
 											<!-- /.table -->
 											<?php
-											$this->datatables->generate('dt_direktori');
+											$this->datatables->generate('dt_pasien');
 
 											?>
 										</div>
@@ -175,31 +197,66 @@
 						<!-- /. box -->
 					</div>
 
+					<!-- <div class="modal-scrollable"  id="uploadberkas_modal"  >
+						<div id="modal-pengumuman2" class="modal container fade modal-scroll modal-overflow in" tabindex="-1" aria-hidden="false" style="display: block; margin-top: 0px;">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+								<h4 class="modal-title">PENGUMUMAN</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="col-md-12" style="padding-right: 0;">
+										<img src="https://jakevo.jakarta.go.id/img/pengumuman/edaran/SURAT_EDARAN.jpg" style="width: 100%;">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
 					<!-- MODAL Direktori -->
 					<div class="example-modal">
-						<div class="modal fade" id="tgldirectory_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
+						<div class="modal fade" id="uploadberkas_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog  modal-lg" role="document">
+								<div class="modal-content ">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span></button>
-										<h4 class="modal-title" align="center">Masukkan Tanggal, Bulan, dan Tahun Dokumen / Berkas</h4>
+										<h4 class="modal-title" align="center">Pastikan <strong>Nomor Rekam Medis</strong> dan File Yang Diupload Sama</h4>
 									</div>
 									<form id="demo-form" data-parsley-validate data-validate>
 										<div class="modal-body">
+											<div class="col-md-3">
+												<div class="form-group">
+													<!-- <label for="logo">Logo / Foto Toko Online<span class="required">*</span></label> -->
+													<p class="help-block">Format File .PDF</p>
+													<?php
+													$data_upload = array(
+														'name' => 'logo',
+														'id' => 'logo',
+														'class' => 'form-control',
+														'style' => 'width:250px;',
+														'onChange' => "previewPdf(event)",
 
-											<div class="form-group">
-
-
-												<div class="input-group ">
-													<div class="input-group-addon">
-														<i class="fa fa-calendar"></i>
-													</div>
-													<input type="text" class="form-control pull-right datepicker_me" id="tgldirectory" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))">
+													);
+													echo form_upload($data_upload);
+													?>
 												</div>
-												<!-- /.input group -->
-											</div>
 
+
+												<div class="form-group">
+													<div class="input-group ">
+														<div class="input-group-addon">
+															<i class="fa fa-calendar"></i>
+														</div>
+														<input type="text" class="form-control pull-right datepicker_me" id="tgldirectory" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))">
+													</div>
+													<!-- /.input group -->
+												</div>
+											</div>
+											<div class="col-md-9">
+												<div id="form-img">
+													<img id="img" class="img-responsive" style="margin-top:10px;width:250px;" src="<?php echo $user->logo == NULL ? base_url() . 'assets/dist/img/user.png' : base_url() . $user->logo; ?>">
+												</div>
+											</div>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-info " id="sbm-tgl">Submit</button>
@@ -217,8 +274,22 @@
 				</div>
 			</section>
 		</div>
-		<?php $this->datatables->jquery('dt_direktori'); ?>
+		<?php $this->datatables->jquery('dt_pasien'); ?>
 		<script>
+			function previewPdf(event) {
+				$("#form-img").html('<img id="img" class="img" style="margin-top:10px;width:250px;">');
+				var reader = new FileReader();
+				var imageField = document.getElementById("img");
+				showLoading();
+				reader.onload = function() {
+					if (reader.readyState == 2) {
+
+						imageField.src = reader.result;
+					}
+				}
+				reader.readAsDataURL(event.target.files[0]);
+			};
+			
 			$(document).ready(function() {
 
 				/**
@@ -228,7 +299,7 @@
 						"order": [],
 						"ordering": false,
 						"ajax": {
-							url: "<?php echo base_url('backoffice/direktori/fetch_ajax'); ?>",
+							url: "<?php echo base_url('backoffice/berkas/fetch_ajax'); ?>",
 							type: "POST",
 						},
 						"language": {
@@ -276,12 +347,12 @@
 					}
 					if (isValid) {
 						showLoading();
-						//do search direktori by ajax
-						//if direktori count 1, just go to berkas with direktori primary key
-						// else insert direktori and go to berkas with direktori lastinsertID();
+						//do search berkas by ajax
+						//if berkas count 1, just go to berkas with berkas primary key
+						// else insert berkas and go to berkas with berkas lastinsertID();
 						$.ajax({
 							method: "POST",
-							url: "<?php echo base_url('backoffice/direktori/chk_dir'); ?>",
+							url: "<?php echo base_url('backoffice/berkas/chk_dir'); ?>",
 							data: {
 								tgl: tgl
 							},
@@ -360,6 +431,6 @@
 					});
 				<?php } ?>
 
-				
-				});
+
+			});
 		</script>
