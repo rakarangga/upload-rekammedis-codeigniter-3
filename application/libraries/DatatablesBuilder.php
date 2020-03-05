@@ -1,29 +1,31 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
-  /**
-  * CIgniter DataTables
-  * CodeIgniter library for Datatables server-side processing / AJAX, easy to use :3
-  *
-  * @package    CodeIgniter
-  * @subpackage libraries
-  * @version    1.5
-  *
-  * @author     Izal Fathoni (izal.fat23@gmail.com)
-  * @link 		https://github.com/nacasha/CIgniter-Datatables
-  */
+/**
+ * CIgniter DataTables
+ * CodeIgniter library for Datatables server-side processing / AJAX, easy to use :3
+ *
+ * @package    CodeIgniter
+ * @subpackage libraries
+ * @version    1.5
+ *
+ * @author     Izal Fathoni (izal.fat23@gmail.com)
+ * @link 		https://github.com/nacasha/CIgniter-Datatables
+ */
 class DatatablesBuilder
 {
 
     private $CI;
-    private $searchable 	= array();
-    private $style 			= '';
-	private $connection 	= 'default';
+    private $searchable     = array();
+    private $style             = '';
+    private $connection     = 'default';
+    private $order     = '';
+    private $sort     = '';
 
-	private $dt_options		= array(
-		'searchDelay' 	=> '500',
-		'autoWidth' 	=> 'false'
-	);
-	private $ax_options 	= '';
+    private $dt_options        = array(
+        'searchDelay'     => '500',
+        'autoWidth'     => 'false'
+    );
+    private $ax_options     = '';
 
     /**
      * Load the necessary library from codeigniter and caching the query
@@ -31,7 +33,7 @@ class DatatablesBuilder
      */
     public function __construct()
     {
-        $this->CI =& get_instance();
+        $this->CI = &get_instance();
 
         $this->_db = $this->CI->load->database($this->connection, TRUE);
         // $this->CI->load->helper('url');
@@ -59,6 +61,12 @@ class DatatablesBuilder
         $this->searchable = $columns;
         return $this;
     }
+    
+    public function set_order_by($order, $sort)
+    {
+        $this->_db->order_by($order, $sort);
+        return $this;
+    }
 
     public function from($table)
     {
@@ -67,16 +75,16 @@ class DatatablesBuilder
         $this->table = $table;
         return $this->_db;
     }
-	
-    public function where($data,$table)
+
+    public function where($data, $table)
     {
         $this->_db->where($data);
 
         $this->table = $table;
         return $this->_db;
     }
-	
-    public function like($data,$table)
+
+    public function like($data, $table)
     {
         $this->_db->like($data);
 
@@ -103,8 +111,8 @@ class DatatablesBuilder
      */
     public function column($label, $source, $function = null)
     {
-        $this->table_heading[] 		= $label;
-        $this->columns[] 			= array($label, $source, $function);
+        $this->table_heading[]         = $label;
+        $this->columns[]             = array($label, $source, $function);
 
         return $this;
     }
@@ -114,14 +122,13 @@ class DatatablesBuilder
      */
     public function init($dt_name)
     {
-		if (isset($_REQUEST['dt_name'])) {
-			if ($_REQUEST['dt_name'] == $dt_name) {
-				if(isset($_REQUEST['draw']) && isset($_REQUEST['length']) && isset($_REQUEST['start']))
-				{
-					$this->json();
-					exit;
-				}
-			}
+        if (isset($_REQUEST['dt_name'])) {
+            if ($_REQUEST['dt_name'] == $dt_name) {
+                if (isset($_REQUEST['draw']) && isset($_REQUEST['length']) && isset($_REQUEST['start'])) {
+                    $this->json();
+                    exit;
+                }
+            }
         }
     }
 
@@ -145,29 +152,29 @@ class DatatablesBuilder
      */
     public function set_options($option, $value = null)
     {
-		if ($option == 'ajax.data') {
-			$this->ax_options .= $value;
-		} else {
-			if(is_array($option)) {
-				foreach ($option as $opt => $value) {
-					$this->dt_options[$opt] = $value;
-				}
-			} else {
-				$this->dt_options[$option] = $value;
-			}
-		}
+        if ($option == 'ajax.data') {
+            $this->ax_options .= $value;
+        } else {
+            if (is_array($option)) {
+                foreach ($option as $opt => $value) {
+                    $this->dt_options[$opt] = $value;
+                }
+            } else {
+                $this->dt_options[$option] = $value;
+            }
+        }
 
         return $this;
-	}
+    }
 
-	/**
+    /**
      * Generate the datatables table (lol)
      *
      * @return html table
      */
     public function generate($id)
     {
-		$this->CI->table->set_template(array(
+        $this->CI->table->set_template(array(
             'table_open' => "<table id=\"$id\" $this->style>"
         ));
         $this->CI->table->set_heading($this->table_heading);
@@ -182,14 +189,14 @@ class DatatablesBuilder
      */
     public function jquery($id)
     {
-		$dt_options	= '';
-		$ax_options = $this->ax_options;
+        $dt_options    = '';
+        $ax_options = $this->ax_options;
 
-		foreach ($this->dt_options as $opt => $value) {
-			$dt_options .= "$opt: $value, \n";
-		}
+        foreach ($this->dt_options as $opt => $value) {
+            $dt_options .= "$opt: $value, \n";
+        }
 
-		$output = "
+        $output = "
         <script type=\"text/javascript\" defer=\"defer\">
             $(document).ready(function() {
                 function createDatatable() {
@@ -205,7 +212,7 @@ class DatatablesBuilder
                         sDom: '<\"top\"lfprtip><\"bottom\"><\"clear\">',
                         {$dt_options}
                         ajax: {
-                            url: \"". site_url(uri_string()) ."\",
+                            url: \"" . site_url(uri_string()) . "\",
                             type: \"POST\",
                             data: function (d, dt) {
                                 d.dt_name = \"{$id}\";
@@ -243,35 +250,37 @@ class DatatablesBuilder
      */
     public function json()
     {
-        $draw		= $_REQUEST['draw'];
-        $length		= $_REQUEST['length'];
-        $start		= $_REQUEST['start'];
-        $order_by	= $_REQUEST['order'][0]['column'];
-        $order_dir	= $_REQUEST['order'][0]['dir'];
-        $search		= $_REQUEST['search']["value"];
+        $draw        = $_REQUEST['draw'];
+        $length        = $_REQUEST['length'];
+        $start        = $_REQUEST['start'];
+        $order_by    = $_REQUEST['order'][0]['column'];
+        $order_dir    = $_REQUEST['order'][0]['dir'];
+        $search        = $_REQUEST['search']["value"];
+        $order        = 'modified';
+        $sort        = 'DESC';
 
-        $output['data'] 	= array();
+        $output['data']     = array();
 
-        if($this->searchable == '*') {
+        if ($this->searchable == '*') {
             $field = $this->_db->list_fields($this->table);
             $this->searchable = implode(',', $field);
-		}
+        }
 
         $column = explode(',', $this->searchable);
-		$this->searchable = array();
+        $this->searchable = array();
 
-        foreach($column as $key => $col) {
+        foreach ($column as $key => $col) {
             $col = strtolower($col);
             $col = strstr($col, ' as ', true) ?: $col;
             $this->searchable[] = $col;
-		}
+        }
 
-		if($search != "") {
-			for($i=0; $i< count($this->searchable);$i++){
-				if($i==0) $this->_db->like($this->searchable[$i], $search);
-				else $this->_db->or_like($this->searchable[$i], $search);
-			}
-		}
+        if ($search != "") {
+            for ($i = 0; $i < count($this->searchable); $i++) {
+                if ($i == 0) $this->_db->like($this->searchable[$i], $search);
+                else $this->_db->or_like($this->searchable[$i], $search);
+            }
+        }
 
         /** ---------------------------------------------------------------------- */
         /** Count records in database */
@@ -279,26 +288,32 @@ class DatatablesBuilder
 
         $total = $this->_db->count_all_results();
 
-        $output['query_count'] 	= $this->_db->last_query();
+        $output['query_count']     = $this->_db->last_query();
         $output['recordsTotal'] = $output['recordsFiltered'] = $total;
 
         /** ---------------------------------------------------------------------- */
         /** Generate JSON */
-		/** ---------------------------------------------------------------------- */
+        /** ---------------------------------------------------------------------- */
 
-		if ($length != -1) {
-			$this->_db->limit($length, $start);
-		}
-        $this->_db->order_by($this->columns[$order_by][1], $order_dir);
+        if ($length != -1) {
+            $this->_db->limit($length, $start);
+        }
+        // $this->_db->order_by($this->columns[$order_by][1], $order_dir);
+        if ($order_by != '') {
+            $this->_db->order_by($this->columns[$order_by][1], $order_dir);
+        } else {
+            $this->set_order_by($order, $sort);
+        }
 
-        $result 			= $this->_db->get()->result_array();
-        $output['query'] 	=  $this->_db->last_query();
+
+        $result             = $this->_db->get()->result_array();
+        $output['query']     =  $this->_db->last_query();
 
         foreach ($result as $row) {
             $arr = array();
             foreach ($this->columns as $key => $column) {
                 $row_output = $row[$column[1]];
-                if(isset($this->columns[$key][2])){
+                if (isset($this->columns[$key][2])) {
                     $row_output = call_user_func_array($this->columns[$key][2], array($row_output, $row));
                 }
                 $arr[] = $row_output;
@@ -308,5 +323,4 @@ class DatatablesBuilder
 
         echo json_encode($output);
     }
-
 }

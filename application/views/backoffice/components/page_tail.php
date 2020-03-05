@@ -310,7 +310,7 @@
 			allowOutsideClick: false,
 			showConfirmButton: false,
 			showLoading: true,
-			timer: 3000,
+			timer: 2000,
 			onOpen: () => {
 				swal.showLoading();
 			}

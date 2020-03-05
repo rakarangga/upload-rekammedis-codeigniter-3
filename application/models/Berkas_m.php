@@ -15,158 +15,30 @@ class Berkas_m extends MY_Model
 
 
 	public $rules = array(
-
-		'namalengkap' => array(
-			'field' => 'namalengkap',
-			'label' => 'Nama Lengkap',
+		'namapasien' => array(
+			'field' => 'namapasien',
+			'label' => 'Nama Pasien',
 			'rules' => 'trim|required|xss_clean',
 			'errors' => array(
-				'required' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Harus diisi.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>'
+				'required' => '*<strong>%s</strong> Harus diisi.'
 			)
 		),
-		'namauser' => array(
-			'field' => 'namauser',
-			'label' => 'Username',
+		'jeniskelamin' => array(
+			'field' => 'jeniskelamin',
+			'label' => 'Jenis Kelamin',
 			'rules' => 'trim|required|xss_clean',
 			'errors' => array(
-				'required' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Harus diisi.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>'
+				'required' => '*<strong>%s</strong> Harus diisi.'
 			)
 		),
-		'nomorhp' => array(
-			'field' => 'nomorhp',
-			'label' => 'Nomor Handphone',
+		'iddirectory' => array(
+			'field' => 'iddirectory',
+			'label' => 'Direktori',
 			'rules' => 'trim|required|xss_clean',
 			'errors' => array(
-				'required' => '<script>
-									$(document).ready(function() {
-										$.toast({
-											heading: "Error",
-											text: "<strong>%s</strong> Harus diisi.",
-											showHideTransition: "fade",
-											icon: "error",
-											hideAfter: 5000,
-										})
-									});
-									</script>'
+				'required' => '*<strong>%s</strong> Harus diisi.'
 			)
 		),
-		'iduserlevel' => array(
-			'field' => 'iduserlevel',
-			'label' => 'Hak Akses',
-			'rules' => 'trim|required|xss_clean',
-			'errors' => array(
-				'required' => '<script>
-									$(document).ready(function() {
-										$.toast({
-											heading: "Error",
-											text: "<strong>%s</strong> Harus Dipilih.",
-											showHideTransition: "fade",
-											icon: "error",
-											hideAfter: 5000,
-										})
-									});
-									</script>'
-			)
-		),
-		'userpass' => array(
-			'field' => 'userpass',
-			'label' => 'Password',
-			'rules' => 'trim|matches[u_pass_confirm]',
-			'errors' => array(
-				'required' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Harus diisi.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>',
-				'matches' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Tidak Sama.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>'
-			)
-
-		),
-		'u_pass_confirm' => array(
-			'field' => 'u_pass_confirm',
-			'label' => 'Konfirmasi Password',
-			'rules' => 'trim|matches[userpass]',
-			'errors' => array(
-				'required' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Harus diisi.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>',
-				'matches' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Tidak Sama.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>'
-			)
-
-		),
-		'logo' => array(
-			'field' => 'logo',
-			'label' => 'Foto Upload',
-			'rules' => 'trim',
-			'errors' => array(
-				'required' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Harus diisi.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>'
-			)
-
-		)
 	);
 
 	public function get_new()

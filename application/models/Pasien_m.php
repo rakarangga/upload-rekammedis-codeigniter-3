@@ -15,158 +15,46 @@ class Pasien_m extends MY_Model
 
 
 	public $rules = array(
-
-		'namalengkap' => array(
-			'field' => 'namalengkap',
-			'label' => 'Nama Lengkap',
+		'namapasien' => array(
+			'field' => 'namapasien',
+			'label' => 'Nama Pasien',
 			'rules' => 'trim|required|xss_clean',
 			'errors' => array(
-				'required' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Harus diisi.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>'
+				'required' => '*<strong>%s</strong> Harus diisi.'
 			)
 		),
-		'namauser' => array(
-			'field' => 'namauser',
-			'label' => 'Username',
+		'jeniskelamin' => array(
+			'field' => 'jeniskelamin',
+			'label' => 'Jenis Kelamin',
 			'rules' => 'trim|required|xss_clean',
 			'errors' => array(
-				'required' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Harus diisi.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>'
+				'required' => '*<strong>%s</strong> Harus diisi.'
 			)
 		),
-		'nomorhp' => array(
-			'field' => 'nomorhp',
-			'label' => 'Nomor Handphone',
+		'iddirectory' => array(
+			'field' => 'iddirectory',
+			'label' => 'Direktori',
 			'rules' => 'trim|required|xss_clean',
 			'errors' => array(
-				'required' => '<script>
-									$(document).ready(function() {
-										$.toast({
-											heading: "Error",
-											text: "<strong>%s</strong> Harus diisi.",
-											showHideTransition: "fade",
-											icon: "error",
-											hideAfter: 5000,
-										})
-									});
-									</script>'
+				'required' => '*<strong>%s</strong> Harus diisi.'
 			)
 		),
-		'iduserlevel' => array(
-			'field' => 'iduserlevel',
-			'label' => 'Hak Akses',
+		'tgl_directory' => array(
+			'field' => 'tgl_directory',
+			'label' => 'Tanggal Direktori',
 			'rules' => 'trim|required|xss_clean',
 			'errors' => array(
-				'required' => '<script>
-									$(document).ready(function() {
-										$.toast({
-											heading: "Error",
-											text: "<strong>%s</strong> Harus Dipilih.",
-											showHideTransition: "fade",
-											icon: "error",
-											hideAfter: 5000,
-										})
-									});
-									</script>'
+				'required' => '*<strong>%s</strong> Harus diisi.'
 			)
 		),
-		'userpass' => array(
-			'field' => 'userpass',
-			'label' => 'Password',
-			'rules' => 'trim|matches[u_pass_confirm]',
+		'norm' => array(
+			'field' => 'norm',
+			'label' => 'Nomor Rekam Medis',
+			'rules' => 'trim|required|xss_clean|callback__unique_norm',
 			'errors' => array(
-				'required' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Harus diisi.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>',
-				'matches' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Tidak Sama.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>'
+				'required' => '*<strong>%s</strong> Harus diisi.'
 			)
-
 		),
-		'u_pass_confirm' => array(
-			'field' => 'u_pass_confirm',
-			'label' => 'Konfirmasi Password',
-			'rules' => 'trim|matches[userpass]',
-			'errors' => array(
-				'required' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Harus diisi.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>',
-				'matches' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Tidak Sama.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>'
-			)
-
-		),
-		'logo' => array(
-			'field' => 'logo',
-			'label' => 'Foto Upload',
-			'rules' => 'trim',
-			'errors' => array(
-				'required' => '<script>
-										$(document).ready(function() {
-											$.toast({
-												heading: "Error",
-												text: "<strong>%s</strong> Harus diisi.",
-												showHideTransition: "fade",
-												icon: "error",
-												hideAfter: 5000,
-											})
-										});
-										</script>'
-			)
-
-		)
 	);
 
 	public function get_new()
@@ -199,6 +87,8 @@ class Pasien_m extends MY_Model
 			$dt_pasien->where(array('iddirectory' => $id));
 			$this->data['u_an_id'] == 'super_admin' ? NULL : $dt_pasien->where(array('id_user' => $this->session->userdata($this->_userSession)));
 		}
+		// $this->db->order_by($this->_order_by, $this->_sort);
+		// $dt_pasien->set_order_by($this->_order_by, $this->_sort);
 		$dt_pasien->style(array('class' => 'table table-hover table-striped',));
 		//if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"])) {
 		$dt_pasien->column(
@@ -206,7 +96,7 @@ class Pasien_m extends MY_Model
 			'chk_all',
 			function ($data, $row) {
 				$is_delete =  authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"]) ? form_checkbox('check_id[]', $row['id'], FALSE, 'class="icheckbox_flat-green chk"') . '<filedset>' : '<filedset>';
-				return $is_delete;
+				return form_checkbox('check_id[]', $row['id'], FALSE, 'class="icheckbox_flat-green chk"') . '<filedset>';
 			}
 		);
 		//}
@@ -221,7 +111,7 @@ class Pasien_m extends MY_Model
 		if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"])) {
 			$dt_pasien->column(
 				'No. RM',
-				'namadirectory',
+				'norm',
 				function ($data, $row) {
 					return anchor('backoffice/pasien/list_berkas/' . encrypting($row['id']), $row['norm']);
 				}
@@ -229,7 +119,7 @@ class Pasien_m extends MY_Model
 		} else {
 			$dt_pasien->column(
 				'No. RM',
-				'namadirectory',
+				'norm',
 				function ($data, $row) {
 					return $row['norm'];
 				}

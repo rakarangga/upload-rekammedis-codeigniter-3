@@ -79,39 +79,39 @@
 				<div class="row">
 
 
-				
 
 
-		<div class="col-md-12">
-			<div class="box box-primary">
-				<div class="box-header with-border">
-					<h3 class="box-title">Semua</h3>
-					<!-- /.box-tools -->
-				</div>
-				<!-- /.box-header -->
-				<div class="box-body no-padding">
-					<div class="mailbox-controls">
-					
-						<div class="btn-group">
 
-							<?php
-							if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"])) {
-								echo '<button type="button" id="btn_hapus_multi" class="btn btn-danger btn-sm btn_hapus_multi" data-toggle="tooltip" data-original-title="Hapus Yang Ditandai"><i class="fa fa-trash-o"></i></button>';
-								echo "";
-							}
-							?> </div>
-						<button type="button" class="btn btn-info btn-sm refresh" data-toggle="tooltip" data-original-title="Segarkan"><i class="fa fa-refresh"></i></button>
-						<?php
-						if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_create"])) {
+					<div class="col-md-12">
+						<div class="box box-primary">
+							<div class="box-header with-border">
+								<h3 class="box-title">Semua</h3>
+								<!-- /.box-tools -->
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body no-padding">
+								<div class="mailbox-controls">
 
-							echo '<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#tgldirectory_modal"><i class="fa fa-plus"></i> Buat Berkas Baru</button>';
-						}
-						?>
-						<fieldset>
-							<!-- /.btn-group -->
-							<div class="mailbox-messages" style="margin-top:10px">
-								<?php
-								/* <table id="example2" class="table table-hover table-striped">
+									<div class="btn-group">
+
+										<?php
+										if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"])) {
+											echo '<button type="button" id="btn_hapus_multi" class="btn btn-danger btn-sm btn_hapus_multi" data-toggle="tooltip" data-original-title="Hapus Yang Ditandai"><i class="fa fa-trash-o"></i></button>';
+											echo "";
+										}
+										?> </div>
+									<button type="button" class="btn btn-info btn-sm refresh" data-toggle="tooltip" data-original-title="Segarkan"><i class="fa fa-refresh"></i></button>
+									<?php
+									if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_create"])) {
+
+										echo '<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#tgldirectory_modal"><i class="fa fa-plus"></i> Buat Berkas Baru</button>';
+									}
+									?>
+									<fieldset>
+										<!-- /.btn-group -->
+										<div class="mailbox-messages" style="margin-top:10px">
+											<?php
+											/* <table id="example2" class="table table-hover table-striped">
 													<thead>
 														<tr class="headings">
 
@@ -135,65 +135,65 @@
 													<tbody>
 													</tbody>
 												</table> */
-								?>
-								<!-- /.table -->
-								<?php
-								$this->datatables->generate('dt_direktori');
+											?>
+											<!-- /.table -->
+											<?php
+											$this->datatables->generate('dt_direktori');
 
-								?>
-							</div>
-							<!-- /.pull-right -->
-					</div>
-
-					<!-- /.mail-box-messages -->
-				</div>
-				<!-- /.box-body -->
-
-			</div>
-			<!-- /. box -->
-		</div>
-
-		<!-- MODAL Direktori -->
-		<div class="example-modal">
-			<div class="modal fade" id="tgldirectory_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" align="center">Masukkan Tanggal, Bulan, dan Tahun Dokumen / Berkas</h4>
-						</div>
-						<form id="demo-form" data-parsley-validate data-validate>
-							<div class="modal-body">
-
-								<div class="form-group">
-
-
-									<div class="input-group ">
-										<div class="input-group-addon">
-											<i class="fa fa-calendar"></i>
+											?>
 										</div>
-										<input type="text" class="form-control pull-right datepicker_me" id="tgldirectory" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))">
-									</div>
-									<!-- /.input group -->
+										<!-- /.pull-right -->
 								</div>
 
+								<!-- /.mail-box-messages -->
 							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-info " id="sbm-tgl">Submit</button>
-							</div>
-						</form>
-					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
-			</div>
-			<!-- /.modal -->
-		</div>
-		<!-- /.example-modal -->
+							<!-- /.box-body -->
 
-		</div>
-		</section>
+						</div>
+						<!-- /. box -->
+					</div>
+
+					<!-- MODAL Direktori -->
+					<div class="example-modal">
+						<div class="modal fade" id="tgldirectory_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" align="center">Masukkan Tanggal, Bulan, dan Tahun Dokumen / Berkas</h4>
+									</div>
+									<form id="demo-form" data-parsley-validate data-validate>
+										<div class="modal-body">
+
+											<div class="form-group">
+
+
+												<div class="input-group ">
+													<div class="input-group-addon">
+														<i class="fa fa-calendar"></i>
+													</div>
+													<input type="text" class="form-control pull-right datepicker_me" id="tgldirectory" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))">
+												</div>
+												<!-- /.input group -->
+											</div>
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-info " id="sbm-tgl">Submit</button>
+										</div>
+									</form>
+								</div>
+								<!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+						<!-- /.modal -->
+					</div>
+					<!-- /.example-modal -->
+
+				</div>
+			</section>
 		</div>
 		<?php $this->datatables->jquery('dt_direktori'); ?>
 		<script>
@@ -268,6 +268,9 @@
 								console.log(data[0].id);
 								// jika tidak ada data
 								// $(".removeRow").fadeOut(300);
+								setTimeout(function() {
+									window.location.replace("<?= site_url() ?>backoffice/berkas/list_berkas/" + data[0].id);
+								}, 1500);
 								$(".refresh").trigger("click");
 							}
 						});

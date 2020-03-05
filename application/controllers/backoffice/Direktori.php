@@ -213,6 +213,18 @@ class Direktori extends Admin_Controller
         $output['id'] =  encrypting($save);
         $data[] = $output;
       }
+      $this->data['sukses'] = '<script>
+                        $.toast({
+                          heading: "Success",
+                          text: "Masukkan Tanggal Terlbih Dahulu.",
+                          showHideTransition: "fade",
+                          icon: "error",
+                          hideAfter: 1500,
+                        });
+                        setTimeout(function(){
+                          window.location.replace("' . site_url('backoffice/berkas/list_berkas/'. $data['id']) .'");
+                        }, 1500);
+                        </script>';
       echo json_encode($data);
     }
   }

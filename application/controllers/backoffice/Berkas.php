@@ -40,13 +40,110 @@ class Berkas extends Admin_Controller
         // $this->data['berkas'] = $this->Berkas_m->get_new();
         $this->show_404();
       }
-      
+
 
       $this->data['subview'] = 'backoffice/berkas/list_berkas';
       $this->load->view('backoffice/_layout_main', $this->data);
     } else {
       $this->show_404();
     }
+  }
+
+  public function upload_single($id = NULL)
+  {
+    header('Content-Type: application/json');
+    // memanggil data 1 direktori berdasarkan id
+    if ($id) {
+      $id = decrypting($id);
+      $this->data['pasien'] = $this->Pasien_m->get($id);
+      count($this->data['pasien']) || $this->show_404();
+    } else {
+      $this->data['pasien'] = $this->Pasien_m->get_new();
+    }
+    $rules = $this->Pasien_m->rules;
+    $this->form_validation->set_rules($rules);
+    $output['error_msg'] = '';
+    if (!$this->form_validation->run()) {
+      $output['error_msg'] = validation_errors('', '');
+      $json = json_encode($output);
+      echo $json;
+      return false;
+    }
+    if ($this->form_validation->run() === TRUE) {
+      $data = $this->Pasien_m->array_from_post(array(
+        'norm',
+        'tgl_directory',
+        'iddirectory',
+        'namapasien',
+        'jeniskelamin',
+      ));
+      $save_pasien = $this->Pasien_m->simpan($data, $id);
+      if ($save_pasien) {
+        $output['save_msg'] = true;
+        // $this->Pasien_m->hapus($save_pasien); // buat debug
+        //UPLOAD PROSES (MULTIPLE)
+        $fieldfile = $_FILES['fileberkas']['name'];
+        for ($i = 0; $i < count($fieldfile); $i++) {
+          // Define new $_FILES array - $_FILES['file']
+          $_FILES['fileberkass']['name'] = $_FILES['fileberkas']['name'][$i];
+          $_FILES['fileberkass']['type'] = $_FILES['fileberkas']['type'][$i];
+          $_FILES['fileberkass']['tmp_name'] = $_FILES['fileberkas']['tmp_name'][$i];
+          $_FILES['fileberkass']['error'] = $_FILES['fileberkas']['error'][$i];
+          $_FILES['fileberkass']['size'] = $_FILES['fileberkas']['size'][$i];
+          $ext = pathinfo($_FILES['fileberkas']['name'][$i]);
+          $config = array(
+            'save_path' => getcwd() . './assets/rmberkas/', //save path di assets/rmberkas
+            'max_file_size' => 1025 * 5, //max kapasisas 5mb
+            'allowed_mime_type_arr' => array('application/pdf'), //hanya support pdf
+            'field_name' => 'fileberkass', // nama form file berkas
+            'allowed_types' => '*' // nama form file berkas
+          );
+          $config['file_name'] =  $data['tgl_directory'] . '_' . $data['norm'] . '_'; //filename dynamic
+
+          $this->load->library('fileupload', $config);
+          if (!$this->fileupload->handle_upload()) {
+            $output['error_msg'] = $this->fileupload->display_errors();
+            $json = json_encode($output);
+            echo $json;
+            return false;
+          }
+          if (!$this->fileupload->do_upload($config['field_name'])) {
+            $output['error_msg'] = $this->fileupload->display_errors();
+            $json = json_encode($output);
+            echo $json;
+            return false;
+          } else {
+            $up_data     = $this->fileupload->data();
+            // array dataitem berkas
+            $dataitem = array(
+              'namaberkas' => './assets/rmberkas/'.$up_data['file_name'],
+              'tglberkas' => $data['tgl_directory'],
+              'idpasien' => $save_pasien,
+              'iddirectory' => $data['iddirectory'],
+              'orderby' => $i
+            );
+            $this->Berkas_m->simpan($dataitem, $id);
+            $output['success_msg_upload'] = true;
+          }
+        }
+      }
+    }
+    $json = json_encode($output);
+    echo $json;
+  }
+
+  public function _unique_norm($id)
+  {
+   /*  $id = $this->uri->segment(4);
+    $id = decrypting($id);
+    $id || $this->db->where('iddirectory', $id); */
+    $this->db->where(array('norm' => $this->input->post('norm')));
+    $data = $this->Pasien_m->get();
+    if (count($data)) {
+      $this->form_validation->set_message('_unique_norm', '*<strong>Nomor Rekam Medis Sudah Terdaftar</strong>, <br>Silahkan Periksa Kembali Berkas Rekam Medis Yang akan diupload');
+      return FALSE;
+    }
+    return TRUE;
   }
 
 
@@ -119,25 +216,6 @@ class Berkas extends Admin_Controller
     return $str = str_replace('_', '', $str);
   }
 
-  public function _unique_nip($str)
-  {
-
-    $id = $this->uri->segment(4);
-    $id = decrypting($id);
-    $user_id = $this->whitespace($this->input->post('u_nip'));
-    $this->db->where('u_nip', $user_id);
-    !$id || $this->db->where('id !=', $id);
-    $user = $this->Berkas_m->get();
-    if (count($user)) {
-      $this->form_validation->set_message('_unique_nip', '<div class="alert alert-warning alert-dismissible fade in" role="alert">
-           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-           </button>
-           <strong>%s</strong> Sudah Terdaftar.
-           </div>');
-      return FALSE;
-    }
-    return TRUE;
-  }
 
   public function _unique_u_name($str)
   {

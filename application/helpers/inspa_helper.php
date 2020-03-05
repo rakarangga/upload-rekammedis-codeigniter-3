@@ -28,7 +28,7 @@ function btn_koreksi_icon($uri)
     return anchor($uri, '<i class="fa fa-edit"></i>', array(
         'class' => 'btn btn-primary btn-sm',
         'data-toggle'=> 'tooltip',
-        'data-original-title' => 'Perbarui'
+        'data-original-title' => 'Kelola Berkas Pasien'
     ));
 }
 

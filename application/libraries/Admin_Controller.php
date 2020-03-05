@@ -15,9 +15,9 @@ class Admin_Controller extends MY_Controller
         $this->load->library('upload');
         $this->load->library('form_validation');
         $this->load->library('session');
-        $this->load->library('barcode'); 
+        // $this->load->library('fileupload');
+        // $this->load->library('barcode'); 
         $this->load->library('Datatables'); 
-
         //encrypt Vigenere / Crypto.php
         $params = array('key' => config_item('encryption_key'));
         $this->load->library('crypto', $params);
@@ -30,7 +30,7 @@ class Admin_Controller extends MY_Controller
         $this->load->model('Accescontrol_m');
         $this->load->model('Promo_m');
         $this->load->model('Promointr_m');
-        
+      
         //path for module
         // $this->load->model('Voucherintr_m');
         // $this->load->model('Rulepickup_m');
