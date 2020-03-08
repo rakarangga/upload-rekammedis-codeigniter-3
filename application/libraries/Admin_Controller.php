@@ -67,21 +67,8 @@ class Admin_Controller extends MY_Controller
             'logis_users.iduser' => $this->data['iduser'] ,
             // 'logis_users.idmemstat' => $this->data['idmemstat']
             ), true); 
-            // if (!count($this->data['user'])) {
-            //     $this->data['notif']='<script>swal({
-            //                     title: "Notifikasi",
-            //                     text: "Mohon Untuk Login Kembali",
-            //                     type: "info",
-            //                     closeOnConfirm: false
-            //                   },function(isConfirm) {
-            //                      window.location.replace("'.site_url('backoffice/user/logout').'");
-            //                   });
-            //                  </script>';
-              
-            // }
         }
    
-       
         $token = $this->uri->segment(4);
         // Jika sudah login redirect ke dashboard selain itu riderect ke login
         $exception_uris = array(
@@ -89,7 +76,6 @@ class Admin_Controller extends MY_Controller
             'backoffice/user/logout',
             'backoffice/user/pw_reset/'.$token
         );
-        
         if (in_array(uri_string(), $exception_uris) == FALSE ) {
             if ($this->User_m->loggedin() == FALSE) {
                 redirect('backoffice/user');

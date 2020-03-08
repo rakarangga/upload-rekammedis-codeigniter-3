@@ -60,7 +60,7 @@ class Berkas_m extends MY_Model
 	}
 
 
-	
+
 
 
 	public function edit_status($id)
@@ -73,7 +73,36 @@ class Berkas_m extends MY_Model
 		//print_r($sosmeds);
 	}
 
+	public function HapusBerkas($id)
+	{
+		$filter = $this->_primary_filter;
+		$id = $filter($id);
+		if (!$id) {
+			return FALSE;
+		}
+		$this->_deleteFile($id);
+		$this->db->where('idpasien', $id);
+		$this->db->delete($this->_table_nama);
+	}
+	
+	public function GetDataBerkas_ID($id)
+	{
+		return $this->db->get_where($this->_table_nama, ['idpasien' => $id])->row_array();
+	}
 
+	private function _deleteFile($id)
+	{
+		$dt = $this->GetDataBerkas_ID($id);
+	
+		$filename = explode(".", $dt['namaberkas'])[1];
+		// dump($filename);
+		// if ($dt['namaberkas'] != "") {
+		
+		// }
+		// dump(glob(FCPATH . ".$filename.*"));
+		// exit();
+		return array_map('unlink', glob(FCPATH . ".$filename.*"));
+	}
 	public function get_drowpdown_hakakses()
 	{
 

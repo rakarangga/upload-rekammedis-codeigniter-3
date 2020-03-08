@@ -194,18 +194,18 @@ class Direktori_m extends MY_Model
 		$dt_direktori = $this->datatables->init();
 		$dt_direktori->select('*')->from($this->_table_nama);
 		$dt_direktori->style(array('class' => 'table table-hover table-striped',));
-		//if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"])) {
+		//if (authorize($_SESSION["access"]["manajemen_berkas"]["direktori"]["ac_delete"])) {
 		$dt_direktori->column(
 			form_checkbox('btn_chk_all', " ", FALSE, 'class="icheckbox_flat-green checkall"'),
 			'chk_all',
 			function ($data, $row) {
-				$is_delete =  authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"]) ? form_checkbox('check_id[]', $row['id'], FALSE, 'class="icheckbox_flat-green chk"') . '<filedset>' : '<filedset>';
+				$is_delete =  authorize($_SESSION["access"]["manajemen_berkas"]["direktori"]["ac_delete"]) ? form_checkbox('check_id[]', $row['id'], FALSE, 'class="icheckbox_flat-green chk"') . '<filedset>' : '<filedset>';
 				return $is_delete;
 			}
 		);
 		//}
 		$dt_direktori->column(
-			' ',
+			'<span class="fa fa-folder"></span> ',
 			'icon_dire',
 			function ($data, $row) {
 				return '<span class="fa fa-folder"></span> ';
@@ -242,8 +242,8 @@ class Direktori_m extends MY_Model
 			'',
 			'aksi',
 			function ($data, $row) {
-				$is_edit =  authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"]) ? btn_koreksi_icon('backoffice/berkas/list_berkas/' . encrypting($row['id'])) : '';
-				$is_delete =  authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"]) ? btn_hapus_icon('berkas/hapus/' . encrypting($row['id'])) : '';
+				$is_edit =  authorize($_SESSION["access"]["manajemen_berkas"]["direktori"]["ac_edit"]) ? btn_koreksi_icon('backoffice/berkas/list_berkas/' . encrypting($row['id'])) : '';
+				$is_delete =  authorize($_SESSION["access"]["manajemen_berkas"]["direktori"]["ac_delete"]) ? btn_hapus_icon('berkas/hapus/' . encrypting($row['id'])) : '';
 				return '<div class="btn-group">' . $is_edit . $is_delete . '</div>';
 			}
 		);
@@ -263,7 +263,7 @@ class Direktori_m extends MY_Model
 				},{ 
 				"targets": [1], //kolom icon
 				"orderable": false,
-				"className": "text-center",
+				"className": "text-left",
 				"width": "4%"
 				},{
 				"targets": [4], //kolom aksi

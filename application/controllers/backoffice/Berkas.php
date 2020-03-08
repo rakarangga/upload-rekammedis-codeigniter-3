@@ -11,8 +11,6 @@ class Berkas extends Admin_Controller
   public function index()
   {
     if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_view"])) {
-
-
       $this->data['dataTable'] = $this->Direktori_m->getDatatable_init();
       $this->data['berkass'] = $this->Berkas_m->get();
       $this->data['subview'] = 'backoffice/berkas/index';
@@ -22,18 +20,77 @@ class Berkas extends Admin_Controller
     }
   }
 
+  public function fetch_ajax1()
+  {
+    $id = $this->input->post('iddirectory');
+    $kategori = $this->input->post('kategori');
+    if ($id) {
+      // $iddir = decrypting($id);
+      $arr = array('id' => $id, 'kategori' => $kategori);
+      $fetchdata = $this->Pasien_m->getDataTables($arr);
+    } else {
+      $this->show_404();
+    }
+
+    $data = array();
+    $no = 1;
+    foreach ($fetchdata as $row) {
+      $sub_array = array();
+      // $sub_array[] = $no++;
+
+      if ($kategori === 'sampah') {
+        $is_edit =  authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"]) ? "<a  href=\"" . base_url('backoffice/berkas/stts/' . encrypting($row->id)) . "\" class=\"btn btn-primary btn-sm\" data-toggle=\"tooltip\" data-original-title=\"Pulihkan\"><i class=\"fa fa-arrow-up\"></i></a>" : '';
+        $is_delete =  authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"]) ? btn_hapus_icon_permanent(base_url('backoffice/berkas/hapus/' . encrypting($row->id))) : '';
+      } else {
+        $is_edit =  authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"]) ? btn_koreksi_icon('backoffice/pasien/list_berkas/' . encrypting($row->id)) : '';
+        $is_delete =  authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"]) ? btn_hapus_icon(base_url('backoffice/berkas/stts/' . encrypting($row->id))) : '';
+      }
+
+      $sub_array[] = form_checkbox('check_id[]', $row->id, FALSE, 'class="icheckbox_flat-green chk"') . '<filedset>'; //checkbox
+      $sub_array[] = '<span class="fa fa-file"></span> '; //icon
+
+      if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"])) {
+        $sub_array[] = anchor('backoffice/pasien/list_berkas/' . encrypting($row->id), $row->norm);
+      } else {
+        $sub_array[] = $row->norm;
+      }
+      $sub_array[] = strtoupper($row->namapasien);
+      $sub_array[] = strtoupper($row->jeniskelamin);
+      if ($this->data['u_an_id'] == 'super_admin') {
+        $iduser = $row->id_user;
+        $nama_user = $this->Settuser_m->get($iduser);
+        $sub_array[] = $nama_user->namalengkap;
+      }
+
+      $sub_array[] = '<div class="btn-group">' . $is_edit . $is_delete . '</div>';
+
+      $data[] = $sub_array;
+    }
+    $output = array(
+      "draw"            => intval($_POST["draw"]),
+      "recordsTotal"    => $this->Pasien_m->getAllData($arr),
+      "recordsFiltered" => $this->Pasien_m->getFiltered($arr),
+      "data"            => $data
+    );
+    echo json_encode($output);
+    // dump($id);
+  }
+
 
   public function list_berkas($id = NULL)
   {
+
     if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_view"])) {
       // memanggil data 1 berkas berdasarkan id
       if ($id) {
         $id = decrypting($id);
         // $this->data['berkas'] = $this->Berkas_m->get_by(array('iddirectory' => $id));
+        // $this->data['dataTable'] = $this->Pasien_m->getDatatable_init();
         $this->data['cpasien'] = $this->Pasien_m->getWithSession($id);
         $this->data['direktori'] = $this->Direktori_m->get($id);
-        $this->data['dataTable'] = $this->Pasien_m->getDatatable_init($id);
         $this->data['iddirectory'] = $id;
+
+        // dump($this->Pasien_m->getWhereIn());
         // dump(count($this->data['cpasien']));
         // count($this->data['berkas']) || $this->show_404();
       } else {
@@ -41,13 +98,13 @@ class Berkas extends Admin_Controller
         $this->show_404();
       }
 
-
       $this->data['subview'] = 'backoffice/berkas/list_berkas';
       $this->load->view('backoffice/_layout_main', $this->data);
     } else {
       $this->show_404();
     }
   }
+
 
   public function upload_single($id = NULL)
   {
@@ -116,7 +173,7 @@ class Berkas extends Admin_Controller
             $up_data     = $this->fileupload->data();
             // array dataitem berkas
             $dataitem = array(
-              'namaberkas' => './assets/rmberkas/'.$up_data['file_name'],
+              'namaberkas' => './assets/rmberkas/' . $up_data['file_name'],
               'tglberkas' => $data['tgl_directory'],
               'idpasien' => $save_pasien,
               'iddirectory' => $data['iddirectory'],
@@ -134,7 +191,7 @@ class Berkas extends Admin_Controller
 
   public function _unique_norm($id)
   {
-   /*  $id = $this->uri->segment(4);
+    /*  $id = $this->uri->segment(4);
     $id = decrypting($id);
     $id || $this->db->where('iddirectory', $id); */
     $this->db->where(array('norm' => $this->input->post('norm')));
@@ -239,8 +296,12 @@ class Berkas extends Admin_Controller
   public function hapus($id)
   {
     $id = decrypting($id);
-    $this->Berkas_m->hapus($id);
-    redirect('backoffice/berkas/');
+    // $this->Berkas_m->HapusBerkas($id);
+    // exit();
+    $this->Berkas_m->HapusBerkas($id);
+    $this->Pasien_m->hapus($id);
+
+    redirect($_SERVER['HTTP_REFERER']);
   }
 
   public function multi_delete()
@@ -249,15 +310,27 @@ class Berkas extends Admin_Controller
       $id = $this->input->post('chk_val');
 
       for ($count = 0; $count < count($id); $count++) {
-        $this->Berkas_m->hapus($id[$count]);
+        // $this->Berkas_m->hapus($id[$count]);
+      }
+    }
+  }
+
+  public function multi_edit_status()
+  {
+    if ($this->input->post('chk_val')) {
+      $id = $this->input->post('chk_val');
+
+      for ($count = 0; $count < count($id); $count++) {
+        // $this->Berkas_m->hapus($id[$count]);
+        $this->Pasien_m->edit_status($id[$count]);
       }
     }
   }
   public function stts($id)
   {
     $id = decrypting($id);
-    $this->Berkas_m->edit_status($id);
-    redirect('backoffice/berkas');
+    $this->Pasien_m->edit_status($id);
+    redirect($_SERVER['HTTP_REFERER']);
   }
 
   public function suggestions()

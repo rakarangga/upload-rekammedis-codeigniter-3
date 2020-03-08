@@ -1,9 +1,5 @@
-<!-- <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/fileuploader/fileuploader.css"> -->
-
-<!-- <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/fileuploader/fileuploader.js"></script> -->
 <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/fileuploader/lib-signature.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/pdfObject/pdfobject.min.js"></script>
-<!-- <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/fileuploader/jquery.ajaxfileupload.js"></script> -->
 <!-- stylesheets -->
 <style type="text/css">
 	/* pdfobject (showing pdf viewer) */
@@ -31,6 +27,23 @@
 
 	.dataTables_filter {
 		float: left !important;
+	}
+
+	th {
+		font-size: 19px;
+	}
+
+	td {
+		font-size: 18px;
+	}
+
+	.nav-pills>li.active>a,
+	.nav-pills>li.active>a:focus,
+	.nav-pills>li.active>a:hover {
+		background: transparent;
+		color: #444;
+		border-top: 0;
+		border-left-color: #3c8dbc;
 	}
 
 	/*
@@ -72,7 +85,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Berkas Tanggal : <strong><?= tgl_no_jam($direktori->tgldirectory) ?></strong>
+			Berkas Tanggal : <strong><?php echo tgl_no_jam($direktori->tgldirectory) ?></strong>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url('backoffice/dashboard'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
@@ -96,12 +109,12 @@
 				?>
 				<div class="v2-menu-wrapper">
 					<ul id="v2-menu-full">
-						<li style="width:100%;"> <a href="<?= base_url('backoffice/berkas') ?>">
+						<li style="width:100%;"> <a href="<?php echo base_url('backoffice/berkas') ?>">
 								<div> <i class="fa fa-arrow-left fa-2x"></i> <span>Kembali</span> </div>
 							</a> </li>
 					</ul>
 				</div>
-				<div class="box box-primary">
+				<div class="box box-primary" style="font-size: 19px;">
 					<div class="box-header with-border">
 						<h3 class="box-title">Manajemen Berkas</h3>
 
@@ -112,10 +125,9 @@
 					</div>
 					<div class="box-body no-padding">
 						<ul class="nav nav-pills nav-stacked">
-							<li class="active"><a href="javascript:void(0);"><i class="fa fa-inbox"></i> Semua
-									<?= count($cpasien) > 0 ? '<span class="label label-primary pull-right">' . count($cpasien) . '</span>' : ''; ?></a></li>
-							<li><a href="#"><i class="fa fa-file-text-o"></i> Draf</a></li>
-							<li><a href="#"><i class="fa fa-trash-o"></i> Sampah</a></li>
+							<li class="nav-li active"><a class="nav-stacked" href="javascript:void(0);"><i class="fa fa-inbox"></i> Semua<?php /* count($cpasien) > 0 ? '<span class="label label-primary pull-right">' . count($cpasien) . '</span>' : ''; */ ?></a></li>
+							<li class="nav-li"><a class="nav-stacked" href="#"><i class="fa fa-file-text-o"></i> Draf</a></li>
+							<li class="nav-li"><a class="nav-stacked" href="#"><i class="fa fa-trash-o"></i> Sampah</a></li>
 						</ul>
 					</div>
 					<!-- /.box-body -->
@@ -159,27 +171,45 @@
 
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">Semua</h3>
+						<h3 class=" table-title">Semua</h3>
 						<!-- /.box-tools -->
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body no-padding">
 						<div class="mailbox-controls">
-							<div class="btn-group">
-								<?php
-								if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"])) {
-									echo '<button type="button" id="btn_hapus_multi" class="btn btn-danger btn-sm btn_hapus_multi" data-toggle="tooltip" data-original-title="Hapus Yang Ditandai"><i class="fa fa-trash-o"></i></button>';
-									echo "";
-								}
-								?> </div>
+							<div class="btn-group btn-pulih">
+								<?php if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"])) { ?>
+									<button type="button" id="btn_hapus_multi" class="btn btn-danger btn-sm btn_hapus_multi" data-toggle="tooltip" data-original-title="Hapus Yang Ditandai"><i class="fa fa-trash-o"></i></button>
+								<?php } ?>
+							</div>
 							<button type="button" class="btn btn-info btn-sm refresh" data-toggle="tooltip" data-original-title="Segarkan"><i class="fa fa-refresh"></i></button>
+							<!-- <div class="btn-group btn-pulih"></div> -->
 							<fieldset>
 								<!-- /.btn-group -->
 								<div class="mailbox-messages table-responsive" style="margin-top:10px">
 									<?php
-									$this->datatables->generate('dt_pasien');
-
+										/* $this->datatables->generate('dt_pasien') */;
 									?>
+									<table id="example23" class="table table-hover table-striped">
+										<thead>
+											<tr class="headings">
+												<th class="no-sort" style="width:20px">
+													<div align="center">
+														<?php echo form_checkbox('btn_chk_all', " ", FALSE, 'class="icheckbox_flat-green checkall"'); ?>
+													</div>
+												</th>
+												<th><i class="fa fa-file"></i></th>
+												<th>No. Rekam Medis</th>
+												<th>Nama Pasien</th>
+												<th>Jenis Kelamin</th>
+												<?php if ($this->data['u_an_id'] == 'super_admin') { ?>
+													<th>Penanggung Jawab</th>
+												<?php } ?>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
 								</div>
 								<!-- /.pull-right -->
 						</div>
@@ -190,6 +220,7 @@
 				<!-- /. box -->
 			</div>
 			<!-- Modal Unggah Berkas -->
+
 			<div class="example-modal">
 				<div class="modal fade" id="uploadberkas_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog  modal-lg" role="document">
@@ -269,8 +300,7 @@
 		</div>
 	</section>
 </div>
-<?php $this->datatables->jquery('dt_pasien'); ?>
-
+<?php /* $this->datatables->jquery('dt_pasien'); */ ?>
 <script>
 	const fileSelect = document.getElementsByClassName("upload_berkas");
 	const fileElem = document.getElementById("fileberkas");
@@ -300,8 +330,82 @@
 	$('.modal').on('hidden.bs.modal', function() {
 		$('#form-single').trigger("reset");
 	})
-	$(document).ready(function() {
 
+
+	$(document).ready(function() {
+		/* Sending Request POST data to datatable */
+		function ajaxPost(data = null) {
+			var dataItem = data;
+			var dataTable_pasien = $('#example23').DataTable({
+				"processing": true,
+				"serverSide": true,
+				"order": [],
+				"ordering": false,
+				"ajax": {
+					url: "<?php echo base_url('backoffice/berkas/fetch_ajax1'); ?>",
+					type: "POST",
+					data: {
+						'iddirectory': '<?php echo $iddirectory; ?>',
+						'kategori': dataItem,
+					},
+					error: function(xhr) {
+						$.toast({
+							heading: "Error",
+							text: xhr.responseText,
+							showHideTransition: "fade",
+							icon: "error",
+							hideAfter: 3000,
+						});
+						window.location = '<?php echo base_url('backoffice/user'); ?>';
+					}
+				},
+				"language": {
+					processing: '<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>',
+					search: '_INPUT_',
+					searchPlaceholder: 'Pencarian...'
+				},
+				"sDom": '<\"top\"lfprtip><\"bottom\"><\"clear\">',
+				"bLengthChange": false,
+				// "searching": true,
+				"columnDefs": [{
+					"targets": [0], //kolom ceklis
+					"orderable": false,
+					"className": "text-left",
+					"width": "2%"
+				}, {
+					"targets": [1], //kolom icon
+					"orderable": false,
+					"className": "text-left",
+					"width": "1%"
+				}, {
+					"targets": [<?php echo $u_an_id == 'super_admin' ? 5 : 4 ?>], //kolom aksi
+					"orderable": false,
+					"width": "20%"
+				}, {
+					"targets": [<?php echo $u_an_id == 'super_admin' ? 6 : 5 ?>], //kolom aksi
+					"orderable": false,
+					"className": "text-left",
+					"width": "14%"
+				}, ],
+			});
+			$(document).on('click', '.refresh', function() {
+				if ($('.checkall').is(':checked')) {
+					$('.checkall').prop('checked', '');
+				}
+				dataTable_pasien.ajax.reload();
+			});
+		};
+		ajaxPost();
+		// $('.dataTables_filter input').unbind().keyup(function(e) {
+		// 	var value = $(this).val();
+		// 	if (value.length > 3) {
+		// 		dataTable_pasien.search(value).draw();
+		// 	} else {
+		// 		dataTable_pasien.search('').draw();
+		// 	}
+		// });
+
+		// UPLOAD SINGLE
 		$(document).on('change', '#fileberkas', function(event) {
 			event.preventDefault(); // prevent navigation to "#"
 			const files = this.files;
@@ -375,7 +479,7 @@
 			e.preventDefault(); // prevent navigation to "#"
 			var myForm = document.getElementById('form-single');
 			var formData = new FormData(myForm);
-			formData.append('iddirectory', '<?= $iddirectory ?>');
+			formData.append('iddirectory', '<?php echo $iddirectory ?>');
 			// debug console formdata
 			// for (let [name, value] of formData) {
 			// 	console.log(`${name} = ${value}`);
@@ -398,12 +502,12 @@
 					if (msg.save_msg == true && msg.success_msg_upload == true) {
 						$('.modal').modal('hide');
 						swal({
-								title: "Data Berhasil Disimpan...",
-								type: "success",
-								closeOnConfirm: false,
-								showConfirmButton: false,
-								timer: 2000
-							});
+							title: "Data Berhasil Disimpan...",
+							type: "success",
+							closeOnConfirm: false,
+							showConfirmButton: false,
+							timer: 2000
+						});
 					} else {
 						if (msg.save_msg == true) {
 							$('.modal').modal('hide');
@@ -415,7 +519,7 @@
 								showConfirmButton: false,
 								timer: 5000
 							});
-						} 
+						}
 						$.toast({
 							heading: "<strong>PERINGATAN</strong>",
 							text: msg.error_msg,
@@ -432,52 +536,70 @@
 
 		});
 		<?php
-		if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"])) {
+		if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"])) {
 		?> $(document).on('click', '.btn_hapus_multi', function(e) {
 				e.preventDefault(); // prevent navigation to "#"
 				var chk = $('.chk:checked');
+				var idElm = $(this).attr('id');
+				let notif = [];
+				if (idElm === 'btn_hapus_multi') {
+					notif = {
+						title: "Anda Yakin Ingin Menghapus?",
+						text: "Item yang sudah di hapus tidak dapat di kembalikan!",
+						type: "warning",
+						showCancelButton: true,
+						confirmButtonColor: '#DD6B55',
+						confirmButtonText: 'Ya, Hapus Item!',
+						cancelButtonText: 'Batal',
+						closeOnConfirm: true,
+						showLoaderOnConfirm: true,
+					};
+				} else {
+					notif = {
+						title: "Pulihkan Data ini..?",
+						text: "Item yang dipulihkan akan kembali, dan hilang dari daftar sampah",
+						type: "info",
+						showCancelButton: true,
+						confirmButtonColor: '#269abc',
+						confirmButtonText: 'Pulihkan Item!',
+						cancelButtonText: 'Batal',
+						closeOnConfirm: true,
+						showLoaderOnConfirm: true,
+					};
+				}
 				if (chk.length > 0) {
 					var chk_val = [];
 					$(chk).each(function() {
 						chk_val.push($(this).val());
 					});
-
-					swal({
-							title: "Anda Yakin Ingin Menghapus?",
-							text: "Item yang sudah di hapus tidak dapat di kembalikan!",
-							type: "warning",
-							showCancelButton: true,
-							confirmButtonColor: '#DD6B55',
-							confirmButtonText: 'Ya, Hapus Item!',
-							cancelButtonText: 'Batal',
-							closeOnConfirm: true,
-							showLoaderOnConfirm: true,
-						},
+					swal(notif,
 						function() {
 							$.ajax({
 								method: "POST",
-								url: "<?php echo base_url('backoffice/berkas/multi_delete'); ?>",
+								url: "<?php echo base_url('backoffice/berkas/multi_edit_status'); ?>",
 								data: {
 									chk_val: chk_val
 								},
 								success: function(msg) {
 									// jika tidak ada data
-									$(".removeRow").fadeOut(300);
-									dataTable.ajax.reload();
+									$(".removeRow").fadeOut(500);
+									setTimeout(function() {
+										$(".refresh").trigger("click");
+									}, 700);
 								}
 							});
 						});
 				} else {
 					swal({
-						title: "Mohon untuk memilih Data yang ingin dihapus",
+						title: "Mohon untuk memilih Data",
 						type: "error",
 					});
 				}
 			});
 
 
-		<?php } ?> $(document).on('click', '.chk', function() {
-
+		<?php } ?>
+		$(document).on('click', '.chk', function() {
 			if ($(this).is(':checked')) {
 				$(this).closest('tr').addClass('removeRow');
 			} else {
@@ -485,14 +607,57 @@
 			}
 		});
 		$(document).on('click', '.checkall', function() {
-
 			$(this).parents('fieldset:eq(0)').find('.chk').prop('checked', this.checked);
 			if ($('.chk').is(':checked')) {
 				$('.chk').closest('tr').addClass('removeRow');
 			} else {
 				$('.chk').closest('tr').removeClass('removeRow');
 			}
+
 			// $.uniform.update();
+		});
+
+
+
+		$(document).on('click', 'a.nav-stacked', function(e) {
+			e.preventDefault();
+			$('.nav-li').removeClass('active');
+			let li = $(this).parent('li:eq(0)');
+			li.addClass('active');
+			let kategori = $.trim($(this).text()).toLowerCase();
+
+			// console.log(kategori);
+			if (kategori === 'semua') {
+				$('h3.table-title').html(capitalize(kategori));
+				$('#example23').DataTable().clear();
+				$('#example23').DataTable().destroy();
+				ajaxPost(kategori);
+				<?php if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"])) { ?>
+					$('.btn-pulih').html('<button type="button" id="btn_hapus_multi" class="btn btn-danger btn-sm btn_hapus_multi" data-toggle="tooltip" data-original-title="Hapus Yang Ditandai"><i class="fa fa-trash-o"></i></button>');
+				<?php } ?>
+				return
+			}
+			if (kategori === 'draf') {
+				$('h3.table-title').html(capitalize(kategori)); //erTable_dt_pasien adalah variable di DatatablesBuilder khusus halaman ini
+				$('#example23').DataTable().clear();
+				$('#example23').DataTable().destroy();
+				ajaxPost(kategori);
+				<?php if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"])) { ?>
+					$('.btn-pulih').html('<button type="button" id="btn_hapus_multi" class="btn btn-danger btn-sm btn_hapus_multi" data-toggle="tooltip" data-original-title="Hapus Yang Ditandai"><i class="fa fa-trash-o"></i></button>');
+				<?php } ?>
+				return
+			}
+			if (kategori === 'sampah') {
+				$('h3.table-title').html(capitalize(kategori)); //erTable_dt_pasien adalah variable di DatatablesBuilder khusus halaman ini
+				$('#example23').DataTable().clear();
+				$('#example23').DataTable().destroy();
+				ajaxPost(kategori);
+				<?php if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"])) { ?>
+					$('.btn-pulih').html('<button type="button" id="btn_pulih_multi" class="btn btn-primary btn-sm btn_hapus_multi" data-toggle="tooltip" data-original-title="Pulihkan Yang Ditandai"><i class="fa fa-arrow-up"></i></button>');
+				<?php } ?>
+				return
+			}
+
 		});
 	});
 </script>

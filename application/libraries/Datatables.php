@@ -24,6 +24,7 @@ class Datatables
 
 	public function create($dt_name, $source)
 	{
+		
 		$source->init($dt_name);
 
 		$this->datatables[$dt_name] = $source;

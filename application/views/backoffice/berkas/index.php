@@ -10,7 +10,6 @@
 				display: none;
 			}
 
-
 			.button {
 				background-color: #0088cc;
 				border: 1px solid #0088cc;
@@ -46,6 +45,14 @@
 
 			.dataTables_filter {
 				float: left !important;
+			}
+
+			th {
+				font-size: 19px;
+			}
+
+			td {
+				font-size: 18px;
 			}
 
 			/**
@@ -95,14 +102,14 @@
 									<div class="btn-group">
 
 										<?php
-										if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"])) {
+										if (authorize($_SESSION["access"]["manajemen_berkas"]["direktori"]["ac_delete"])) {
 											echo '<button type="button" id="btn_hapus_multi" class="btn btn-danger btn-sm btn_hapus_multi" data-toggle="tooltip" data-original-title="Hapus Yang Ditandai"><i class="fa fa-trash-o"></i></button>';
 											echo "";
 										}
 										?> </div>
 									<button type="button" class="btn btn-info btn-sm refresh" data-toggle="tooltip" data-original-title="Segarkan"><i class="fa fa-refresh"></i></button>
 									<?php
-									if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_create"])) {
+									if (authorize($_SESSION["access"]["manajemen_berkas"]["direktori"]["ac_create"])) {
 
 										echo '<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#tgldirectory_modal"><i class="fa fa-plus"></i> Buat Berkas Baru</button>';
 									}
@@ -116,7 +123,7 @@
 														<tr class="headings">
 
 															<?php
-															if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"])) {
+															if (authorize($_SESSION["access"]["manajemen_berkas"]["direktori"]["ac_delete"])) {
 															?>
 																<!-- Check all button -->
 																<th class="no-sort" style="width:20px">
@@ -277,7 +284,7 @@
 					}
 				});
 				<?php
-				if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"])) {
+				if (authorize($_SESSION["access"]["manajemen_berkas"]["direktori"]["ac_delete"])) {
 				?>
 					$(document).on('click', '.btn_hapus_multi', function() {
 						// $('.btn_hapus_multi').click(function () { 

@@ -273,7 +273,6 @@
 <!-- Going to Fullscreen page-->
 <script>
 	function hapus(id) {
-
 		swal({
 				title: "Anda Yakin Ingin Menghapus?",
 				text: "Item yang sudah di hapus tidak dapat di kembalikan!",
@@ -294,7 +293,6 @@
 						showConfirmButton: false,
 					});
 				}, 2000);
-
 				setTimeout(function() {
 					window.location.replace(id);
 				}, 3000);
@@ -421,6 +419,11 @@
 			input.attr("type", "password");
 		}
 	});
+
+	const capitalize = (s) => {
+			if (typeof s !== 'string') return ''
+			return s.charAt(0).toUpperCase() + s.slice(1)
+		}
 	$(document).ready(function() {
 
 		// //iCheck for checkbox and radio inputs

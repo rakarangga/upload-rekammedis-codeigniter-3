@@ -18,8 +18,6 @@ class DatatablesBuilder
     private $searchable     = array();
     private $style             = '';
     private $connection     = 'default';
-    private $order     = '';
-    private $sort     = '';
 
     private $dt_options        = array(
         'searchDelay'     => '500',
@@ -61,7 +59,7 @@ class DatatablesBuilder
         $this->searchable = $columns;
         return $this;
     }
-    
+
     public function set_order_by($order, $sort)
     {
         $this->_db->order_by($order, $sort);
@@ -113,7 +111,6 @@ class DatatablesBuilder
     {
         $this->table_heading[]         = $label;
         $this->columns[]             = array($label, $source, $function);
-
         return $this;
     }
 
@@ -195,46 +192,52 @@ class DatatablesBuilder
         foreach ($this->dt_options as $opt => $value) {
             $dt_options .= "$opt: $value, \n";
         }
-
+        $uri_data = uri_string().'/dataTables_view';
         $output = "
         <script type=\"text/javascript\" defer=\"defer\">
+        function createDatatable(dataMe = null) {
+            var dataitem = dataitem;
+            var dataMe = dataMe;
+            erTable_{$id} = $(\"#{$id}\").DataTable({
+                processing: true,
+                serverSide: true,
+                language: {
+                /* processing: '<i class=\"fa fa-refresh fa-spin fa-3x fa-fw\"></i>',*/
+                    search: '_INPUT_',
+                    searchPlaceholder: 'Pencarian...'
+                }, 
+                // pagingType: \"full_numbers\",
+                sDom: '<\"top\"lfprtip><\"bottom\"><\"clear\">',
+                {$dt_options}
+                ajax: {
+                    url: \"" . site_url(uri_string()) . "\",
+                    type: \"POST\",
+                    data: function (d, dt) {
+                        d.dt_name = \"{$id}\";
+                        d.kategori = \"tes\";
+                        {$ax_options};
+                        
+                        // dataMe.serialize();
+                        // console.log(dataMe);
+                    },
+                }
+            });
+        };
             $(document).ready(function() {
-                function createDatatable() {
-                    erTable_{$id} = $(\"#{$id}\").DataTable({
-                        processing: true,
-                        serverSide: true,
-                        language: {
-                        /* processing: '<i class=\"fa fa-refresh fa-spin fa-3x fa-fw\"></i>',*/
-                            search: '_INPUT_',
-                            searchPlaceholder: 'Pencarian...'
-						}, 
-                        // pagingType: \"full_numbers\",
-                        sDom: '<\"top\"lfprtip><\"bottom\"><\"clear\">',
-                        {$dt_options}
-                        ajax: {
-                            url: \"" . site_url(uri_string()) . "\",
-                            type: \"POST\",
-                            data: function (d, dt) {
-                                d.dt_name = \"{$id}\";
-
-                                {$ax_options}
-                            }
-                        }
-                    });
-                    $('.dataTables_filter input').unbind().keyup(function(e) {
-                        var value = $(this).val();
-                        if (value.length>3) {
-                            erTable_{$id}.search(value).draw();
-                        } else {     
-                            //optional, reset the search if the phrase 
-                            //is less then 3 characters long
-                            erTable_{$id}.search('').draw();
-                        }        
-                    });
-                    $(document).on('click', '.refresh', function() {
-						erTable_{$id} .ajax.reload();
-					});
-                };
+               
+                $('.dataTables_filter input').unbind().keyup(function(e) {
+                    var value = $(this).val();
+                    if (value.length>3) {
+                        erTable_{$id}.search(value).draw();
+                    } else {     
+                        //optional, reset the search if the phrase 
+                        //is less then 3 characters long
+                        erTable_{$id}.search('').draw();
+                    }        
+                });
+                $(document).on('click', '.refresh', function() {
+                    erTable_{$id} .ajax.reload();
+                });
                 createDatatable();
                 
             });
@@ -259,6 +262,7 @@ class DatatablesBuilder
         $order        = 'modified';
         $sort        = 'DESC';
 
+       
         $output['data']     = array();
 
         if ($this->searchable == '*') {
@@ -287,7 +291,8 @@ class DatatablesBuilder
         /** ---------------------------------------------------------------------- */
 
         $total = $this->_db->count_all_results();
-
+        
+       
         $output['query_count']     = $this->_db->last_query();
         $output['recordsTotal'] = $output['recordsFiltered'] = $total;
 
@@ -305,10 +310,10 @@ class DatatablesBuilder
             $this->set_order_by($order, $sort);
         }
 
-
-        $result             = $this->_db->get()->result_array();
+       
+        $result              = $this->_db->get()->result_array();
         $output['query']     =  $this->_db->last_query();
-
+        // $output['post'] = $_REQUEST['draw'];
         foreach ($result as $row) {
             $arr = array();
             foreach ($this->columns as $key => $column) {
