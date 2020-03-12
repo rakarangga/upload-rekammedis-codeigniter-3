@@ -12,7 +12,8 @@ function __autoload($classname)
         }
     }
 }
-
+    // var_dump($classname);
+    // die();
 /*
  * |--------------------------------------------------------------------------
  * | Base Site URL
@@ -318,7 +319,6 @@ $config['cache_path'] = '';
  * |
  */
 $config['cache_query_string'] = FALSE;
-
 /*
  * |--------------------------------------------------------------------------
  * | Encryption Key
