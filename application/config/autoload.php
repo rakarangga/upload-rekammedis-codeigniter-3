@@ -114,7 +114,8 @@ $autoload['helper'] = array(
  * |
  */
 $autoload['config'] = array(
-    'inspa_config'
+    'inspa_config',
+    'rest'
 );
 
 /*

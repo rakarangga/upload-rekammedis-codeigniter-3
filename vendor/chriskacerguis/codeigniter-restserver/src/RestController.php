@@ -88,7 +88,7 @@ class RestController extends \CI_Controller
     protected $_put_args = [];
 
     /**
-     * The arguments for the DELETE request method.
+     * The arguments for the Delete  request method.
      *
      * @var array
      */
@@ -123,7 +123,7 @@ class RestController extends \CI_Controller
     protected $_query_args = [];
 
     /**
-     * The arguments from GET, POST, PUT, DELETE, PATCH, HEAD and OPTIONS request methods combined.
+     * The arguments from GET, POST, PUT, Delete , PATCH, HEAD and OPTIONS request methods combined.
      *
      * @var array
      */
@@ -197,7 +197,7 @@ class RestController extends \CI_Controller
     /**
      * Enable XSS flag
      * Determines whether the XSS filter is always active when
-     * GET, OPTIONS, HEAD, POST, PUT, DELETE and PATCH data is encountered
+     * GET, OPTIONS, HEAD, POST, PUT, Delete  and PATCH data is encountered
      * Set automatically based on config setting.
      *
      * @var bool
@@ -309,7 +309,7 @@ class RestController extends \CI_Controller
         // Determine whether the connection is HTTPS
         $this->request->ssl = is_https();
 
-        // How is this request being made? GET, POST, PATCH, DELETE, INSERT, PUT, HEAD or OPTIONS
+        // How is this request being made? GET, POST, PATCH, Delete , INSERT, PUT, HEAD or OPTIONS
         $this->request->method = $this->_detect_method();
 
         // Check for CORS access request
@@ -1309,13 +1309,13 @@ class RestController extends \CI_Controller
     }
 
     /**
-     * Parse the DELETE request arguments.
+     * Parse the Delete  request arguments.
      *
      * @return void
      */
     protected function _parse_delete()
     {
-        // These should exist if a DELETE request
+        // These should exist if a Delete  request
         if ($this->input->method() === 'delete') {
             $this->_delete_args = $this->input->input_stream();
         }
@@ -1424,13 +1424,13 @@ class RestController extends \CI_Controller
     }
 
     /**
-     * Retrieve a value from a DELETE request.
+     * Retrieve a value from a Delete  request.
      *
-     * @param null $key       Key to retrieve from the DELETE request
+     * @param null $key       Key to retrieve from the Delete  request
      *                        If NULL an array of arguments is returned
      * @param null $xss_clean Whether to apply XSS filtering
      *
-     * @return array|string|null Value from the DELETE request; otherwise, NULL
+     * @return array|string|null Value from the Delete  request; otherwise, NULL
      */
     public function delete($key = null, $xss_clean = null)
     {
