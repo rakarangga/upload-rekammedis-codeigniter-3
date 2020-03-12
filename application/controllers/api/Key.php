@@ -4,10 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 /** @noinspection PhpIncludeInspection */
-require APPPATH . '/libraries/REST_Controller.php';
+// require APPPATH . '/libraries/REST_Controller.php';
 
 // use namespace
-use Restserver\Libraries\REST_Controller;
+// use Restserver\Libraries\REST_Controller;
 
 /**
  * Keys Controller
@@ -20,7 +20,7 @@ use Restserver\Libraries\REST_Controller;
  * @license         MIT
  * @link            https://github.com/chriskacerguis/codeigniter-restserver
  */
-class Key extends REST_Controller {
+class Key extends Rest_Controller {
 
     protected $methods = [
             'index_put' => ['level' => 10, 'limit' => 10],
