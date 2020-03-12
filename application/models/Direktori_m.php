@@ -217,7 +217,15 @@ class Direktori_m extends MY_Model
 				'Direktori / Tanggal Berkas',
 				'namadirectory',
 				function ($data, $row) {
-					return anchor('backoffice/berkas/list_berkas/' . encrypting($row['id']), $row['namadirectory']);
+					$cdraf = $this->Pasien_m->get_sum('stts', '(stts = 1 AND iddirectory = ' . $row['id'] . ') AND id NOT IN (' . implode(',', $this->Pasien_m->getWhereIn()) . ')');
+					$cpasien = $this->Pasien_m->get_sum('stts', '(stts = 1 AND iddirectory = ' . $row['id'] . ')');
+					$cberkas = $this->Berkas_m->get_sum('stts', '(stts = 1 AND iddirectory = ' . $row['id'] . ')');
+					$csampah = $this->db->get_where('t_pasien', array('stts' => 0, 'iddirectory' => $row['id']))->result();
+					$cdraf = $cdraf > 0 ? '<span class="label label-warning pull-right" style="margin-right:10px;">Draft : ' . $cdraf . '</span>' : '<span class="label label-warning pull-right" style="margin-right:10px;">Draft : 0 </span>';
+					$cpasien = $cpasien > 0 ? '<span class="label label-primary pull-right" style="margin-right:10px;">Pasien : ' . $cpasien . ' </span>' : '<span class="label label-primary pull-right" style="margin-right:10px;">Pasien : 0 </span>';
+					$cberkas = $cberkas > 0 ? '<span class="label label-info pull-right" style="margin-right:10px;">Berkas : ' . $cberkas . ' </span>' : '<span class="label label-info pull-right" style="margin-right:10px;">Berkas : 0 </span>';
+					$csampah = count($csampah) >= 0 ? '<span class="label label-danger pull-right" style="margin-right:10px;">Sampah : ' . intval($csampah) . ' </span>' : '<span class="label label-danger pull-right" style="margin-right:10px;">Sampah : 0 </span>';
+					return anchor('backoffice/berkas/list_berkas/' . encrypting($row['id']), $row['namadirectory']) . $csampah . ' ' . $cberkas . ' ' . $cpasien . ' ' . $cdraf;
 				}
 			);
 		} else {
@@ -237,7 +245,7 @@ class Direktori_m extends MY_Model
 				return $data;
 			}
 		);
-		
+
 		$dt_direktori->column(
 			'',
 			'aksi',

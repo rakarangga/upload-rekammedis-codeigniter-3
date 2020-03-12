@@ -18,8 +18,6 @@
 		display: none;
 	}
 
-
-
 	.table thead,
 	.table th {
 		text-align: left;
@@ -140,19 +138,19 @@
 				<div class="v2-menu-wrapper">
 					<ul id="v2-menu-full">
 						<?php if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_create"])) { ?>
-							<li> <a href="#" class="upload_berkas">
+							<li> <a href="#" class="upload_berkas"  data-toggle="tooltip" data-original-title="Hanya Mendukung File Bermformat .pdf">
 									<div> <i class="fa fa-file-text fa-2x"></i> <span>Unggah Berkas</span> </div>
 								</a> </li>
-							<li> <a href="#">
+							<!-- <li> <a href="#">
 									<div> <i class="fa fa-files-o fa-2x"></i> <span>Unggah Ganda</span> </div>
-								</a> </li>
+								</a> </li> -->
 
-							<li> <a href="#">
+							<li> <a href="#" data-toggle="tooltip" data-original-title="Pastikan scanner sudah terkoneksi ke perangkat USB">
 									<div> <i class="fa fa-print fa-2x"></i> <span>Scan Berkas</span> </div>
 								</a> </li>
 						<?php } ?>
 						<?php if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"])) { ?>
-							<li> <a href="#">
+							<li> <a href="#"  class="btn_kelola" data-toggle="tooltip" data-original-title="Mendukung File Bermformat .jpg / .pdf / .jpeg / .png">
 									<div> <i class="fa fa-edit fa-2x"></i> <span>Kelola Berkas Yang Ditandai</span> </div>
 								</a> </li>
 						<?php } ?>
@@ -161,10 +159,10 @@
 							<div> <i class="fa fa-align-left fa-2x"></i> <span>Menu</span> </div>
 						</a>
 						<ul class="dropdown-menu pull-left" role="menu2">
-							<li> <a href="#" class="upload_berkas"> <i class="fa fa-file-text fa-1x"></i> <span>Unggah Berkas</span> </a> </li>
-							<li> <a href="#"> <i class="fa fa-files-o fa-1x"></i> <span>Unggah Ganda</span></a> </li>
+							<li> <a href="#" class="upload_berkas" > <i class="fa fa-file-text fa-1x"></i> <span>Unggah Berkas</span> </a> </li>
+							<!-- <li> <a href="#"> <i class="fa fa-files-o fa-1x"></i> <span>Unggah Ganda</span></a> </li> -->
 							<li> <a href="#"> <i class="fa fa-print fa-1x"></i> <span>Scan Berkas</span> </a> </li>
-							<li> <a href="#"> <i class="fa fa-edit fa-1x"></i> <span>Kelola Berkas Yang Ditandai</span> </a> </li>
+							<li> <a href="#" class="btn_kelola"> <i class="fa fa-edit fa-1x"></i> <span>Kelola Berkas Yang Ditandai</span> </a> </li>
 						</ul>
 					</div>
 				</div>
@@ -537,7 +535,8 @@
 		});
 		<?php
 		if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"])) {
-		?> $(document).on('click', '.btn_hapus_multi', function(e) {
+		?>
+			$(document).on('click', '.btn_hapus_multi', function(e) {
 				e.preventDefault(); // prevent navigation to "#"
 				var chk = $('.chk:checked');
 				var idElm = $(this).attr('id');
@@ -567,6 +566,7 @@
 						showLoaderOnConfirm: true,
 					};
 				}
+				// CHECK MULTI HAPUS
 				if (chk.length > 0) {
 					var chk_val = [];
 					$(chk).each(function() {
@@ -589,6 +589,38 @@
 								}
 							});
 						});
+				} else {
+					swal({
+						title: "Mohon untuk memilih Data",
+						type: "error",
+					});
+				}
+			});
+
+			//KELOLA BY CEKLIS
+			$(document).on('click', '.btn_kelola', function(e) {
+				e.preventDefault(); // prevent navigation to "#"
+				var chk = $('.chk:checked');
+				if (chk.length > 1) {
+					$.toast({
+						heading: "<strong>PERINGATAN</strong>",
+						text: "Tidak dapat kelola lebih dari 1 data",
+						showHideTransition: "fade",
+						icon: "warning",
+						position: 'top-right',
+						stack: false,
+						hideAfter: 5000,
+					});
+					return false;
+				}
+				if (chk.length > 0) {
+					var chk_val = [];
+					$(chk).each(function() {
+						chk_val.push($(this).val());
+					});
+					setTimeout(function() {
+						window.location = '<?php echo base_url(); ?>backoffice/pasien/form/' + chk_val;
+					}, 700);
 				} else {
 					swal({
 						title: "Mohon untuk memilih Data",

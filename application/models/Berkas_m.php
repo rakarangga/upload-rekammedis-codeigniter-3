@@ -80,28 +80,36 @@ class Berkas_m extends MY_Model
 		if (!$id) {
 			return FALSE;
 		}
-		$this->_deleteFile($id);
+		$this->_deleteFile(array('idpasien'=> $id));
+		// exit();
 		$this->db->where('idpasien', $id);
 		$this->db->delete($this->_table_nama);
 	}
 	
-	public function GetDataBerkas_ID($id)
+	public function GetDataBerkas_ID($arr)
 	{
-		return $this->db->get_where($this->_table_nama, ['idpasien' => $id])->row_array();
+		return $this->db->get_where($this->_table_nama, $arr)->result();
 	}
 
-	private function _deleteFile($id)
+	private function _deleteFile($array)
 	{
-		$dt = $this->GetDataBerkas_ID($id);
+		$dt = $this->GetDataBerkas_ID($array);
 	
-		$filename = explode(".", $dt['namaberkas'])[1];
+		// $filename = explode(".", $dt['namaberkas'])[1];
 		// dump($filename);
 		// if ($dt['namaberkas'] != "") {
 		
 		// }
-		// dump(glob(FCPATH . ".$filename.*"));
+		$arr = array();
+		foreach ($dt as $dts) :
+			// $exName[] = explode(".", $dts->namaberkas)[1];
+			$arr[] = glob(FCPATH . ".".explode(".", $dts->namaberkas)[1].".*")[0];
+		endforeach;
+
+		// dump($exName);	
+		// dump($arr);	
 		// exit();
-		return array_map('unlink', glob(FCPATH . ".$filename.*"));
+		return array_map('unlink', $arr);
 	}
 	public function get_drowpdown_hakakses()
 	{
@@ -123,6 +131,7 @@ class Berkas_m extends MY_Model
 
 	public function hapus($id)
 	{
+		$this->_deleteFile(array('id'=> $id));
 		// hapus halaman
 		parent::hapus($id);
 	}

@@ -22,6 +22,11 @@ var signatures_pdfimg = {
     	offset: 0,
     	sizet: 4
     },
+    jpe: {
+    	signature: "FFD8FFE0",
+    	offset: 0,
+    	sizet: 4
+    },
     pdf: {
         signature: "25504446",
         offset: 0,

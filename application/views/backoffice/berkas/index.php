@@ -109,7 +109,7 @@
 										?> </div>
 									<button type="button" class="btn btn-info btn-sm refresh" data-toggle="tooltip" data-original-title="Segarkan"><i class="fa fa-refresh"></i></button>
 									<?php
-									if (authorize($_SESSION["access"]["manajemen_berkas"]["direktori"]["ac_create"])) {
+									if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_create"])) {
 
 										echo '<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#tgldirectory_modal"><i class="fa fa-plus"></i> Buat Berkas Baru</button>';
 									}

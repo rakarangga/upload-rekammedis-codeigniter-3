@@ -60,13 +60,21 @@ class Pasien_m extends MY_Model
 	public function get_new()
 	{
 		$pasien = new stdClass();
-
 		$pasien->namapasien = '';
 		$pasien->norm = '';
 		$pasien->jeniskelamin = '';
+		$pasien->iddirectory = '';
+		$pasien->tgl_directory = '';
 		return $pasien;
 	}
-
+	public function get_berkas_by($id = NULL)
+	{
+		$this->db->select('*');
+		$this->db->where(array('idpasien' => $id, 'stts' => 1));
+		$this->db->order_by('orderby', 'asc');
+		$query = $this->db->get('t_berkas');
+		return $query->result_array();
+	}
 	////////////////////////////////////////////
 	// FUNCTION FOR DATATABLE AJAX MANUAL
 	////////////////////////////////////////////	
@@ -147,7 +155,7 @@ class Pasien_m extends MY_Model
 		$this->load->model('Berkas_m');
 		$datas = $this->Berkas_m->get();
 		// Jika catagorie Tidak 0 Tampilkan Judul
-		$arr = array();
+		$arr = array(0 => 0);
 		if (count($datas)) {
 
 			foreach ($datas as $data) :

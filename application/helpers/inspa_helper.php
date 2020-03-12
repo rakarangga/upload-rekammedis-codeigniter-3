@@ -79,6 +79,10 @@ function low($string)
     return strtolower($string);
 }
 
+function clean_str_end($string)
+{
+    return trim(preg_replace('/\s+/', ' ', $string));
+}
 function gambar($promo)
 {
     $CI = &get_instance();

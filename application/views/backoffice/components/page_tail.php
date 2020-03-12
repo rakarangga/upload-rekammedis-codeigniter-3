@@ -421,9 +421,9 @@
 	});
 
 	const capitalize = (s) => {
-			if (typeof s !== 'string') return ''
-			return s.charAt(0).toUpperCase() + s.slice(1)
-		}
+		if (typeof s !== 'string') return ''
+		return s.charAt(0).toUpperCase() + s.slice(1)
+	}
 	$(document).ready(function() {
 
 		// //iCheck for checkbox and radio inputs

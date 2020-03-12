@@ -42,15 +42,15 @@ class Berkas extends Admin_Controller
         $is_edit =  authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"]) ? "<a  href=\"" . base_url('backoffice/berkas/stts/' . encrypting($row->id)) . "\" class=\"btn btn-primary btn-sm\" data-toggle=\"tooltip\" data-original-title=\"Pulihkan\"><i class=\"fa fa-arrow-up\"></i></a>" : '';
         $is_delete =  authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_delete"]) ? btn_hapus_icon_permanent(base_url('backoffice/berkas/hapus/' . encrypting($row->id))) : '';
       } else {
-        $is_edit =  authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"]) ? btn_koreksi_icon('backoffice/pasien/list_berkas/' . encrypting($row->id)) : '';
+        $is_edit =  authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"]) ? btn_koreksi_icon('backoffice/pasien/form/' . encrypting($row->id)) : '';
         $is_delete =  authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"]) ? btn_hapus_icon(base_url('backoffice/berkas/stts/' . encrypting($row->id))) : '';
       }
 
-      $sub_array[] = form_checkbox('check_id[]', $row->id, FALSE, 'class="icheckbox_flat-green chk"') . '<filedset>'; //checkbox
+      $sub_array[] = form_checkbox('check_id[]', encrypting($row->id), FALSE, 'class="icheckbox_flat-green chk"') . '<filedset>'; //checkbox
       $sub_array[] = '<span class="fa fa-file"></span> '; //icon
 
       if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"])) {
-        $sub_array[] = anchor('backoffice/pasien/list_berkas/' . encrypting($row->id), $row->norm);
+        $sub_array[] = anchor('backoffice/pasien/form/' . encrypting($row->id), $row->norm);
       } else {
         $sub_array[] = $row->norm;
       }
@@ -155,7 +155,8 @@ class Berkas extends Admin_Controller
             'field_name' => 'fileberkass', // nama form file berkas
             'allowed_types' => '*' // nama form file berkas
           );
-          $config['file_name'] =  $data['tgl_directory'] . '_' . $data['norm'] . '_'; //filename dynamic
+          $order = $this->Berkas_m->get_sum('stts', array('idpasien' => $id));
+          $config['file_name'] =  $data['tgl_directory'] . '_' . $data['norm'] . '_' . intval($order + 1); //filename dynamic
 
           $this->load->library('fileupload', $config);
           if (!$this->fileupload->handle_upload()) {
@@ -177,7 +178,7 @@ class Berkas extends Admin_Controller
               'tglberkas' => $data['tgl_directory'],
               'idpasien' => $save_pasien,
               'iddirectory' => $data['iddirectory'],
-              'orderby' => $i
+              'orderby' => intval($order + 1)
             );
             $this->Berkas_m->simpan($dataitem, $id);
             $output['success_msg_upload'] = true;
@@ -300,7 +301,6 @@ class Berkas extends Admin_Controller
     // exit();
     $this->Berkas_m->HapusBerkas($id);
     $this->Pasien_m->hapus($id);
-
     redirect($_SERVER['HTTP_REFERER']);
   }
 
@@ -308,7 +308,7 @@ class Berkas extends Admin_Controller
   {
     if ($this->input->post('chk_val')) {
       $id = $this->input->post('chk_val');
-
+      $id = decrypting($id);
       for ($count = 0; $count < count($id); $count++) {
         // $this->Berkas_m->hapus($id[$count]);
       }
@@ -317,12 +317,11 @@ class Berkas extends Admin_Controller
 
   public function multi_edit_status()
   {
-    if ($this->input->post('chk_val')) {
-      $id = $this->input->post('chk_val');
-
+    $id = $this->input->post('chk_val');
+    if (isset($id)) {
       for ($count = 0; $count < count($id); $count++) {
-        // $this->Berkas_m->hapus($id[$count]);
-        $this->Pasien_m->edit_status($id[$count]);
+        $iddec[$count] = decrypting($id[$count]);
+        $this->Pasien_m->edit_status($iddec[$count]);
       }
     }
   }

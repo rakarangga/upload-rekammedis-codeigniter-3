@@ -2,101 +2,122 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $meta_title;?> | </title>
+  <title><?php echo $meta_title; ?> | </title>
 
-    <!-- Bootstrap core CSS -->
-      <!-- Font Awesome -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-      <!-- Ionicons -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Bootstrap core CSS -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-    <link href="<?php echo base_url()?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Font awesome -->
-    <link href="<?php echo base_url()?>assets/dist/css/font-awesome.min.css" rel="stylesheet">
-    <link href="<?php echo base_url()?>assets/dist/css/ionicons.min.css" rel="stylesheet">
-    <link href="<?php echo base_url()?>assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
-     <!-- select2 -->
-      <link href="<?php echo base_url()?>assets/plugins/select2/select2.min.css" rel="stylesheet">
-    <!-- Custom styling plus plugins -->
-        <link href="<?php echo base_url()?>assets/dist/css/intrex.css" rel="stylesheet">
-    
-    <link href="<?php echo base_url()?>assets/dist/css/AdminLTE.min.css" rel="stylesheet">
-    <link href="<?php echo base_url()?>assets/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css"  />
-    <!--  <link href="<?php //echo base_url()?>assets/plugins/iCheck/flat/all.css" rel="stylesheet">-->
-    <link href="<?php echo base_url()?>assets/plugins/morris/morris.css" rel="stylesheet" />
-	
-    <!--datatables plus plugins -->
-    <link href="<?php echo base_url()?>assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet">
-    <link href="<?php echo base_url()?>assets/plugins/datepicker/datepicker3.css" rel="stylesheet">
-   <link href="<?php echo base_url()?>assets/plugins/daterangepicker/daterangepicker.css" rel="stylesheet">
-   
-    <!-- toast-->
-    <link href="<?php echo base_url()?>assets/plugins/toast/jquery.toast.css" rel="stylesheet">
- 	
- 	  <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="<?php echo base_url()?>assets/plugins/iCheck/all.css">
+  <!-- Font awesome -->
+  <link href="<?php echo base_url() ?>assets/dist/css/font-awesome.min.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assets/dist/css/ionicons.min.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
+  <!-- select2 -->
+  <link href="<?php echo base_url() ?>assets/plugins/select2/select2.min.css" rel="stylesheet">
+  <!-- Custom styling plus plugins -->
+  <link href="<?php echo base_url() ?>assets/dist/css/intrex.css" rel="stylesheet">
 
- 	<!-- bootstrap wysihtml5 - text editor -->
-    <!-- Include Jquery min js
-    <script src="<?php //echo base_url()?>assets/js/jquery.min.js"></script>
+  <link href="<?php echo base_url() ?>assets/dist/css/AdminLTE.min.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assets/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+  <!--  <link href="<?php //echo base_url()
+                    ?>assets/plugins/iCheck/flat/all.css" rel="stylesheet">-->
+  <link href="<?php echo base_url() ?>assets/plugins/morris/morris.css" rel="stylesheet" />
+
+  <!--datatables plus plugins -->
+  <link href="<?php echo base_url() ?>assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assets/plugins/datepicker/datepicker3.css" rel="stylesheet">
+  <link href="<?php echo base_url() ?>assets/plugins/daterangepicker/daterangepicker.css" rel="stylesheet">
+
+  <!-- toast-->
+  <link href="<?php echo base_url() ?>assets/plugins/toast/jquery.toast.css" rel="stylesheet">
+
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/iCheck/all.css">
+
+  <!-- bootstrap wysihtml5 - text editor -->
+  <!-- Include Jquery min js
+    <script src="<?php //echo base_url()
+                  ?>assets/js/jquery.min.js"></script>
 
      Include Sweet-alert-->
-     <?php /*  
+  <?php /*  
          <script src="<?php echo base_url()?>assets/sweet-allert/sweetalert2.all.min.js"></script>
       <link rel="stylesheet" href="<?php echo base_url()?>assets/sweet-allert/sweetalert2.min.css">
      <?php */ ?>
-   
-      <script src="<?php echo base_url()?>assets/sweet-allert/sweetalert-dev.js"></script>
-      <link rel="stylesheet" href="<?php echo base_url()?>assets/sweet-allert/sweetalert.css">
-     
-      <!-- include auto complete-->
-     
-      <!--.......................-->
+
+  <script src="<?php echo base_url() ?>assets/sweet-allert/sweetalert-dev.js"></script>
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/sweet-allert/sweetalert.css">
+
+  <!-- include auto complete-->
+
+  <!--.......................-->
 
 
-    <!--[if lt IE 9]>
+  <!--[if lt IE 9]>
         <script src="../assets/js/ie8-responsive-file-warning.js"></script>
         <![endif]-->
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-    <script src="<?php echo base_url()?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <script src="<?php echo base_url()?>assets/plugins/jQueryUI/jquery-ui.min.js"></script>
-     <!-- <link rel="stylesheet" href="<?php //echo base_url()?>assets/plugins/validator/jquery-password-validator.css"></link> -->
-    
-     <!-- highchart 8.0.0 !-->
-    <script type="text/javascript" src="<?php echo base_url()?>assets/plugins/highchart/highcharts.js"></script>
-    <script type="text/javascript" src="<?php echo base_url()?>assets/plugins/highchart/no-data-to-display.js"></script>
-    <script type="text/javascript" src="<?php echo base_url()?>assets/plugins/highchart/exporting.js"></script>
-    
+  <script src="<?php echo base_url() ?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/plugins/jQueryUI/jquery-ui.min.js"></script>
+
+  <!-- <link rel="stylesheet" href="<?php //echo base_url()
+                                    ?>assets/plugins/validator/jquery-password-validator.css"></link> -->
+
+
+  <!-- scriptpath function __FILE__ & __DIR__ in javascript -->
+  <script src="<?php echo base_url() ?>assets/plugins/scriptpath.min.js"></script>
+  <script>
+    switch (dirname(__FILE__)) {
+      case '/__2020/rekam_medis/assets/plugins':
+        //development assets/plugins
+        var setScript = domainname(__FILE__);
+        break;
+      default:
+        //production
+        var setScript = getRootUrl() + 'assets/plugins';
+        break;
+    }
+  </script>
+
+  <!-- highchart 8.0.0 !-->
+  <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/highchart/highcharts.js"></script>
+  <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/highchart/no-data-to-display.js"></script>
+  <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/highchart/exporting.js"></script>
+
 </head>
 <style>
-.removeRow{
-  background-color:#D3DCE3;
-  /* color:#FFFFFF; */
-}
-.table thead,
-.table th {text-align: center;}
+  .removeRow {
+    background-color: #D3DCE3;
+    /* color:#FFFFFF; */
+  }
+
+  .table thead,
+  .table th {
+    text-align: center;
+  }
 </style>
-<?php 
-    try {
-        $_SESSION["access"] = set_rights($allModules, $acsControl, $modulesGroup);
-      
-   
-    } catch (Exception $ex) {
- 
-        echo $ex->getMessage();
+<?php
+try {
+  $_SESSION["access"] = set_rights($allModules, $acsControl, $modulesGroup);
+} catch (Exception $ex) {
+
+  echo $ex->getMessage();
 }
 
 

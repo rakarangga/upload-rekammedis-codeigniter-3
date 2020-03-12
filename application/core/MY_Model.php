@@ -65,6 +65,14 @@ class MY_Model extends CI_Model
         return $this->get(NULL, $single);
     }
 
+    public function get_sum($alias, $where)
+    {
+        $this->db->select_sum($alias);
+        $this->db->where($where);
+        $result = $this->get(NULL, true);
+        return $result->$alias;
+    }
+
     public function simpan($data, $id = NULL)
     {
         // timestamp
@@ -122,6 +130,4 @@ class MY_Model extends CI_Model
     {
         $this->db->truncate($this->_table_nama);
     }
-
-    
 }

@@ -68,7 +68,6 @@ date_default_timezone_set('Asia/Jakarta');
 	        //define('ENVIRONMENT', 'development');
 	        break;
 	}
-
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
