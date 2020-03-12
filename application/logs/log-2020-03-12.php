@@ -165,3 +165,7 @@ FROM `t_berkas`
 WHERE 0 = `Array`
 ERROR - 2020-03-12 11:56:51 --> Severity: error --> Exception: Call to undefined method Pasien_m::get_where() D:\webserver@raka\htdocs\__2020\rekam_medis\application\models\Direktori_m.php 223
 ERROR - 2020-03-12 11:57:59 --> Severity: error --> Exception: Call to undefined method Pasien_m::get_where() D:\webserver@raka\htdocs\__2020\rekam_medis\application\models\Direktori_m.php 223
+ERROR - 2020-03-12 19:53:28 --> Severity: Error --> Class 'Admin_Controller' not found D:\webserver@raka\htdocs\__2020\rekam_medis\application\controllers\backoffice\Dashboard.php 3
+ERROR - 2020-03-12 19:54:22 --> Severity: Error --> Class 'Admin_Controller' not found D:\webserver@raka\htdocs\__2020\rekam_medis\application\controllers\Custom404.php 2
+ERROR - 2020-03-12 19:55:59 --> Severity: Error --> Class 'Admin_Controller' not found D:\webserver@raka\htdocs\__2020\rekam_medis\application\controllers\backoffice\User.php 2
+ERROR - 2020-03-12 19:56:30 --> Severity: Error --> Class 'Admin_Controller' not found D:\webserver@raka\htdocs\__2020\rekam_medis\application\controllers\backoffice\User.php 2
