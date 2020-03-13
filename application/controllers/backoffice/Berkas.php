@@ -149,7 +149,7 @@ class Berkas extends Admin_Controller
           $_FILES['fileberkass']['size'] = $_FILES['fileberkas']['size'][$i];
           $ext = pathinfo($_FILES['fileberkas']['name'][$i]);
           $config = array(
-            'save_path' => getcwd() . './assets/rmberkas/', //save path di assets/rmberkas
+            'save_path' => getcwd() . '/assets/rmberkas/', //save path di assets/rmberkas
             'max_file_size' => 1025 * 5, //max kapasisas 5mb
             'allowed_mime_type_arr' => array('application/pdf'), //hanya support pdf
             'field_name' => 'fileberkass', // nama form file berkas

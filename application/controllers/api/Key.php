@@ -4,10 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 /** @noinspection PhpIncludeInspection */
-// require APPPATH . '/libraries/REST_Controller.php';
+// require APPPATH . '/libraries/Restfull_Controller.php';
 
 // use namespace
-// use Restserver\Libraries\REST_Controller;
+// use Restserver\Libraries\Restfull_Controller;
 
 /**
  * Keys Controller
@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @license         MIT
  * @link            https://github.com/chriskacerguis/codeigniter-restserver
  */
-class Key extends Rest_Controller {
+class Key extends Restfull_Controller {
 
     protected $methods = [
             'index_put' => ['level' => 10, 'limit' => 10],
@@ -50,14 +50,14 @@ class Key extends Rest_Controller {
             $this->response([
                 'status' => TRUE,
                 'key' => $key
-            ], REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
+            ], Restfull_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
         }
         else
         {
             $this->response([
                 'status' => FALSE,
                 'message' => 'Could not save the key'
-            ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // INTERNAL_SERVER_ERROR (500) being the HTTP response code
+            ], Restfull_Controller::HTTP_INTERNAL_SERVER_ERROR); // INTERNAL_SERVER_ERROR (500) being the HTTP response code
         }
     }
 
@@ -78,7 +78,7 @@ class Key extends Rest_Controller {
             $this->response([
                 'status' => FALSE,
                 'message' => 'Invalid API key'
-            ], REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
+            ], Restfull_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
         }
 
         // Destroy it
@@ -88,7 +88,7 @@ class Key extends Rest_Controller {
         $this->response([
             'status' => TRUE,
             'message' => 'API key was deleted'
-            ], REST_Controller::HTTP_NO_CONTENT); // NO_CONTENT (204) being the HTTP response code
+            ], Restfull_Controller::HTTP_NO_CONTENT); // NO_CONTENT (204) being the HTTP response code
     }
 
     /**
@@ -109,7 +109,7 @@ class Key extends Rest_Controller {
             $this->response([
                 'status' => FALSE,
                 'message' => 'Invalid API key'
-            ], REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
+            ], Restfull_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
         }
 
         // Update the key level
@@ -118,14 +118,14 @@ class Key extends Rest_Controller {
             $this->response([
                 'status' => TRUE,
                 'message' => 'API key was updated'
-            ], REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+            ], Restfull_Controller::HTTP_OK); // OK (200) being the HTTP response code
         }
         else
         {
             $this->response([
                 'status' => FALSE,
                 'message' => 'Could not update the key level'
-            ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // INTERNAL_SERVER_ERROR (500) being the HTTP response code
+            ], Restfull_Controller::HTTP_INTERNAL_SERVER_ERROR); // INTERNAL_SERVER_ERROR (500) being the HTTP response code
         }
     }
 
@@ -146,7 +146,7 @@ class Key extends Rest_Controller {
             $this->response([
                 'status' => FALSE,
                 'message' => 'Invalid API key'
-            ], REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
+            ], Restfull_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
         }
 
         // Update the key level
@@ -155,14 +155,14 @@ class Key extends Rest_Controller {
             $this->response([
                 'status' => TRUE,
                 'message' => 'Key was suspended'
-            ], REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+            ], Restfull_Controller::HTTP_OK); // OK (200) being the HTTP response code
         }
         else
         {
             $this->response([
                 'status' => FALSE,
                 'message' => 'Could not suspend the user'
-            ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // INTERNAL_SERVER_ERROR (500) being the HTTP response code
+            ], Restfull_Controller::HTTP_INTERNAL_SERVER_ERROR); // INTERNAL_SERVER_ERROR (500) being the HTTP response code
         }
     }
 
@@ -184,7 +184,7 @@ class Key extends Rest_Controller {
             $this->response([
                 'status' => FALSE,
                 'message' => 'Invalid API key'
-            ], REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
+            ], Restfull_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
         }
 
         // Build a new key
@@ -199,14 +199,14 @@ class Key extends Rest_Controller {
             $this->response([
                 'status' => TRUE,
                 'key' => $new_key
-            ], REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
+            ], Restfull_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
         }
         else
         {
             $this->response([
                 'status' => FALSE,
                 'message' => 'Could not save the key'
-            ], REST_Controller::HTTP_INTERNAL_SERVER_ERROR); // INTERNAL_SERVER_ERROR (500) being the HTTP response code
+            ], Restfull_Controller::HTTP_INTERNAL_SERVER_ERROR); // INTERNAL_SERVER_ERROR (500) being the HTTP response code
         }
     }
 

@@ -67,13 +67,13 @@ class Pasien_m extends MY_Model
 		$pasien->tgl_directory = '';
 		return $pasien;
 	}
-	public function get_berkas_by($id = NULL)
+	public function get_berkas_by($id = NULL, $res_array = true)
 	{
 		$this->db->select('*');
 		$this->db->where(array('idpasien' => $id, 'stts' => 1));
 		$this->db->order_by('orderby', 'asc');
 		$query = $this->db->get('t_berkas');
-		return $query->result_array();
+		return $res_array == true ? $query->result_array() : $query->result();
 	}
 	////////////////////////////////////////////
 	// FUNCTION FOR DATATABLE AJAX MANUAL
