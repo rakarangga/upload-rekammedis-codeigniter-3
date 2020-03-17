@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title><?php echo $meta_title; ?> | </title>
-
+  <link id="favicon" rel="icon" href="<?php echo base_url() ?>assets/dist/img/favicon(2).ico" type="image/ico" sizes="16x16">
   <!-- Bootstrap core CSS -->
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">

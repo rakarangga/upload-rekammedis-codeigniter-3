@@ -41,7 +41,7 @@ class MY_Model extends CI_Model
 
 
 
-    public function get($id = NULL, $single = FALSE)
+    public function get($id = NULL, $single = FALSE, $api = FALSE)
     {
         if ($id != NULL) {
             $filter = $this->_primary_filter;
@@ -50,7 +50,9 @@ class MY_Model extends CI_Model
             $method = 'row';
         } elseif ($single == TRUE) {
             $method = 'row';
-        } else {
+        } elseif ($api == TRUE)  {
+            $method = 'result_array';
+        }else {
             $method = 'result';
         }
         if (!count($this->db->_order_by)) {
@@ -59,7 +61,7 @@ class MY_Model extends CI_Model
         return $this->db->get($this->_table_nama)->$method();
     }
 
-    public function get_by($where, $single = FALSE)
+    public function get_by($where, $single = FALSE, $api = FALSE)
     {
         $this->db->where($where);
         return $this->get(NULL, $single);

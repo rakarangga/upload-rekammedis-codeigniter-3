@@ -134,3 +134,4 @@ ERROR - 2020-03-13 22:35:07 --> Query error: MySQL server has gone away - Invali
 FROM `t_pasien`
 WHERE `stts` = 1 AND (`created` BETWEEN DATE_ADD(CURDATE(), INTERVAL -1 day) AND CURDATE())
 ORDER BY `t_pasien`.`modified` DESC
+ERROR - 2020-03-13 23:16:52 --> Unable to connect to the database
