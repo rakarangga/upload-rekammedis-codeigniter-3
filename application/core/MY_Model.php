@@ -47,7 +47,7 @@ class MY_Model extends CI_Model
             $filter = $this->_primary_filter;
             $id = $filter($id);
             $this->db->where($this->_primary_key, $id);
-            $method = 'row';
+            $method = $api == FALSE ? 'row' : 'result_array';
         } elseif ($single == TRUE) {
             $method = 'row';
         } elseif ($api == TRUE)  {
@@ -64,7 +64,7 @@ class MY_Model extends CI_Model
     public function get_by($where, $single = FALSE, $api = FALSE)
     {
         $this->db->where($where);
-        return $this->get(NULL, $single);
+        return $this->get(NULL, $single, $api);
     }
 
     public function get_sum($alias, $where)

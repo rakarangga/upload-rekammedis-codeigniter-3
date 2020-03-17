@@ -60,7 +60,11 @@ $route['translate_uri_dashes'] = FALSE;
 */
 $route['api/example/users/(:num)'] = 'api/example/users/id/$1'; // Example 4
 $route['api/example/users/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/example/users/id/$1/format/$3$4'; // Example 8
-$route['api/pasien/(:num)'] = 'api/pasien/index/id/$1'; // Pasien by id
-$route['api/pasien/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/pasien/index/id/$1/format/$3$4'; // Pasien More Param with format to download file
+$route['api/(:any)/(:num)'] = 'api/main/index/method/$1/norm/$2'; // Main Method by id
+$route['api/(:any)'] = 'api/main/index/method/$1'; // Main Method by id
+// $route['api/(:any)/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/main/index/method/$1/format/$3$4'; // More Param with format to download file
+
+/* $route['api/pasien/(:num)'] = 'api/pasien/index/norm/$1'; // Pasien by id
+$route['api/pasien/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/pasien/index/norm/$1/format/$3$4'; // Pasien More Param with format to download file 
 $route['api/berkas/(:num)'] = 'api/berkas/index/id/$1'; // berkas by id
-$route['api/berkas/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/berkas/index/id/$1/format/$3$4'; // berkas More Param with format to download file
+$route['api/berkas/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/berkas/index/id/$1/format/$3$4'; // berkas More Param with format to download file */

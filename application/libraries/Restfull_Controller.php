@@ -384,7 +384,9 @@ class Restfull_Controller extends MY_Controller {
     {
         parent::__construct();
 
-       
+        $params = array('key' => config_item('encryption_key'));
+        $this->load->library('crypto', $params);
+
         $this->preflight_checks();
 
         // Set the default value of global xss filtering. Same approach as CodeIgniter 3
@@ -401,9 +403,8 @@ class Restfull_Controller extends MY_Controller {
         $this->load->config($config);
 
         // At present the library is bundled with REST_Controller 2.5+, but will eventually be part of CodeIgniter (no citation)
-        $this->load->library('format');
-        // dump($this->load->library('format'));
-        // die();
+        $this->load->library('Format');
+        // 
         // Determine supported output formats from configuration
         $supported_formats = $this->config->item('rest_supported_formats');
 
@@ -417,7 +418,7 @@ class Restfull_Controller extends MY_Controller {
         {
             $supported_formats = [$supported_formats];
         }
-
+      
         // Add silently the default output format if it is missing
         $default_format = $this->_get_default_output_format();
         if (!in_array($default_format, $supported_formats))
@@ -427,6 +428,9 @@ class Restfull_Controller extends MY_Controller {
 
         // Now update $this->_supported_formats
         $this->_supported_formats = array_intersect_key($this->_supported_formats, array_flip($supported_formats));
+        
+       /*  dump($this->_supported_formats);
+        die(); */
 
         // Get the language
         $language = $this->config->item('rest_language');
