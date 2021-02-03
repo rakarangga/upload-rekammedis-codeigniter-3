@@ -13,8 +13,8 @@ class Admin_Controller extends MY_Controller
         $this->load->helper('form');
         $this->load->helper('security');
         $this->load->library('upload');
-        $this->load->library('form_validation');
-        $this->load->library('session');
+        $this->load->library('Form_validation');
+        $this->load->library('Session');
         // $this->load->library('fileupload');
         // $this->load->library('barcode'); 
         $this->load->library('Datatables'); 
@@ -77,11 +77,13 @@ class Admin_Controller extends MY_Controller
             'backoffice/user/pw_reset/'.$token
         );
         if (in_array(uri_string(), $exception_uris) == FALSE ) {
-            if ($this->User_m->loggedin() == FALSE) {
-                redirect('backoffice/user');
-            }
+           // alert("tes");
+           if ($this->User_m->loggedin() == FALSE) {
+               redirect('backoffice/user');
+           }
         }
-
+       
+        
     }
     
     public function show_404()

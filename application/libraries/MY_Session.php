@@ -1,12 +1,7 @@
 <?php
 
-class My_Session extends CI_Session
+class MY_Session extends CI_Session
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-    
     function sess_update()
     {
         // Listen to HTTP_X_REQUESTED_WITH

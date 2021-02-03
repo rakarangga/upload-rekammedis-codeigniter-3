@@ -103,7 +103,7 @@
                                    }, 1000);
                                    
                                   </script>';
-        
+                 
                  }else{
                  $this->session->set_flashdata('error','email / Password tidak valid !');
                  $url = "backoffice/user";
@@ -131,7 +131,7 @@
        // dump($this->session->userdata());
         //$this->data['authURL'] =  $this->facebook->login_url();
          //dump( $data['authURL']);
-
+        //  dump($this->session->userdata());
          $this->data['forgotview']='backoffice/user/forgot';
          $this->data['subview']='backoffice/user/login';
          $this->data['regsubview']='backoffice/user/regis';
@@ -212,7 +212,7 @@
          // kecuali jika edit data bisa menggunakan username yang sama sesuai id
         // $id = $this->uri->segment(5);
          $this->db->where('email', $this->input->post('email'));
-         //! $id || $this->db->where('id !=', $id);
+         /*!$id || $this->db->where('id !=', $id);*/
          $user = $this->User_m->get();
          if (count($user)) {
              $this->form_validation->set_message('_unique_email', '<p class="margin">- <code>%s sudah terdaftar</code></p>');

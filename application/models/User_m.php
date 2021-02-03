@@ -178,9 +178,12 @@ class User_m extends MY_Model
                 'login' =>true,
                 'user_agent' => $agent
             );
+            // $datas = urlencode(base64_encode($data));
             $this->session->set_userdata($data);
             return (bool) $this->session->userdata('login');
+          
         }
+       
     }
 
 public function resetLogin($id)

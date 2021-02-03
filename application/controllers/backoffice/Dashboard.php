@@ -24,8 +24,10 @@ class Dashboard extends Admin_Controller
             //    dump( $this->data['draft']);
             count($this->data['user']) || $this->show_404();
         } else {
+            // dump($this->Session->all_userdata());
             count($this->data['user']) || $this->show_404();
         }
+      
         $this->data['subview'] = 'backoffice/dashboard/index';
         $this->load->view('backoffice/_layout_main', $this->data);
     }
