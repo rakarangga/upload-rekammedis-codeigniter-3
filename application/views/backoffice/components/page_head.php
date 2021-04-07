@@ -50,7 +50,7 @@
                   ?>assets/js/jquery.min.js"></script>
 
      Include Sweet-alert-->
-  <?php /*  
+  <?php /*
          <script src="<?php echo base_url()?>assets/sweet-allert/sweetalert2.all.min.js"></script>
       <link rel="stylesheet" href="<?php echo base_url()?>assets/sweet-allert/sweetalert2.min.css">
      <?php */ ?>
@@ -84,7 +84,7 @@
   <script src="<?php echo base_url() ?>assets/plugins/scriptpath.min.js"></script>
   <script>
     switch (dirname(__FILE__)) {
-      case '/__2020/rekam_medis/assets/plugins':
+      case '/__2021/rekam_medis/assets/plugins':
         //development assets/plugins
         var setScript = domainname(__FILE__);
         break;

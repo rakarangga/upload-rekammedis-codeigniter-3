@@ -61,7 +61,7 @@ date_default_timezone_set('Asia/Jakarta');
 	switch (dirname(__FILE__)){
 		// SETTING DIRECTORY FILE PROJECT ANDA
 		// case'C:\xampp\htdocs\rekam_medis':
-		case 'D:\webserver@raka\htdocs\__2020\rekam_medis':
+		case 'D:\webserver@raka\htdocs\__2021\rekam_medis':
 	       //define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 	       define('ENVIRONMENT', 'development');
 	        break;
@@ -84,7 +84,8 @@ switch (ENVIRONMENT)
 {
 	case 'development':
 		error_reporting(E_ALL || E_STRICT);
-		//ini_set('display_errors', 1);
+      error_reporting(1);
+		ini_set('display_errors', 1);
 	break;
 
 	case 'testing':
