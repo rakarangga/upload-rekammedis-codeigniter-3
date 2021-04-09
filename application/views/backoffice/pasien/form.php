@@ -405,7 +405,7 @@ if (validation_errors() != "") { ?>
 			}
 		}, false);
 	}
-	/* 
+	/*
 	 * # Sign the signatures array in lib-signature.js
 	 * signature_pdf[ext]
 	 * signature_pdfimg [ext]
@@ -594,7 +594,7 @@ if (validation_errors() != "") { ?>
 				dataType: "json",
 				success: function(data) {
 					for (var i = 0; i < data.length; i++) {
-						console.log(data[i]);
+						// console.log(data[i]);
 						$(".card-deck").append('<div class="card">' + data[i].files + '<div class="card-body"><h5 class="card-title">' + data[i].namaberkas + '</h5><p class="card-text"></p></div><div class="card-footer"><small class="text-muted">tgl : ' + data[i].tgl + ' </small>'+data[i].btndelete+'</div></div>')
 					}
 					// console.log(data);

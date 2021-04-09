@@ -144,10 +144,10 @@
 							<!-- <li> <a href="#">
 									<div> <i class="fa fa-files-o fa-2x"></i> <span>Unggah Ganda</span> </div>
 								</a> </li> -->
-
+<!--
 							<li> <a href="#" data-toggle="tooltip" data-original-title="Pastikan scanner sudah terkoneksi ke perangkat USB">
 									<div> <i class="fa fa-print fa-2x"></i> <span>Scan Berkas</span> </div>
-								</a> </li>
+								</a> </li> -->
 						<?php } ?>
 						<?php if (authorize($_SESSION["access"]["manajemen_berkas"]["berkas"]["ac_edit"])) { ?>
 							<li> <a href="#"  class="btn_kelola" data-toggle="tooltip" data-original-title="Mendukung File Bermformat .jpg / .pdf / .jpeg / .png">
@@ -161,7 +161,7 @@
 						<ul class="dropdown-menu pull-left" role="menu2">
 							<li> <a href="#" class="upload_berkas" > <i class="fa fa-file-text fa-1x"></i> <span>Unggah Berkas</span> </a> </li>
 							<!-- <li> <a href="#"> <i class="fa fa-files-o fa-1x"></i> <span>Unggah Ganda</span></a> </li> -->
-							<li> <a href="#"> <i class="fa fa-print fa-1x"></i> <span>Scan Berkas</span> </a> </li>
+							<!-- <li> <a href="#"> <i class="fa fa-print fa-1x"></i> <span>Scan Berkas</span> </a> </li> -->
 							<li> <a href="#" class="btn_kelola"> <i class="fa fa-edit fa-1x"></i> <span>Kelola Berkas Yang Ditandai</span> </a> </li>
 						</ul>
 					</div>
@@ -312,7 +312,7 @@
 			}
 		}, false);
 	}
-	/* 
+	/*
 	 * # Sign the signatures array in lib-signature.js
 	 * signature_pdf[ext]
 	 * signature_pdfimg [ext]
